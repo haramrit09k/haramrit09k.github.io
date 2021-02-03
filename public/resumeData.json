@@ -41,7 +41,7 @@
     ]
   },
   "resume":{
-    "skillmessage":"I'm a tinkerer and am always interested in playing around with new technologies but these are the ones that have really won me over",
+    "skillmessage":"I'm a dilettante and am always interested in playing around with new technologies but these are the ones that have really won me over",
     "education":[
       {
         "school":"George Mason University",
@@ -79,18 +79,23 @@
     "skills":[
       {
         "name":"Git",
-        "description":"I use Git for all of my projects so far. I have used Git for version control in small teams and have toyed around with contributing to Open Source Projects.",
+        "description":"I use Git for all of my projects so far. I have mostly used Git for version control in small teams.",
         "image":"git.jpg"
       },
       {
         "name":"Java",
-        "description":"Java was my first programming language that I started using in college years ago. It is by far the language I am most familiar with in terms of data-structure and algorithm programming.",
+        "description":"Java was my second programming language that I started using (after C) in college a couple years ago. It is by far the language I am most familiar with in data-structure and algorithm programming.",
         "image":"java.jpg"
       },
       {
-        "name":"React Js",
-        "description":"I am fairly new to React and really did not like it at first. It has grown on me though and I will continue to use it going forward. I have built a ReactJS based resume-website template (link below in portfolio) which I used as a starting point for this personal site.",
+        "name":"ReactJS",
+        "description":"I am fairly new to React and found it a bit confusing at first. However, I realized how powerful and easy to use it is, once I got the hang of it. This website is also made using React. ",
         "image":"react.jpg"
+      },
+      {
+        "name":"AWS",
+        "description":"For this, I just have one word - AMAZING! I used some of the services to host a couple course projects, but after that, I wanted to learn more. And hence I got certified as an AWS Solutions Architect - Associate.",
+        "image":"aws.gif"
       },
       {
         "name":"Meteor JS",
@@ -99,24 +104,19 @@
       },
 
       {
-        "name":"Node JS",
-        "description":"Node JS is my server-side scripting language of choice. The bulk of my experience with it has been in conjunction with MeteorJS-based projects",
+        "name":"Node.js",
+        "description":"I developed my first application with Node.js back in 2016, and have never looked back since. It has become my server-side scripting language of choice. The bulk of my experience with it has been in conjunction with using MongoDB as the supporting database.",
         "image":"node.jpg"
       },
       {
         "name":"Bootstrap 4",
-        "description":"I use Bootstrap more often than not when designing the layout for my sites. It is the framework I am most familiar with and can therefore design more quickly than with others.",
-        "image":"bootstrap.jpg"
+        "description":"I was introduced to Bootstrap during a web dev workshop I attended in late 2015, and honestly I was blown away with what you could do with a simple CSS framework. Since then, I have used Bootstrap more often than not when designing the layout for my sites.",
+        "image":"bootstrap.png"
       },
       {
         "name":"MongoDB",
-        "description":"I have used many different database systems and am better educated and experienced with Relational Databases. However, for many applications, the ease of use of MongoDB better suits my needs and it is much more enjoyable to work with",
+        "description":"I have used many different database systems and am better educated and experienced with Relational Databases. However, for many applications, especially Node.js applications that I have worked on, I found MongoDB to be a better alternative for those use cases.",
         "image":"mongo.jpg"
-      },
-      {
-        "name":"Heroku",
-        "description":"I use Heroku as my hosting platform for most of my projects because so far they are all unpaid and their free tier is convenient. I also appreciate its integration with Github for such simple deployment.",
-        "image":"heroku.jpg"
       }
     ]
   },
