@@ -98,9 +98,9 @@
         "image":"aws.gif"
       },
       {
-        "name":"Meteor JS",
-        "description":"I enjoy MeteorJS for it's ease of configuration and its ability to get a full stack prototype up and running quickly. I used MeteorJS in a team for a Startup Programming class in UVIC in conjunction with React to build the MVP for Smirkspace (below in portfolio)",
-        "image":"meteor.jpg"
+        "name":"Docker & Kubernetes",
+        "description":"I came across these terms in grad school, and after having used them for a couple course projects, I realized how important and relevant containerization and orchestration are in the industry today.",
+        "image":"docker-kubernetes.png"
       },
 
       {
