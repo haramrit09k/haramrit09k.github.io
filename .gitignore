@@ -2,3 +2,4 @@ node_modules
 .DS_Store
 build
 public/.DS_Store
+public/images/.DS_Store
