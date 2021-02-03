@@ -33,7 +33,7 @@ jobs:
       run: npm run build
     
     - name: Deploy
-      run: 
+      run: |
         git config --global user.name haramrit09k
         git config --global user.email haramrit09k@gmail.com
         git remote set-url origin https://${{secrets.ACCESS_TOKEN}}@github.com/haramrit09k/haramrit09k.github.io.git
