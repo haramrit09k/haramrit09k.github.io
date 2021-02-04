@@ -44,7 +44,7 @@ class Contact extends Component {
                   <i class="fa fa-home"></i>&emsp;{street} <br />
                   &emsp;{city}, {state} {zip}<br />
                   <i class="fa fa-phone"></i>&emsp;<span>{phone}</span><br/>
-                  <i class="fa fa-at"></i>&emsp;<span><a href="mailto:haramrit09k@gmail.com">{email}</a></span>
+                  <i class="fa fa-envelope"></i>&emsp;<span><a href="mailto:haramrit09k@gmail.com">{email}</a></span>
 					   </p>
 				   </div>
                
