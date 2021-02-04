@@ -6,7 +6,7 @@
     "image": "profilepic.jpg",
     "employer": "Nexus 8 International",
     "bio": "I am a tech professional with expertise in Java, Python, app development and Agile methodology gained in my pursuit of an M.S. in Computer Science. I am passionate about creating quality software chunks that help make this world a better place. Along with possessing effective problem-solving skills I am also an excellent communicator with strong analytical and organizational skills.",
-    "contactmessage": "Have a project for me? Think I'd be a good fit for your team? I'd love to hear from you, give me a shout by email or by using the form below if you'd like to get in contact with me.",
+    "contactmessage": "Have a project for me? Think I'd be a good fit for your team? I'd love to hear from you, give me a shout by email, via LinkedIn or call me on my cellphone.",
     "email": "haramrit09k@gmail.com",
     "phone": "703-341-9667",
     "address": {
@@ -47,13 +47,15 @@
         "school": "George Mason University",
         "degree": "Masters in Computer Science",
         "graduated": "Graduating May 2021",
-        "description": "GPA: 3.76/4.0"
+        "description": "GPA: 3.76/4.0",
+        "achievements": "Relevant Coursework: Algorithms, Systems Programming, Object Oriented Design, Database Systems, Component-based Software Engineering"
       },
       {
         "school": "University of Mumbai",
         "degree": "Bachelors in Computer Engineering",
-        "graduated": "June 2019",
-        "description": "GPA: 4.0/4.0"
+        "graduated": "Class of 2019",
+        "description": "GPA: 4.0/4.0",
+        "achievements": "2nd runner up -  Mumbai Hackathon (2017), 1st runner up - Best Senior Thesis"
       }
     ],
     "work": [
@@ -63,18 +65,18 @@
           {
             "title": "Software Engineer Intern ",
             "years": "May 2020 - August 2020",
-            "description": "• Used C#, object-oriented (OO) design patterns, relational DBs, and data modeling techniques to update existing model schemas • Gathering and analyzing business and functional requirements and translating business requirements into technical design specifications. • Worked on implementing the “image upload” and “comment like” feature by developing appropriate web components using ASP.NET Core framework and Blazor and managed version control and DevOps with Git and Azure  • Worked with the Play Services Publishing team to publish the app on Play Store"
+            "description": "• Individually developed two major web components using <strong>ASP.NET Core</strong> framework and <strong>Blazor</strong> in compliance with <strong>HIPAA</strong> \n • <strong>Optimized</strong> the image upload process and decreased the upload time by 30% on average \n • Developed test cases and <strong>performed unit testing</strong> of the application before release to the stakeholders \n • Identified and analyzed new business and functional requirements as a part of requirement gathering sessions with customers"
           }
         ]
       },
-      
+
       {
         "company": "George Mason University",
         "roles": [
           {
             "title": "Graduate Teaching Assistant",
             "years": "August 2019 - present",
-            "description": "• Working as a Graduate Teaching Assistant and Lab Instructor for the course Applied IT Programming (IT 207) at GMU, instructing and grading the students on HTML, CSS, PHP and MySQL coursework. Resolve any student queries throughout the course. • Assisting two faculty instructors by teaching a batch of 60 students in recitation, laboratory, and discussion sessions, helping software users in a Computer laboratory."
+            "description": "• Working as a Graduate Teaching Assistant and Lab Instructor for the course Applied IT Programming (IT 207) at GMU, instructing and grading the students on HTML, CSS, PHP and MySQL coursework. Resolve any student queries throughout the course. \n • Assisting two faculty instructors by teaching a batch of 60 students in recitation, laboratory, and discussion sessions, helping software users in a Computer laboratory."
           }
         ]
       },
@@ -83,14 +85,14 @@
         "company": "Don Bosco Institute of Technology",
         "roles": [
           {
-            "title": "Full Stack Developer Intern",
-            "years": "June 2018 - August 2018",
-            "description": "• Remodeled the website Don Bosco Journal of Science and Engineering - a portal for the submission and review of academic papers • Lead a team of six developers to write reusable, testable and efficient code using Node.js & Mongoose • Introduced a tag-based paper-reviewer matching algorithm to automate the review assignment process • Achieved a 3x speedup over its previous iteration."
+            "title": "Backend Developer Intern",
+            "years": "June 2018 - December 2018",
+            "description": "• Developed the plan and <strong>headed the team</strong> that implemented remodeling of the website Don Bosco Journal of Science and Engineering using <strong>Node.js, Express</strong> and <strong>MongoDB </strong>\n • <strong>Designed</strong> and <strong>implemented</strong> a secure <strong>tag-based paper-reviewer matching algorithm</strong> to automate the review assignment process"
           },
           {
             "title": "Technical Head - ACM DBIT",
             "years": "July 2017 - May 2018",
-            "description": "Organized Teknack, a two-day intercollegiate online gaming festival featuring more than 10 games (Single-Player, Multi-Player & Open World). Games were played over 25000 people, a significant markup of 28 % from Teknack ‘17"
+            "description": "• Organized Teknack, a two-day intercollegiate online gaming festival featuring more than 10 games (Single-Player, Multi-Player & Open World) \n • Games were played over 25000 people, a significant markup of 28 % from Teknack ‘17"
           }
         ]
       }
