@@ -1,174 +1,193 @@
 {
   "main": {
-    "name":"Haramrit Singh Khurana",
-    "occupation":"Graduate Student at George Mason University",
-    "description":"I recently interned as a Software Engineer Intern at a local healthcare startup this summer, and am currently looking for full-time opportunities in software engineering.",
-    "image":"profilepic.jpg",
-    "employer":"Nexus 8 International",
-    "bio":"I am a tech professional with expertise in Java, Python, app development and Agile methodology gained in my pursuit of an M.S. in Computer Science. I am passionate about creating quality software chunks that help make this world a better place. Along with possessing effective problem-solving skills I am also an excellent communicator with strong analytical and organizational skills.",
-    "contactmessage":"Have a project for me? Think I'd be a good fit for your team? I'd love to hear from you, give me a shout by email or by using the form below if you'd like to get in contact with me.",
+    "name": "Haramrit Singh Khurana",
+    "occupation": "Graduate Student at George Mason University",
+    "description": "I recently interned as a Software Engineer Intern at a local healthcare startup this summer, and am currently looking for full-time opportunities in software engineering.",
+    "image": "profilepic.jpg",
+    "employer": "Nexus 8 International",
+    "bio": "I am a tech professional with expertise in Java, Python, app development and Agile methodology gained in my pursuit of an M.S. in Computer Science. I am passionate about creating quality software chunks that help make this world a better place. Along with possessing effective problem-solving skills I am also an excellent communicator with strong analytical and organizational skills.",
+    "contactmessage": "Have a project for me? Think I'd be a good fit for your team? I'd love to hear from you, give me a shout by email or by using the form below if you'd like to get in contact with me.",
     "email": "haramrit09k@gmail.com",
     "phone": "703-341-9667",
-    "address":{
-      "street":"9451 Lee Hwy",
-      "city":"Fairfax",
-      "state":"Virginia",
+    "address": {
+      "street": "9451 Lee Hwy",
+      "city": "Fairfax",
+      "state": "Virginia",
       "zip": "22031"
     },
     "website": "http://haramrit09k.github.io",
-    "resumedownload":"/resume/Haramrit_Khurana_Resume.pdf",
-    "social":[
+    "resumedownload": "/resume/Haramrit_Khurana_Resume.pdf",
+    "social": [
       {
-        "name":"linkedin",
-        "url":"https://www.linkedin.com/in/haramrit09k/",
-        "className":"fa fa-linkedin"
+        "name": "linkedin",
+        "url": "https://www.linkedin.com/in/haramrit09k/",
+        "className": "fa fa-linkedin"
       },
       {
-        "name":"instagram",
-        "url":"https://www.instagram.com/haramrit09k",
-        "className":"fa fa-instagram"
+        "name": "instagram",
+        "url": "https://www.instagram.com/haramrit09k",
+        "className": "fa fa-instagram"
       },
       {
-        "name":"github",
-        "url":"https://www.github.com/haramrit09k",
-        "className":"fa fa-github"
+        "name": "github",
+        "url": "https://www.github.com/haramrit09k",
+        "className": "fa fa-github"
       },
       {
-        "name":"email",
-        "url":"mailto:haramrit09k@gmail.com",
-        "className":"fa fa-envelope"
+        "name": "email",
+        "url": "mailto:haramrit09k@gmail.com",
+        "className": "fa fa-envelope"
       }
     ]
   },
-  "resume":{
-    "skillmessage":"I'm a dilettante and am always interested in playing around with new technologies but these are the ones that have really won me over",
-    "education":[
+  "resume": {
+    "skillmessage": "I'm a dilettante and am always interested in playing around with new technologies but these are the ones that have really won me over",
+    "education": [
       {
-        "school":"George Mason University",
-        "degree":"Masters in Computer Science",
-        "graduated":"Expected May 2021",
-        "description":"GPA: 3.7/4.0"
+        "school": "George Mason University",
+        "degree": "Masters in Computer Science",
+        "graduated": "Graduating May 2021",
+        "description": "GPA: 3.76/4.0"
       },
       {
-        "school":"University of Mumbai",
-        "degree":"Bachelors in Computer Engineering",
-        "graduated":"June 2019",
-        "description":"GPA: 4.0/4.0"
+        "school": "University of Mumbai",
+        "degree": "Bachelors in Computer Engineering",
+        "graduated": "June 2019",
+        "description": "GPA: 4.0/4.0"
       }
     ],
-    "work":[
+    "work": [
       {
-        "company":"Nexus 8 International",
-        "title":"Software Engineer Intern ",
-        "years":"May 2020 - August 2020",
-        "description":"• Used C#, object-oriented (OO) design patterns, relational DBs, and data modeling techniques to update existing model schemas • Gathering and analyzing business and functional requirements and translating business requirements into technical design specifications. • Worked on implementing the “image upload” and “comment like” feature by developing appropriate web components using ASP.NET Core framework and Blazor and managed version control and DevOps with Git and Azure  • Worked with the Play Services Publishing team to publish the app on Play Store"
+        "company": "Nexus 8 International",
+        "roles": [
+          {
+            "title": "Software Engineer Intern ",
+            "years": "May 2020 - August 2020",
+            "description": "• Used C#, object-oriented (OO) design patterns, relational DBs, and data modeling techniques to update existing model schemas • Gathering and analyzing business and functional requirements and translating business requirements into technical design specifications. • Worked on implementing the “image upload” and “comment like” feature by developing appropriate web components using ASP.NET Core framework and Blazor and managed version control and DevOps with Git and Azure  • Worked with the Play Services Publishing team to publish the app on Play Store"
+          }
+        ]
       },
+      
       {
-        "company":"George Mason University",
-        "title":"Graduate Teaching Assistant",
-        "years":"August 2019 - present",
-        "description":"• Working as a Graduate Teaching Assistant and Lab Instructor for the course Applied IT Programming (IT 207) at GMU, instructing and grading the students on HTML, CSS, PHP and MySQL coursework. Resolve any student queries throughout the course. • Assisting two faculty instructors by teaching a batch of 60 students in recitation, laboratory, and discussion sessions, helping software users in a Computer laboratory."
-      },
-      {
-        "company":"Don Bosco Institute of Technology",
-        "title":"Full Stack Developer Intern",
-        "years":"June 2018 - August 2018",
-        "description":"• Remodeled the website Don Bosco Journal of Science and Engineering - a portal for the submission and review of academic papers • Lead a team of six developers to write reusable, testable and efficient code using Node.js & Mongoose • Introduced a tag-based paper-reviewer matching algorithm to automate the review assignment process • Achieved a 3x speedup over its previous iteration."
-      }
-    ],
-    "skills":[
-      {
-        "name":"Git",
-        "description":"I use Git for all of my projects so far. I have mostly used Git for version control in small teams.",
-        "image":"git.jpg"
-      },
-      {
-        "name":"Java",
-        "description":"Java was my second programming language that I started using (after C) in college a couple years ago. It is by far the language I am most familiar with in data-structure and algorithm programming.",
-        "image":"java.jpg"
-      },
-      {
-        "name":"ReactJS",
-        "description":"I am fairly new to React and found it a bit confusing at first. However, I realized how powerful and easy to use it is, once I got the hang of it. This website is also made using React. ",
-        "image":"react.jpg"
-      },
-      {
-        "name":"AWS",
-        "description":"For this, I just have one word - AMAZING! I used some of the services to host a couple course projects, but after that, I wanted to learn more. And hence I got certified as an AWS Solutions Architect - Associate.",
-        "image":"aws.gif"
-      },
-      {
-        "name":"Docker & Kubernetes",
-        "description":"I came across these terms in grad school, and after having used them for a couple course projects, I realized how important and relevant containerization and orchestration are in the industry today.",
-        "image":"docker-kubernetes.png"
+        "company": "George Mason University",
+        "roles": [
+          {
+            "title": "Graduate Teaching Assistant",
+            "years": "August 2019 - present",
+            "description": "• Working as a Graduate Teaching Assistant and Lab Instructor for the course Applied IT Programming (IT 207) at GMU, instructing and grading the students on HTML, CSS, PHP and MySQL coursework. Resolve any student queries throughout the course. • Assisting two faculty instructors by teaching a batch of 60 students in recitation, laboratory, and discussion sessions, helping software users in a Computer laboratory."
+          }
+        ]
       },
 
       {
-        "name":"Node.js",
-        "description":"I developed my first application with Node.js back in 2016, and have never looked back since. It has become my server-side scripting language of choice. The bulk of my experience with it has been in conjunction with using MongoDB as the supporting database.",
-        "image":"node.jpg"
+        "company": "Don Bosco Institute of Technology",
+        "roles": [
+          {
+            "title": "Full Stack Developer Intern",
+            "years": "June 2018 - August 2018",
+            "description": "• Remodeled the website Don Bosco Journal of Science and Engineering - a portal for the submission and review of academic papers • Lead a team of six developers to write reusable, testable and efficient code using Node.js & Mongoose • Introduced a tag-based paper-reviewer matching algorithm to automate the review assignment process • Achieved a 3x speedup over its previous iteration."
+          },
+          {
+            "title": "Technical Head - ACM DBIT",
+            "years": "July 2017 - May 2018",
+            "description": "Organized Teknack, a two-day intercollegiate online gaming festival featuring more than 10 games (Single-Player, Multi-Player & Open World). Games were played over 25000 people, a significant markup of 28 % from Teknack ‘17"
+          }
+        ]
+      }
+
+    ],
+    "skills": [
+      {
+        "name": "Git",
+        "description": "I use Git for all of my projects so far. I have mostly used Git for version control in small teams.",
+        "image": "git.jpg"
       },
       {
-        "name":"Bootstrap 4",
-        "description":"I was introduced to Bootstrap during a web dev workshop I attended in late 2015, and honestly I was blown away with what you could do with a simple CSS framework. Since then, I have used Bootstrap more often than not when designing the layout for my sites.",
-        "image":"bootstrap.png"
+        "name": "Java",
+        "description": "Java was my second programming language that I started using (after C) in college a couple years ago. It is by far the language I am most familiar with in data-structure and algorithm programming.",
+        "image": "java.jpg"
       },
       {
-        "name":"MongoDB",
-        "description":"I have used many different database systems and am better educated and experienced with Relational Databases. However, for many applications, especially Node.js applications that I have worked on, I found MongoDB to be a better alternative for those use cases.",
-        "image":"mongo.jpg"
+        "name": "ReactJS",
+        "description": "I am fairly new to React and found it a bit confusing at first. However, I realized how powerful and easy to use it is, once I got the hang of it. This website is also made using React. ",
+        "image": "react.jpg"
+      },
+      {
+        "name": "AWS",
+        "description": "For this, I just have one word - AMAZING! I used some of the services to host a couple course projects, but after that, I wanted to learn more. And hence I got certified as an AWS Solutions Architect - Associate.",
+        "image": "aws.gif"
+      },
+      {
+        "name": "Docker & Kubernetes",
+        "description": "I came across these terms in grad school, and after having used them for a couple course projects, I realized how important and relevant containerization and orchestration are in the industry today.",
+        "image": "docker-kubernetes.png"
+      },
+      {
+        "name": "Node.js",
+        "description": "I developed my first application with Node.js back in 2016, and have never looked back since. It has become my server-side scripting language of choice. The bulk of my experience with it has been in conjunction with using MongoDB as the supporting database.",
+        "image": "node.jpg"
+      },
+      {
+        "name": "Bootstrap 4",
+        "description": "I was introduced to Bootstrap during a web dev workshop I attended in late 2015, and honestly I was blown away with what you could do with a simple CSS framework. Since then, I have used Bootstrap more often than not when designing the layout for my sites.",
+        "image": "bootstrap.png"
+      },
+      {
+        "name": "MongoDB",
+        "description": "I have used many different database systems and am better educated and experienced with Relational Databases. However, for many applications, especially Node.js applications that I have worked on, I found MongoDB to be a better alternative for those use cases.",
+        "image": "mongo.jpg"
       }
     ]
   },
-  "portfolio":{
+  "portfolio": {
     "projects": [
       {
-        "title":"NumPy for C",
-        "category":"Open source project focused on augmenting the C library",
-        "image":"numpy-for-c.png",
-        "url":"https://github.com/AkashG6/New-C-Library"
+        "title": "NumPy for C",
+        "category": "Open source project focused on augmenting the C library",
+        "image": "numpy-for-c.png",
+        "url": "https://github.com/AkashG6/New-C-Library"
       },
       {
-        "title":"Dist-ML",
-        "category":"Capstone project, won 1st runner up in annual project competition",
-        "image":"dist-ml.png",
-        "url":"https://youtu.be/q6aFGrotY4c"
+        "title": "Dist-ML",
+        "category": "Capstone project, won 1st runner up in annual project competition, Tech stack: Electron.js, ",
+        "image": "dist-ml.png",
+        "url": "https://youtu.be/q6aFGrotY4c"
       },
       {
-        "title":"IPL Predictor",
-        "category":"Predicting the results of IPL 2020 using Data Science",
-        "image":"ipl.jpeg",
-        "url":"https://github.com/haramrit09k/ipl-predictor"
+        "title": "IPL Predictor",
+        "category": "Predicting the results of IPL 2020 using Data Science",
+        "image": "ipl.jpeg",
+        "url": "https://github.com/haramrit09k/ipl-predictor"
       },
       {
-        "title":"Hippra",
-        "category":"Healthcare collaboration app, Tech stack: ASP.NET Core, Blazor, SQL",
-        "image":"hippra.png",
-        "url":"https://www.hippra.com/"
+        "title": "Hippra",
+        "category": "Healthcare collaboration app, Tech stack: ASP.NET Core, Blazor, SQL",
+        "image": "hippra.png",
+        "url": "https://www.hippra.com/"
       },
       {
-        "title":"SpaceTerra",
-        "category":"Voted as most played game of Teknack, Tech stack: Phaser.io, MongoDB, Node.js",
-        "image":"space-terra.png",
-        "url":"https://gitlab.com/teknack17/space-terra"
+        "title": "SpaceTerra",
+        "category": "Voted as most played game of Teknack, Tech stack: Phaser.io, MongoDB, Node.js",
+        "image": "space-terra.png",
+        "url": "https://gitlab.com/teknack17/space-terra"
       },
       {
-        "title":"DBJSE",
-        "category":"Research paper review portal, Tech stack: Node.js, Express and MongoDB",
-        "image":"dbit-logo.png",
-        "url":"https://gitlab.com/aarish407/DBJSE"
+        "title": "DBJSE",
+        "category": "Research paper review portal, Tech stack: Node.js, Express and MongoDB",
+        "image": "dbit-logo.png",
+        "url": "https://gitlab.com/aarish407/DBJSE"
       }
     ]
   },
-  "testimonials":{
-    "testimonials":[
+  "testimonials": {
+    "testimonials": [
       {
-        "text":"It’s rare that you come across standout talent like Haramrit. \n\n I had the pleasure of working with Haramrit for 6 months at the Nexus 8 International, collaborating on several projects. \n\n I was particularly impressed by Haramrit's ability to quickly learn a new technology and handle even the toughest issues—effortlessly. That skill often takes years to develop professionals, but it seemed to come perfectly naturally to him. \n\nHaramrit would be an asset to any team.",
-        "user":"Jason Chen - CTO, Nexus 8 International"
+        "text": "It’s rare that you come across standout talent like Haramrit. \n\n I had the pleasure of working with Haramrit for 6 months at the Nexus 8 International, collaborating on several projects. \n\n I was particularly impressed by Haramrit's ability to quickly learn a new technology and handle even the toughest issues—effortlessly. That skill often takes years to develop professionals, but it seemed to come perfectly naturally to him. \n\nHaramrit would be an asset to any team.",
+        "user": "Jason Chen - CTO, Nexus 8 International"
       },
       {
-        "text":"That Haramrit Singh Khurana must be one of the most brilliant developers I've ever met! It is surprising that nobody has hired him yet. Hey you, you should hire this guy, he may be fresh out of University and have hardly any job experience but I am confident that he will be one of your best developers in no time!",
-        "user":"Steve Wozniak... impersonator"
+        "text": "That Haramrit Singh Khurana must be one of the most brilliant developers I've ever met! It is surprising that nobody has hired him yet. Hey you, you should hire this guy, he may be fresh out of University and have hardly any job experience but I am confident that he will be one of your best developers in no time!",
+        "user": "Steve Wozniak... impersonator"
       }
     ]
   }
