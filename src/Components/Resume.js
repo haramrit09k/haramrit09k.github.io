@@ -18,7 +18,7 @@ class Resume extends Component {
         return <div key={work.company}><h3>{work.company}</h3>
           {
             Object.keys(work.roles).map(function (role) {
-              return <div>
+              return <div key={role}>
                 <p className="info">{work.roles[role].title}<span>&bull;</span> <em className="date">{work.roles[role].years}</em></p>
                 <p style={{whiteSpace: 'pre-line'}} className="newline" dangerouslySetInnerHTML={{__html: sanitizer(work.roles[role].description)}}></p>
               </div>
