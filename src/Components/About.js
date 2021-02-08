@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import dompurify from 'dompurify';
 
 class About extends Component {
   render() {
+   const sanitizer = dompurify.sanitize;
 
     if(this.props.data){
       var name = this.props.data.name;
@@ -25,7 +27,7 @@ class About extends Component {
          <div className="nine columns main-col">
             <h2>About Me</h2>
 
-            <p>{bio}</p>
+            <p dangerouslySetInnerHTML={{__html: sanitizer(bio)}}></p>
             <div className="row">
                <div className="columns contact-details">
                   <h2>Contact Details</h2>
