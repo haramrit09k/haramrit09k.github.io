@@ -171,7 +171,7 @@
         "title": "SpaceTerra",
         "category": "Voted as most played game of Teknack, Tech stack: Phaser.io, MongoDB, Node.js",
         "image": "space-terra.png",
-        "url": "https://gitlab.com/teknack17/space-terra"
+        "url": "https://spaceterra.herokuapp.com"
       },
       {
         "title": "DBJSE",
