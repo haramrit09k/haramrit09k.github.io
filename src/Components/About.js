@@ -6,7 +6,7 @@ class About extends Component {
    const sanitizer = dompurify.sanitize;
 
     if(this.props.data){
-      var name = this.props.data.name;
+      // var name = this.props.data.name;
       var profilepic= "images/"+this.props.data.image;
       var bio = this.props.data.bio;
       var street = this.props.data.address.street;
