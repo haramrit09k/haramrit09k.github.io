@@ -54,7 +54,7 @@
         "school": "University of Mumbai",
         "degree": "Bachelors in Computer Engineering",
         "graduated": "Class of 2019",
-        "description": "GPA: 4.0/4.0",
+        "description": "GPA: 8.58/10.0",
         "achievements": "2nd runner up -  Mumbai Hackathon (2017), 1st runner up - Best Senior Thesis"
       }
     ],
@@ -190,6 +190,18 @@
         "category": "Minimalistic todo Android app, Tech stack: React Native, Firebase",
         "image": "wha2do.png",
         "url": "https://play.google.com/store/apps/details?id=com.wha2do"
+      },
+      {
+        "title": "rockX",
+        "category": "A simple Angular app displaying SpaceX recent launches, Tech stack: Angular, GraphQL",
+        "image": "rockX.webp",
+        "url": "https://rock-x.herokuapp.com"
+      },
+      {
+        "title": "Stock Price Dashboard",
+        "category": "A stock price dashboard built using Python, Streamlit and Yahoo Finance API",
+        "image": "stock.png",
+        "url": "https://streamlit-stock-price.herokuapp.com/"
       }
     ]
   },

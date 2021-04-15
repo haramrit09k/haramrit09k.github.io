@@ -226,15 +226,22 @@ ul#nav li.current a { color: #f2ce92; }
    height: 120px;
    border-radius: 100%;
 }
-#about .contact-details { width: 41.66667%; }
+#about .contact-details { 
+   width: 41.66667%; 
+   font-size: 17px;
+}
+
+#about .contact-heading{
+   color: #fff;
+}
+
 #about .download {
-   width: 58.33333%;
    padding-top: 6px;
 }
 #about .main-col { padding-right: 5%; }
 #about .download .button {
-   margin-top: 6px;
-   background: #444;
+   margin-top: 50px;
+   background: #11ABB0;
 }
 #about .download .button:hover {
    background: #fff;
@@ -243,6 +250,19 @@ ul#nav li.current a { color: #f2ce92; }
 #about .download .button i {
    margin-right: 15px;
    font-size: 20px;
+}
+
+#about .github-profile{
+   padding-top: 10px;
+   background-color: #fff;
+   border-color: #0F9095;
+   border-width: 5px;
+   width: 58.3333%;
+}
+
+#about .github-stats-heading{
+   text-align: center;
+   padding-bottom: 15px;
 }
 
 
@@ -294,8 +314,8 @@ ul#nav li.current a { color: #f2ce92; }
 }
 
 #resume .info {
-   font: 16px/24px 'librebaskerville-italic', serif;
-   color: #6E7881;
+   font: 20px/24px 'opensans-regular', sans-serif;
+   color: #141414;
    margin-bottom: 18px;
    margin-top: 9px;
 }
@@ -304,7 +324,7 @@ ul#nav li.current a { color: #f2ce92; }
    margin-left: 5px;
 }
 #resume .date {
-   font: 15px/24px 'opensans-regular', sans-serif;
+   font: 15px/24px 'librebaskerville-italic', serif;
    margin-top: 6px;
 }
 
@@ -449,12 +469,12 @@ ul#nav li.current a { color: #f2ce92; }
    padding-bottom: 60px;
 }
 #portfolio h1 {
-   font: 15px/24px 'opensans-semibold', sans-serif;
-   text-transform: uppercase;
-   letter-spacing: 1px;
+   font:'opensans-semibold', sans-serif;
+   /* text-transform: uppercase; */
+   /* letter-spacing: 1px; */
    text-align: center;
    margin-bottom: 48px;
-   color: #95A3A3;
+   color: #303535;
 }
 
 /* Portfolio Content */
