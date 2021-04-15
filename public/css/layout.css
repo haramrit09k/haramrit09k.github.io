@@ -226,13 +226,21 @@ ul#nav li.current a { color: #f2ce92; }
    height: 120px;
    border-radius: 100%;
 }
-#about .contact-details { width: 41.66667%; }
+#about .contact-details { 
+   width: 41.66667%; 
+   font-size: 17px;
+}
+
+#about .contact-heading{
+   color: #fff;
+}
+
 #about .download {
    padding-top: 6px;
 }
 #about .main-col { padding-right: 5%; }
 #about .download .button {
-   margin-top: 56px;
+   margin-top: 50px;
    background: #11ABB0;
 }
 #about .download .button:hover {
@@ -250,6 +258,11 @@ ul#nav li.current a { color: #f2ce92; }
    border-color: #0F9095;
    border-width: 5px;
    width: 58.3333%;
+}
+
+#about .github-stats-heading{
+   text-align: center;
+   padding-bottom: 15px;
 }
 
 
