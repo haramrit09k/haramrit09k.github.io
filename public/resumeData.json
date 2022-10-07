@@ -1,11 +1,11 @@
 {
   "main": {
     "name": "Haramrit Singh Khurana",
-    "occupation": "Graduate Student at George Mason University",
-    "description": "I recently interned as a Software Engineer Intern at a local healthcare startup this summer, and am currently looking for full-time opportunities in software engineering.",
+    "occupation": "Software Engineer",
+    "description": "Over 1 year of experience working with modern day technologies like .NET Core, C#, React, and MS-SQL.",
     "image": "profilepic.jpg",
-    "employer": "Nexus 8 International",
-    "bio": "I am a tech professional with expertise in <strong>Java, Python, app development and Agile methodology</strong> gained in my pursuit of an M.S. in Computer Science. My zeal for learning about cloud technologies led me to getting certified as an <strong>AWS Solutions Architect - Associate</strong>. I am passionate about creating quality software chunks that help make this world a better place. Along with possessing effective problem-solving skills I am also an excellent communicator with strong analytical and organizational skills.",
+    "employer": "Optimal Satcom Inc",
+    "bio": "I am a software engineer with over 1 year of experience at Optimal Satcom Inc, and have a good grasp on <strong>.NET Core, C#, and MS-SQL</strong>. My zeal for learning about cloud technologies led me to getting certified as an <strong>AWS Solutions Architect - Associate</strong>. I am passionate about creating quality software chunks that help make this world a better place. Along with possessing effective problem-solving skills, I am also an excellent communicator with strong analytical and organizational skills.",
     "contactmessage": "Have a project for me? Think I'd be a good fit for your team? I'd love to hear from you, give me a shout by email, via LinkedIn or call me on my cellphone. \n OR <strong><u>you could schedule a Zoom call with me using Calendly!</u></strong> :)",
     "email": "haramrit09k@gmail.com",
     "phone": "703-341-9667",
@@ -59,6 +59,17 @@
       }
     ],
     "work": [
+      {
+        "company": "Optimal Satcom Inc",
+        "roles": [
+          {
+            "title": "Software Engineer",
+            "years": "June 2021 - October 2022",
+            "description": "• Migrated firm-wide legacy applications to web applications using DevExpress React, ASP.NET Core, and MS-SQL \n • Implemented three major components using C# and responsible for all future enhancements along with bug fixes of those components \n • Responsible for fixing key components of critical silent console crashes reported by clients and deprecation issues integral to the security of the application \n • Created and modified SQL triggers, queries, stored procedures, and database upgrade scripts for new releases of the enterprise SATCOM capacity management system for clients \n • Developed and revitalized report generation functionality which provides meaningful insights and decoding useful patterns for external stakeholders \n • Spearheaded a project-wide initiative to introduce a third mode of operation to the company’s flagship product, ECM \n • Collaborated closely with support and QA team to reproduce and fix high priority bugs reported by clients \n • Optimized and restructured unused and deprecated legacy code and achieved a ~70% decrease in number of compiler warnings and errors \n"
+          }
+        ]
+      },
+
       {
         "company": "Nexus 8 International",
         "roles": [
