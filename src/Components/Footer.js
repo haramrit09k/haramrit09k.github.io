@@ -7,6 +7,7 @@ class Footer extends Component {
       var networks= this.props.data.social.map(function(network){
         return <li key={network.name}><a href={network.url}><i className={network.className}></i></a></li>
       })
+      var year = new Date().getFullYear();
     }
 
     return (
@@ -19,7 +20,7 @@ class Footer extends Component {
            </ul>
 
            <ul className="copyright">
-              <li>&copy; Copyright 2021 Haramrit Singh Khurana</li>
+              <li>&copy; Copyright {year} Haramrit Singh Khurana</li>
               <li>Inspired by <a title="Tim Baker" href="http://www.timbakerdev.com/">Tim Baker</a></li>
            </ul>
 
