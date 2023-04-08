@@ -2,18 +2,18 @@
   "main": {
     "name": "Haramrit Singh Khurana",
     "occupation": "Software Engineer",
-    "description": "Over 1 year of experience working with modern day technologies like .NET Core, C#, React, and MS-SQL.",
+    "description": "Currently doing full-stack development using Spring Boot, Java, Angular, Oracle-SQL, Python, and Shell Scripting",
     "image": "profilepic.jpg",
-    "employer": "Optimal Satcom Inc",
-    "bio": "I am a software engineer with over 1 year of experience at Optimal Satcom Inc, and have a good grasp on <strong>.NET Core, C#, and MS-SQL</strong>. My zeal for learning about cloud technologies led me to getting certified as an <strong>AWS Solutions Architect - Associate</strong>. I am passionate about creating quality software chunks that help make this world a better place. Along with possessing effective problem-solving skills, I am also an excellent communicator with strong analytical and organizational skills.",
+    "employer": "Citi Group N.A.",
+    "bio": "I am a software engineer with over 2 years of experience, and am currently working with <strong>Spring Boot, Java, Angular, and Oracle-SQL</strong>. My zeal for learning about cloud technologies led me to getting certified as an <strong>AWS Solutions Architect - Associate</strong>. I am passionate about creating quality software chunks that help make this world a better place. Along with possessing effective problem-solving skills, I am also an excellent communicator with strong analytical and organizational skills.",
     "contactmessage": "Have a project for me? Think I'd be a good fit for your team? I'd love to hear from you, give me a shout by email, via LinkedIn or call me on my cellphone. \n OR <strong><u>you could schedule a Zoom call with me using Calendly!</u></strong> :)",
     "email": "haramrit09k@gmail.com",
     "phone": "703-341-9667",
     "address": {
-      "street": "13504 Avonmore Dr",
-      "city": "Herndon",
-      "state": "Virginia",
-      "zip": "20171"
+      "street": "3701 Grapevine Mills Pkwy, Apt 1235",
+      "city": "Grapevine",
+      "state": "Texas",
+      "zip": "76051"
     },
     "website": "http://haramrit09k.github.io",
     "resumedownload": "/resume/Haramrit_Khurana_Resume.pdf",
@@ -65,7 +65,7 @@
           {
             "title": "Software Engineer",
             "years": "June 2021 - October 2022",
-            "description": "• Migrated firm-wide legacy applications to web applications using DevExpress React, ASP.NET Core, and MS-SQL \n • Implemented three major components using C# and responsible for all future enhancements along with bug fixes of those components \n • Responsible for fixing key components of critical silent console crashes reported by clients and deprecation issues integral to the security of the application \n • Created and modified SQL triggers, queries, stored procedures, and database upgrade scripts for new releases of the enterprise SATCOM capacity management system for clients \n • Developed and revitalized report generation functionality which provides meaningful insights and decoding useful patterns for external stakeholders \n • Spearheaded a project-wide initiative to introduce a third mode of operation to the company’s flagship product, ECM \n • Collaborated closely with support and QA team to reproduce and fix high priority bugs reported by clients \n • Optimized and restructured unused and deprecated legacy code and achieved a ~70% decrease in number of compiler warnings and errors \n"
+            "description": "• Migrated firm-wide legacy applications to web applications using DevExpress React, ASP.NET Core, and MS-SQL \n • Implemented three major components using C# and responsible for all future enhancements along with bug fixes of those components \n • Responsible for fixing key components of critical silent console crashes reported by clients and deprecation issues integral to the security of the application \n • Created and modified SQL triggers, queries, stored procedures, and database upgrade scripts for new releases of the enterprise SATCOM capacity management system for clients \n • Developed and revitalized report generation functionality which provides meaningful insights and decoding useful patterns for external stakeholders \n • Spearheaded a project-wide initiative to introduce a third mode of operation to the company’s flagship product, ECM \n • Collaborated closely with support and QA team to reproduce and fix high priority bugs reported by clients \n • Handled tech debt by optimizing and restructuring unused and deprecated legacy code and achieving a ~70% decrease in number of compiler warnings and errors \n"
           }
         ]
       },
