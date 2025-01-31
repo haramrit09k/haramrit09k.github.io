@@ -3,14 +3,14 @@
     "name": "Haramrit Singh Khurana",
     "occupation": "Software Engineer",
     "description": "Currently doing full-stack development using Spring Boot, Java, Angular, Oracle-SQL, Python, and Shell Scripting",
-    "image": "profilepic.jpg",
-    "employer": "Citi Group N.A.",
-    "bio": "I am a software engineer with over 2 years of experience, and am currently working with <strong>Spring Boot, Java, Angular, and Oracle-SQL</strong>. My zeal for learning about cloud technologies led me to getting certified as an <strong>AWS Solutions Architect - Associate</strong>. I am passionate about creating quality software chunks that help make this world a better place. Along with possessing effective problem-solving skills, I am also an excellent communicator with strong analytical and organizational skills.",
+    "image": "profile-pic-new.png",
+    "employer": "Citibank N.A.",
+    "bio": "I am a software engineer with over 3 years of experience, and am currently working with <strong>Spring Boot, Java, Angular, and Oracle-SQL</strong>. My zeal for learning about cloud technologies led me to getting certified as an <strong>AWS Solutions Architect - Associate</strong>. I am passionate about creating quality software chunks that help make this world a better place. Along with possessing effective problem-solving skills, I am also an excellent communicator with strong analytical and organizational skills.",
     "contactmessage": "Have a project for me? Think I'd be a good fit for your team? I'd love to hear from you, give me a shout by email, via LinkedIn or call me on my cellphone. \n OR <strong><u>you could schedule a Zoom call with me using Calendly!</u></strong> :)",
     "email": "haramrit09k@gmail.com",
     "phone": "703-341-9667",
     "address": {
-      "street": "3701 Grapevine Mills Pkwy, Apt 1235",
+      "street": "3701 Grapevine Mills Pkwy",
       "city": "Grapevine",
       "state": "Texas",
       "zip": "76051"
@@ -41,12 +41,12 @@
     ]
   },
   "resume": {
-    "skillmessage": "I'm a dilettante and am always interested in playing around with new technologies but these are the ones that have really won me over",
+    "skillmessage": "I'm a dilettante and am always interested in playing around with new technologies but these are the ones that have really won me over!",
     "education": [
       {
         "school": "George Mason University",
         "degree": "Masters in Computer Science",
-        "graduated": "Graduating May 2021",
+        "graduated": "Class of 2021",
         "description": "GPA: 3.76/4.0",
         "achievements": "Relevant Coursework: Algorithms, Systems Programming, Object Oriented Design, Database Systems, Component-based Software Engineering"
       },
@@ -59,6 +59,18 @@
       }
     ],
     "work": [
+
+      {
+        "company": "Citibank N.A.",
+        "roles": [
+          {
+            "title": "Engineer Sr Analyst",
+            "years": "December 2022 - Present",
+            "description": "• <strong>Led the Playwright automation project</strong> from inception to completion, independently conducting R&D, defining the technical roadmap, and establishing an efficient task breakdown strategy to accelerate execution. \n • Managed project planning and task distribution, creating JIRAs, assigning development tasks to a junior colleague, and ensuring timely implementation of core regression testing. \n • Successfully integrated the Playwright test suite into Jenkins for nightly builds, <strong>reducing manual testing efforts by 60% per RFT cycle</strong> and allowing developers to focus on feature validation instead of repetitive regression tests. \n • Ensured regression testing as the team transitions from DMA automation (Microfocus) to Ansible playbooks, leveraging the Playwright suite to maintain stability during the migration. \n • <strong>Spearheaded the Ops Manager Metrics Tab</strong> for MongoDB clusters, enabling users to view a summary of Ops Manager monitoring data directly within the portal without requiring a separate login, <strong>improving accessibility and reducing the need for manual navigation between multiple systems</strong>. \n • Optimized UAT and production deployment by introducing a <strong>divide-and-conquer testing strategy</strong> and SQL aggregation techniques, ensuring faster releases and database consistency across environments. \n • <strong>Closed 62+ high-impact JIRAs</strong>, showcasing strong problem-solving and full-stack development expertise across Angular and Spring Boot. \n • Oversaw <strong>onboarding</strong> of multiple new colleagues, both <strong>senior and junior</strong>, ensuring they were set up for their day-to-day work while continuing to meet my own deliverables and action items on time."
+          }
+        ]
+      },
+
       {
         "company": "Optimal Satcom Inc",
         "roles": [
@@ -117,7 +129,7 @@
       },
       {
         "name": "Java",
-        "description": "Java was my second programming language that I started using (after C) in college a couple years ago. It is by far the language I am most familiar with in data-structure and algorithm programming.",
+        "description": "Java was the second programming language I learned in college, following C. It is the language I am most proficient in, particularly for data structures and algorithms.",
         "image": "java.jpg"
       },
       {
@@ -137,17 +149,18 @@
       },
       {
         "name": "Node.js",
-        "description": "I developed my first application with Node.js back in 2016, and have never looked back since. It has become my server-side scripting language of choice. The bulk of my experience with it has been in conjunction with using MongoDB as the supporting database.",
+        "description": "I developed my first application with Node.js back in 2016, and have never looked back since. Since then, I have worked with React, Angular, and Express to build full-stack applications - all of which are powered by Node.js, including this website.",
         "image": "node.jpg"
       },
       {
-        "name": "Bootstrap 4",
-        "description": "I was introduced to Bootstrap during a web dev workshop I attended in late 2015, and honestly I was blown away with what you could do with a simple CSS framework. Since then, I have used Bootstrap more often than not when designing the layout for my sites.",
-        "image": "bootstrap.png"
-      },
+        "name": "Playwright",
+        "description": "I first used Playwright while leading an R&D project to automate testin at Citibank. It’s a faster, more reliable alternative to Selenium with strong Microsoft-backed support. Its cross-browser automation and AI-driven capabilities make it a powerful tool for scalable, efficient testing and regression automation.",
+        "image": "playwright.png"
+      }
+      ,
       {
         "name": "MongoDB",
-        "description": "I have used many different database systems and am better educated and experienced with Relational Databases. However, for many applications, especially Node.js applications that I have worked on, I found MongoDB to be a better alternative for those use cases.",
+        "description": "My first MongoDB use-case was for my project Spaceterra back in 2017. Since then, I have used it in a couple other projects and have found it to be a very powerful and flexible database. Fast forward to today, I work on a team that helps provision MongoDB clusters for the entire firm.",
         "image": "mongo.jpg"
       }
     ]
