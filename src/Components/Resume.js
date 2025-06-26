@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import dompurify from 'dompurify';
-
-
+import Skills from './Skills';
 
 class Resume extends Component {
   render() {
     const sanitizer = dompurify.sanitize;
 
     if (this.props.data) {
-      var skillmessage = this.props.data.skillmessage;
       var education = this.props.data.education.map(function (education) {
         return <div key={education.school}><h3>{education.school}</h3>
           <p className="info">{education.degree} <span>&bull;</span><em className="date">{education.graduated}</em></p>
@@ -24,14 +22,6 @@ class Resume extends Component {
               </div>
             })
           }
-        </div>
-      })
-      var skills = this.props.data.skills.map(function (skills) {
-        var projectImage = 'images/tech/' + skills.image;
-        return <div key={skills.name} className="columns feature-item">
-          <img className='skill' alt={skills.name} src={projectImage} />
-          <h5 style={{ color: 'white' }}>{skills.name}</h5>
-          <p>{skills.description}</p>
         </div>
       })
     }
@@ -67,21 +57,7 @@ class Resume extends Component {
           </div>
         </section>
 
-        <section style={{ backgroundColor: '#2B2B2B' }} id='skills'>
-          <div className="row skill">
-
-            <div className="three columns header-col">
-              <h1 style={{ color: 'white' }}><span>Favorite Tech</span></h1>
-            </div>
-
-            <div>
-              <div className="nine columns main-col"><p className="lead center">{skillmessage}</p></div>
-              <ul className="bgrid-quarters s-bgrid-thirds cf">
-                {skills}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <Skills data={this.props.data} />
       </div>
 
     );
