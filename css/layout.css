@@ -1113,3 +1113,15 @@ footer .social-links li:first-child { margin-left: 0; }
 #testimonials .testimonials-prompt:hover {
   border-bottom: 2.5px solid #fff;
 }
+
+/* Education and Work Logos */
+.edu-logo, .work-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-right: 16px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #eee;
+  vertical-align: middle;
+}
