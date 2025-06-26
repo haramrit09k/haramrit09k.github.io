@@ -48,19 +48,22 @@
         "degree": "Masters in Computer Science",
         "graduated": "Class of 2021",
         "description": "GPA: 3.76/4.0",
-        "achievements": "Relevant Coursework: Algorithms, Systems Programming, Object Oriented Design, Database Systems, Component-based Software Engineering"
+        "achievements": "Relevant Coursework: Algorithms, Systems Programming, Object Oriented Design, Database Systems, Component-based Software Engineering",
+        "logo": "images/education/gmu.png"
       },
       {
         "school": "University of Mumbai",
         "degree": "Bachelors in Computer Engineering",
         "graduated": "Class of 2019",
         "description": "GPA: 8.58/10.0",
-        "achievements": "2nd runner up -  Mumbai Hackathon (2017), 1st runner up - Best Senior Thesis"
+        "achievements": "2nd runner up -  Mumbai Hackathon (2017), 1st runner up - Best Senior Thesis",
+        "logo": "images/education/mumbai.svg"
       }
     ],
     "work": [
       {
         "company": "Citibank N.A.",
+        "logo": "images/work/citi.png",
         "roles": [
           {
             "title": "Engineer Sr Analyst",
@@ -71,6 +74,7 @@
       },
       {
         "company": "Optimal Satcom Inc",
+        "logo": "images/work/optimal.png",
         "roles": [
           {
             "title": "Software Engineer",
@@ -81,6 +85,7 @@
       },
       {
         "company": "Nexus 8 International",
+        "logo": "images/work/nexus.png",
         "roles": [
           {
             "title": "Software Engineer Intern ",
@@ -91,6 +96,7 @@
       },
       {
         "company": "George Mason University",
+        "logo": "images/education/gmu.png",
         "roles": [
           {
             "title": "Graduate Teaching Assistant",
@@ -101,6 +107,7 @@
       },
       {
         "company": "Don Bosco Institute of Technology",
+        "logo": "images/education/dbit.png",
         "roles": [
           {
             "title": "Backend Developer Intern",
