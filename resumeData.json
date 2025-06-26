@@ -10,10 +10,10 @@
     "email": "haramrit09k@gmail.com",
     "phone": "703-341-9667",
     "address": {
-      "street": "3701 Grapevine Mills Pkwy",
-      "city": "Grapevine",
-      "state": "Texas",
-      "zip": "76051"
+      "street": "123 Rock Fern Way",
+      "city": "Toronto",
+      "state": "ON",
+      "zip": "M2J 4P4"
     },
     "website": "http://haramrit09k.github.io",
     "resumedownload": "/resume/Haramrit_Khurana_Resume.pdf",
@@ -77,7 +77,7 @@
           {
             "title": "Software Engineer",
             "years": "June 2021 - October 2022",
-            "description": "• Migrated firm-wide legacy applications to web applications using DevExpress React, ASP.NET Core, and MS-SQL \n • Implemented three major components using C# and responsible for all future enhancements along with bug fixes of those components \n • Responsible for fixing key components of critical silent console crashes reported by clients and deprecation issues integral to the security of the application \n • Created and modified SQL triggers, queries, stored procedures, and database upgrade scripts for new releases of the enterprise SATCOM capacity management system for clients \n • Developed and revitalized report generation functionality which provides meaningful insights and decoding useful patterns for external stakeholders \n • Spearheaded a project-wide initiative to introduce a third mode of operation to the company’s flagship product, ECM \n • Collaborated closely with support and QA team to reproduce and fix high priority bugs reported by clients \n • Handled tech debt by optimizing and restructuring unused and deprecated legacy code and <strong>achieving a ~70% decrease in number of compiler warnings and errors</strong> \n"
+            "description": "• Migrated firm-wide legacy applications to web applications using DevExpress React, ASP.NET Core, and MS-SQL \n • Implemented three major components using C# and responsible for all future enhancements along with bug fixes of those components \n • Responsible for fixing key components of critical silent console crashes reported by clients and deprecation issues integral to the security of the application \n • Created and modified SQL triggers, queries, stored procedures, and database upgrade scripts for new releases of the enterprise SATCOM capacity management system for clients \n • Developed and revitalized report generation functionality which provides meaningful insights and decoding useful patterns for external stakeholders \n • Spearheaded a project-wide initiative to introduce a third mode of operation to the company's flagship product, ECM \n • Collaborated closely with support and QA team to reproduce and fix high priority bugs reported by clients \n • Handled tech debt by optimizing and restructuring unused and deprecated legacy code and <strong>achieving a ~70% decrease in number of compiler warnings and errors</strong> \n"
           }
         ]
       },
@@ -115,7 +115,7 @@
           {
             "title": "Technical Head - ACM DBIT",
             "years": "July 2017 - May 2018",
-            "description": "• Organized Teknack, a two-day intercollegiate online gaming festival featuring more than 10 games (Single-Player, Multi-Player & Open World) \n • Games were played over 25000 people, a significant markup of 28 % from Teknack ‘17"
+            "description": "• Organized Teknack, a two-day intercollegiate online gaming festival featuring more than 10 games (Single-Player, Multi-Player & Open World) \n • Games were played over 25000 people, a significant markup of 28 % from Teknack '17"
           }
         ]
       }
@@ -154,7 +154,7 @@
       },
       {
         "name": "Playwright",
-        "description": "I first used Playwright while leading an R&D project to automate testin at Citibank. It’s a faster, more reliable alternative to Selenium with strong Microsoft-backed support. Its cross-browser automation and AI-driven capabilities make it a powerful tool for scalable, efficient testing and regression automation.",
+        "description": "I first used Playwright while leading an R&D project to automate testing at Citibank. It's a faster, more reliable alternative to Selenium with strong Microsoft-backed support. Its cross-browser automation and AI-driven capabilities make it a powerful tool for scalable, efficient testing and regression automation.",
         "image": "playwright.png"
       }
       ,
@@ -232,7 +232,7 @@
   "testimonials": {
     "testimonials": [
       {
-        "text": "It’s rare that you come across standout talent like Haramrit. \n\n I had the pleasure of working with Haramrit for 6 months at the Nexus 8 International, collaborating on several projects. \n\n I was particularly impressed by Haramrit's ability to quickly learn a new technology and handle even the toughest issues—effortlessly. That skill often takes years to develop professionals, but it seemed to come perfectly naturally to him. \n\nHaramrit would be an asset to any team.",
+        "text": "It's rare that you come across standout talent like Haramrit. \n\n I had the pleasure of working with Haramrit for 6 months at the Nexus 8 International, collaborating on several projects. \n\n I was particularly impressed by Haramrit's ability to quickly learn a new technology and handle even the toughest issues—effortlessly. That skill often takes years to develop professionals, but it seemed to come perfectly naturally to him. \n\nHaramrit would be an asset to any team.",
         "user": "Jason Chen - CTO, Nexus 8 International"
       },
       {

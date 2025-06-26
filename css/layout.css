@@ -736,8 +736,8 @@ call-to-action .button {
 #testimonials blockquote p {
    font-family: 'librebaskerville-italic', serif;
    padding: 0;
-   font-size: 24px;
-   line-height: 48px;
+   font-size: 20px;
+   line-height: 40px;
    color: #fff
 }
 #testimonials blockquote cite {
@@ -750,6 +750,37 @@ call-to-action .button {
 #testimonials blockquote cite:before { content: "\2014 \0020"; }
 #testimonials blockquote cite a,
 #testimonials blockquote cite a:visited { color: #8B9798; border: none }
+
+/* LinkedIn Recommendations Link */
+#testimonials .linkedin-recommendations {
+   text-align: center;
+   margin-top: 40px;
+   padding: 18px 24px;
+   background: rgba(31, 31, 31, 0.85);
+   border-radius: 16px;
+   border-bottom: 3px solid #11ABB0;
+   font-family: 'librebaskerville-italic', serif;
+   box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+}
+
+#testimonials .linkedin-recommendations p {
+   font-size: 18px;
+   color: #fff;
+   margin: 0;
+   text-shadow: 0px 1px 3px rgba(0,0,0,0.7);
+}
+
+#testimonials .linkedin-recommendations a {
+   color: #11ABB0;
+   text-decoration: underline;
+   font-weight: bold;
+   transition: color 0.3s;
+}
+
+#testimonials .linkedin-recommendations a:hover {
+   color: #fff;
+   text-decoration: underline;
+}
 
 /* Flex Slider
 /* ------------------------------------------------------------------ */
@@ -1056,3 +1087,29 @@ footer .social-links li:first-child { margin-left: 0; }
  	border-radius: 100%;
 }
 #go-top a:hover { background-color: #0F9095; }
+
+#testimonials .testimonials-intro {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+#testimonials .testimonials-prompt {
+  display: inline-block;
+  font-family: 'librebaskerville-italic', serif;
+  font-size: 28px;
+  color: #fff;
+  margin-top: 12px;
+  margin-bottom: 0;
+  letter-spacing: 0.5px;
+  text-shadow: 0px 1px 3px rgba(0,0,0,0.7);
+  border-bottom: 2.5px solid #11ABB0;
+  padding-bottom: 6px;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-color 0.3s;
+}
+
+#testimonials .testimonials-prompt:hover {
+  border-bottom: 2.5px solid #fff;
+}
