@@ -61,9 +61,6 @@ const Skills = ({ data }) => {
 
     const displayedSkills = (categorized[selectedCategory] || []).slice(0, 8);
 
-    // Responsive sticky offset
-    const stickyTop = isMobile ? 200 : 140;
-
     return (
         <section style={{ backgroundColor: '#2B2B2B', overflow: 'visible' }} id='skills'>
             <div className="row skill">
