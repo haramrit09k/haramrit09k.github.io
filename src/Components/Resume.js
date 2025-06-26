@@ -9,7 +9,7 @@ class Resume extends Component {
     if (this.props.data) {
       var education = this.props.data.education.map(function (education) {
         return (
-          <div key={education.school} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 48 }}>
+          <div key={education.school} className="experience-entry" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 48 }}>
             <div style={{ flex: 1 }}>
               <h3 style={{ marginBottom: 4 }}>{education.school}</h3>
               <p className="info">{education.degree} <span>&bull;</span><em className="date">{education.graduated}</em></p>
@@ -28,7 +28,7 @@ class Resume extends Component {
       var work = this.props.data.work.map(function (work) {
         console.log('WORK ENTRY:', work);
         return (
-          <div key={work.company} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 48 }}>
+          <div key={work.company} className="experience-entry" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 48 }}>
             <div style={{ flex: 1 }}>
               <h3 style={{ marginBottom: 4 }}>{work.company}</h3>
               {Object.keys(work.roles).map(function (role) {

@@ -1125,3 +1125,15 @@ footer .social-links li:first-child { margin-left: 0; }
   border: 1px solid #eee;
   vertical-align: middle;
 }
+
+@media (max-width: 768px) {
+  .experience-entry {
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    text-align: center;
+  }
+  .experience-entry img {
+    margin-left: 0 !important;
+    margin-bottom: 18px;
+  }
+}
