@@ -59,7 +59,6 @@
       }
     ],
     "work": [
-
       {
         "company": "Citibank N.A.",
         "roles": [
@@ -70,7 +69,6 @@
           }
         ]
       },
-
       {
         "company": "Optimal Satcom Inc",
         "roles": [
@@ -81,7 +79,6 @@
           }
         ]
       },
-
       {
         "company": "Nexus 8 International",
         "roles": [
@@ -92,7 +89,6 @@
           }
         ]
       },
-
       {
         "company": "George Mason University",
         "roles": [
@@ -103,7 +99,6 @@
           }
         ]
       },
-
       {
         "company": "Don Bosco Institute of Technology",
         "roles": [
@@ -119,7 +114,6 @@
           }
         ]
       }
-
     ],
     "skills": [
       {
@@ -133,59 +127,104 @@
         "image": "spring-boot.png"
       },
       {
-        "name": "Playwright",
-        "description": "Led an enterprise automation project with Playwright — built nightly test pipelines, integrated with Jenkins, and slashed manual QA work by 60%.",
-        "image": "playwright.png"
-      },
-      {
-        "name": "Angular",
-        "description": "Built full-featured admin and diagnostic UIs for internal platforms used by 500+ teams. Strong with services, forms, and state management.",
-        "image": "react.jpg"
-      },
-      {
-        "name": "Oracle SQL",
-        "description": "Written some gnarly queries, optimized joins, handled migrations, and debugged issues across environments. Used in most of my production work.",
-        "image": "mongo.jpg"
-      },
-      {
         "name": "Node.js",
-        "description": "First love. Built full-stack apps in Node, Express, and MongoDB — used it for research portals, games, and side projects.",
+        "description": "Built full-stack apps in Node, Express, and MongoDB — used it for research portals, games, and side projects.",
         "image": "node.jpg"
       },
       {
-        "name": "AWS",
-        "description": "AWS-certified. Used for cloud automation, deployment, and scaling solutions.",
-        "image": "aws.gif"
-      },
-      {
-        "name": "Python & Shell",
-        "description": "Casually dangerous with Python and shell scripts for automation, data wrangling, and dev tooling.",
-        "image": "git.jpg"
-      },
-      {
-        "name": "CI/CD (Jenkins & GitHub Actions)",
-        "description": "Automated build and regression pipelines using Jenkins and GitHub Actions. Integrated testing workflows to ensure high release confidence across environments.",
-        "image": "ci-cd.png"
-      },
-      {
-        "name": "Test Automation",
-        "description": "Led end-to-end test automation initiatives using Playwright, achieving 60% reduction in manual QA. Designed scalable test suites integrated with CI/CD workflows.",
-        "image": "test-automation.png"
+        "name": "Oracle SQL",
+        "description": "Written complex queries, optimized joins, handled migrations, and debugged cross-environment issues.",
+        "image": "oracle-sql.png"
       },
       {
         "name": "REST APIs",
-        "description": "Designed and consumed RESTful APIs across multiple projects. Built backend services and integrated third-party endpoints with robust error handling.",
+        "description": "Designed and consumed RESTful APIs across multiple projects with robust error handling and modular service layers.",
         "image": "rest-api.png"
       },
       {
-        "name": "Shell Scripting & Python",
-        "description": "Used for automation, data parsing, and internal tooling. Created efficient scripts to support operations and reduce manual overhead.",
-        "image": "python-shell.png"
+        "name": "Angular",
+        "description": "Built full-featured admin and diagnostic UIs used by 500+ teams. Strong with services, forms, and state management.",
+        "image": "angular.png"
       },
       {
-        "name": "Monitoring & Logging (Grafana / Kibana)",
-        "description": "Worked with monitoring dashboards and logs to debug production issues, ensure observability, and maintain uptime in live systems.",
-        "image": "monitoring.png"
+        "name": "React",
+        "description": "Used React to build dynamic frontends, including my portfolio site and internal tools. Familiar with hooks and component-based architecture.",
+        "image": "react.jpg"
+      },
+      {
+        "name": "Streamlit",
+        "description": "Built data dashboards with real-time visualizations using Streamlit. Great for quick internal tools and data-heavy apps.",
+        "image": "streamlit.png"
+      },
+      {
+        "name": "Electron.js",
+        "description": "Built a cross-platform desktop app using Electron for distributed ML workloads. Managed both frontend and backend interactions.",
+        "image": "electron-js.png"
+      },
+      {
+        "name": "Phaser.js",
+        "description": "Built a multiplayer browser game with Phaser.js. Experience with game loops, collision detection, and real-time rendering.",
+        "image": "phaser.png"
+      },
+      {
+        "name": "AWS",
+        "description": "AWS-certified. Used for cloud automation, deployment, and scaling internal systems.",
+        "image": "aws.gif"
+      },
+      {
+        "name": "CI/CD (Jenkins & GitHub Actions)",
+        "description": "Automated builds and regression pipelines. Integrated Playwright test suite with Jenkins nightly jobs for stable releases.",
+        "image": "ci-cd.png"
+      },
+      {
+        "name": "Monitoring & Logging (Kibana)",
+        "description": "Used dashboards and logs to debug production issues and improve observability in critical systems.",
+        "image": "kibana.svg"
+      },
+      {
+        "name": "Playwright",
+        "description": "Led an automation project using Playwright — built nightly test pipelines, integrated with CI, and cut manual QA by 60%.",
+        "image": "playwright.png"
+      },
+      {
+        "name": "Test Automation",
+        "description": "Built scalable test suites and regression pipelines. Focused on reliability, CI integration, and low flake rates.",
+        "image": "test-automation.png"
+      },
+      {
+        "name": "Python",
+        "description": "Used for data wrangling, quick automation scripts, and backend tools in production and personal projects.",
+        "image": "python.png"
+      },
+      {
+        "name": "Shell Scripting",
+        "description": "Written reusable shell scripts to automate repetitive tasks and manage deployment processes.",
+        "image": "bash.png"
+      },
+      {
+        "name": "GraphQL",
+        "description": "Used GraphQL to build and consume efficient APIs, especially for frontend data fetching. Experience includes schema design and resolver functions.",
+        "image": "graphql.png"
+      },
+      {
+        "name": "Docker",
+        "description": "Built and containerized applications using Docker for local development and cloud deployment. Familiar with Dockerfiles, volumes, and networking.",
+        "image": "docker.png"
+      },
+      {
+        "name": "JUnit",
+        "description": "Used JUnit for writing unit and integration tests in Spring Boot applications, ensuring backend logic correctness and code coverage.",
+        "image": "junit.png"
+      },
+      {
+        "name": "Jest",
+        "description": "Tested Angular components using Jest — focused on unit testing, mocking APIs for UI stability.",
+        "image": "jest.png"
+      },
+      {
+        "name": "MongoDB",
+        "description": "Experience with document-based NoSQL databases. Used MongoDB extensively for personal and academic full-stack projects with Node.js backends.",
+        "image": "mongo.jpg"
       }
     ]
   },
