@@ -25,9 +25,27 @@ class Testimonials extends Component {
             </div>
 
             <div className="ten columns flex-container">
+               <div className="testimonials-intro">
+                  <p className="testimonials-prompt">
+                     Still on the fence? See what others have to say about working with me.
+                  </p>
+               </div>
                   <ul className="slides">
                       {testimonials}
                   </ul>
+               </div>
+            </div>
+            
+            <div className="row">
+               <div className="twelve columns">
+                  <div className="linkedin-recommendations">
+                     <p>
+                        To hear more awesome people tell you about why they've loved working with me, 
+                        <a href="https://www.linkedin.com/in/haramrit09k/#:~:text=all%2066%20skills-,Recommendations,-Recommendations" 
+                           target="_blank" 
+                           rel="noopener noreferrer"> click here</a>
+                     </p>
+                  </div>
                </div>
             </div>
          </div>
