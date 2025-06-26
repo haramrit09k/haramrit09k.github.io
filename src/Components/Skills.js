@@ -2,21 +2,36 @@ import React, { useState, useEffect } from 'react';
 
 const CATEGORY_MAP = {
     'Backend & APIs': [
-        'Java', 'Spring Boot', 'Node.js', 'Oracle SQL', 'REST APIs'
+        'Java',
+        'Spring Boot',
+        'Node.js',
+        'Oracle SQL',
+        'MongoDB',
+        'GraphQL',
+        'Python',
     ],
     'Frontend & UI': [
-        'Angular'
+        'Angular',
+        'React',
+        'Phaser.js',
+        'Streamlit',
+        'Electron.js'
     ],
     'DevOps & Cloud': [
-        'AWS', 'CI/CD (Jenkins & GitHub Actions)', 'Monitoring & Logging (Grafana / Kibana)'
+        'AWS',
+        'Docker',
+        'CI/CD (Jenkins & GitHub Actions)',
+        'Monitoring & Logging (Kibana)'
     ],
     'Testing & Automation': [
-        'Playwright', 'Test Automation'
-    ],
-    'Scripting & Tooling': [
-        'Python & Shell', 'Shell Scripting & Python'
+        'Playwright',
+        'JUnit',
+        'Jest',
+        'Shell Scripting'
     ]
 };
+
+
 
 const TAB_STYLE = {
     display: 'inline-block',
