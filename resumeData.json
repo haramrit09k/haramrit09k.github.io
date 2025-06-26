@@ -5,8 +5,8 @@
     "description": "Currently doing full-stack development using Spring Boot, Java, Angular, Oracle-SQL, Python, and Shell Scripting",
     "image": "profile-pic-new.png",
     "employer": "Citibank N.A.",
-    "bio": "I am a software engineer with over 3 years of experience, and am currently working with <strong>Spring Boot, Java, Angular, and Oracle-SQL</strong>. My zeal for learning about cloud technologies led me to getting certified as an <strong>AWS Solutions Architect - Associate</strong>. I am passionate about creating quality software chunks that help make this world a better place. Along with possessing effective problem-solving skills, I am also an excellent communicator with strong analytical and organizational skills.",
-    "contactmessage": "Have a project for me? Think I'd be a good fit for your team? I'd love to hear from you, give me a shout by email, via LinkedIn or call me on my cellphone. \n OR <strong><u>you could schedule a Zoom call with me using Calendly!</u></strong> :)",
+    "bio": "I'm a Senior Software Engineer (AVP) at Citi, building automation pipelines, ingestion systems, and internal tools that help 500+ dev teams ship faster and safer.\n\nI work mostly with Java, Spring Boot, Angular, Oracle SQL, and recently led a Playwright testing initiative that cut manual regression effort by 60%. I enjoy solving problems that affect systems at scale — especially if it means developers get fewer headaches.\n\nI'm AWS-certified, casually dangerous with Python and shell scripts, and always curious about how things work under the hood. Let's just say \"saving time and improving dev flow\" is kinda my thing.",
+    "contactmessage": "Got a role that involves backend systems, platform tooling, or building things devs actually enjoy using?\nHit me up — email, LinkedIn, or even better, schedule a Zoom through Calendly. Always happy to chat tech (or coffee, if we're being honest ☕).",
     "email": "haramrit09k@gmail.com",
     "phone": "703-341-9667",
     "address": {
@@ -41,7 +41,7 @@
     ]
   },
   "resume": {
-    "skillmessage": "I'm a dilettante and am always interested in playing around with new technologies but these are the ones that have really won me over!",
+    "skillmessage": "I'm always exploring new tools, but these are the ones I've used to solve real-world engineering problems — from backend automation and platform tooling to frontend dashboards and performance tuning.",
     "education": [
       {
         "school": "George Mason University",
@@ -123,45 +123,69 @@
     ],
     "skills": [
       {
-        "name": "Git",
-        "description": "I use Git for all of my projects so far. I have mostly used Git for version control in small teams.",
-        "image": "git.jpg"
-      },
-      {
         "name": "Java",
-        "description": "Java was the second programming language I learned in college, following C. It is the language I am most proficient in, particularly for data structures and algorithms.",
+        "description": "My go-to language for building backend systems, data pipelines, and APIs. Strong foundation in OOP, threading, and modular design.",
         "image": "java.jpg"
       },
       {
-        "name": "ReactJS",
-        "description": "I am fairly new to React and found it a bit confusing at first. However, I realized how powerful and easy to use it is, once I got the hang of it. This website is also made using React. ",
-        "image": "react.jpg"
-      },
-      {
-        "name": "AWS",
-        "description": "For this, I just have one word - AMAZING! I used some of the services to host a couple course projects, but after that, I wanted to learn more. And hence I got certified as an AWS Solutions Architect - Associate.",
-        "image": "aws.gif"
-      },
-      {
-        "name": "Docker & Kubernetes",
-        "description": "I came across these terms in grad school, and after having used them for a couple course projects, I realized how important and relevant containerization and orchestration are in the industry today.",
-        "image": "docker-kubernetes.png"
-      },
-      {
-        "name": "Node.js",
-        "description": "I developed my first application with Node.js back in 2016, and have never looked back since. Since then, I have worked with React, Angular, and Express to build full-stack applications - all of which are powered by Node.js, including this website.",
-        "image": "node.jpg"
+        "name": "Spring Boot",
+        "description": "Used heavily for building microservices, ingestion endpoints, and backend config tools. Clean, testable, and easy to scale.",
+        "image": "spring-boot.png"
       },
       {
         "name": "Playwright",
-        "description": "I first used Playwright while leading an R&D project to automate testing at Citibank. It's a faster, more reliable alternative to Selenium with strong Microsoft-backed support. Its cross-browser automation and AI-driven capabilities make it a powerful tool for scalable, efficient testing and regression automation.",
+        "description": "Led an enterprise automation project with Playwright — built nightly test pipelines, integrated with Jenkins, and slashed manual QA work by 60%.",
         "image": "playwright.png"
-      }
-      ,
+      },
       {
-        "name": "MongoDB",
-        "description": "My first MongoDB use-case was for my project Spaceterra back in 2017. Since then, I have used it in a couple other projects and have found it to be a very powerful and flexible database. Fast forward to today, I work on a team that helps provision MongoDB clusters for the entire firm.",
+        "name": "Angular",
+        "description": "Built full-featured admin and diagnostic UIs for internal platforms used by 500+ teams. Strong with services, forms, and state management.",
+        "image": "react.jpg"
+      },
+      {
+        "name": "Oracle SQL",
+        "description": "Written some gnarly queries, optimized joins, handled migrations, and debugged issues across environments. Used in most of my production work.",
         "image": "mongo.jpg"
+      },
+      {
+        "name": "Node.js",
+        "description": "First love. Built full-stack apps in Node, Express, and MongoDB — used it for research portals, games, and side projects.",
+        "image": "node.jpg"
+      },
+      {
+        "name": "AWS",
+        "description": "AWS-certified. Used for cloud automation, deployment, and scaling solutions.",
+        "image": "aws.gif"
+      },
+      {
+        "name": "Python & Shell",
+        "description": "Casually dangerous with Python and shell scripts for automation, data wrangling, and dev tooling.",
+        "image": "git.jpg"
+      },
+      {
+        "name": "CI/CD (Jenkins & GitHub Actions)",
+        "description": "Automated build and regression pipelines using Jenkins and GitHub Actions. Integrated testing workflows to ensure high release confidence across environments.",
+        "image": "ci-cd.png"
+      },
+      {
+        "name": "Test Automation",
+        "description": "Led end-to-end test automation initiatives using Playwright, achieving 60% reduction in manual QA. Designed scalable test suites integrated with CI/CD workflows.",
+        "image": "test-automation.png"
+      },
+      {
+        "name": "REST APIs",
+        "description": "Designed and consumed RESTful APIs across multiple projects. Built backend services and integrated third-party endpoints with robust error handling.",
+        "image": "rest-api.png"
+      },
+      {
+        "name": "Shell Scripting & Python",
+        "description": "Used for automation, data parsing, and internal tooling. Created efficient scripts to support operations and reduce manual overhead.",
+        "image": "python-shell.png"
+      },
+      {
+        "name": "Monitoring & Logging (Grafana / Kibana)",
+        "description": "Worked with monitoring dashboards and logs to debug production issues, ensure observability, and maintain uptime in live systems.",
+        "image": "monitoring.png"
       }
     ]
   },
