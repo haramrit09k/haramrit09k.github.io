@@ -90,11 +90,11 @@ const Skills = ({ data }) => {
                     margin: '24px 0 32px 0',
                     borderBottom: isMobile ? 'none' : '2px solid #232323',
                     background: '#2B2B2B',
-                    zIndex: 1,
+                    zIndex: 101,
                     paddingTop: 8,
                     paddingBottom: 8,
                     marginBottom: 24,
-                    ...(isMobile ? { position: 'sticky', top: 0 } : {}),
+                    ...(isMobile ? { position: 'sticky', top: 60 } : {}),
                 }}>
                     {isMobile ? (
                         <select
