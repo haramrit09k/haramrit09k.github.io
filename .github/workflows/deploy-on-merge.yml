@@ -1,0 +1,38 @@
+name: Deploy on PR Merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required for gh-pages to push to branch
+    
+    # Only run if the PR was merged (not just closed)
+    if: github.event.pull_request.merged == true
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        
+    - name: Install Dependencies
+      run: npm install
+    
+    - name: Build
+      run: npm run build
+    
+    - name: Deploy to GitHub Pages
+      run: |
+        # Set Git identity
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        npm run deploy
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided by GitHub 
