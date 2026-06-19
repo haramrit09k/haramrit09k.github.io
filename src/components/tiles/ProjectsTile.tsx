@@ -4,7 +4,7 @@ import BentoTile from '../layout/BentoTile'
 import TechBadge from '../shared/TechBadge'
 import { Project } from '../../types/resume'
 
-const FEATURED_TITLES = ['f1rstaid', 'logscribe-mcp', 'classifAI', 'Dist-ML', 'wha2do', 'Hippra']
+const FEATURED_TITLES = ['f1rstaid', 'logscribe-mcp', 'classifAI', 'Dist-ML', 'SpaceTerra', 'ai-interview-prep-mentor']
 
 const ENRICHMENT: Record<string, { techStack: string[]; metric: string }> = {
   'f1rstaid': {
@@ -23,13 +23,13 @@ const ENRICHMENT: Record<string, { techStack: string[]; metric: string }> = {
     techStack: ['Electron.js', 'Python', 'React'],
     metric: '🏆 1st runner-up · Annual Project Competition',
   },
-  'wha2do': {
-    techStack: ['React Native', 'Firebase'],
-    metric: '📱 Live on Google Play Store',
+  'SpaceTerra': {
+    techStack: ['Phaser.js', 'Node.js', 'MongoDB'],
+    metric: '🎮 Most played game · Teknack fest',
   },
-  'Hippra': {
-    techStack: ['ASP.NET Core', 'Blazor', 'SQL'],
-    metric: '🏥 HIPAA-compliant · Live production app',
+  'ai-interview-prep-mentor': {
+    techStack: ['Python', 'LLM Agents', 'OpenAI'],
+    metric: '🎯 AI-powered interview prep coach',
   },
 }
 

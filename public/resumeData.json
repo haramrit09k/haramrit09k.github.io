@@ -349,6 +349,12 @@
         "category": "MCP server for intelligent log file analysis using Model Context Protocol",
         "image": "logscribe.png",
         "url": "https://github.com/haramrit09k/logscribe-mcp"
+      },
+      {
+        "title": "ai-interview-prep-mentor",
+        "category": "AI-powered interview preparation mentor using LLM agents",
+        "image": "ai-interview-prep-mentor.png",
+        "url": "https://github.com/haramrit09k/ai-interview-prep-mentor"
       }
     ]
   },
