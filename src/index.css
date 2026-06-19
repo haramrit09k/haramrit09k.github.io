@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: #0A0A0A;
+    color: #F8FAFC;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Bento grid layout */
+.bento-grid {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas:
+    "hero hero status location"
+    "hero hero expstat github"
+    "skills skills skills skills"
+    "timeline timeline projects projects"
+    "about contact contact contact";
+}
+
+/* Tablet */
+@media (max-width: 1023px) and (min-width: 640px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "hero hero"
+      "status location"
+      "expstat github"
+      "skills skills"
+      "timeline timeline"
+      "projects projects"
+      "about about"
+      "contact contact";
+  }
+}
+
+/* Mobile */
+@media (max-width: 639px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "hero"
+      "status"
+      "location"
+      "expstat"
+      "github"
+      "skills"
+      "about"
+      "timeline"
+      "projects"
+      "contact";
+    gap: 10px;
+    padding: 10px;
+  }
+}
+
+/* Grid area assignments */
+.tile-hero     { grid-area: hero; }
+.tile-status   { grid-area: status; }
+.tile-location { grid-area: location; }
+.tile-expstat  { grid-area: expstat; }
+.tile-github   { grid-area: github; }
+.tile-skills   { grid-area: skills; }
+.tile-timeline { grid-area: timeline; }
+.tile-projects { grid-area: projects; }
+.tile-about    { grid-area: about; }
+.tile-contact  { grid-area: contact; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0A0A0A; }
+::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #11ABB0; }
