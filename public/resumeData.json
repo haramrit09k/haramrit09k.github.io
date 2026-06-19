@@ -1,22 +1,22 @@
 {
   "main": {
     "name": "Haramrit Singh Khurana",
-    "occupation": "Software Engineer",
+    "occupation": "Software Engineer → ML Engineer",
     "description": "Currently doing full-stack development using Spring Boot, Java, Angular, Oracle-SQL, Python, and Shell Scripting",
     "image": "profile-pic-new.png",
     "employer": "Citibank N.A.",
     "bio": "I'm a Senior Software Engineer (AVP) at Citi, building automation pipelines, ingestion systems, and internal tools that help 500+ dev teams ship faster and safer.\n\nI work mostly with Java, Spring Boot, Angular, Oracle SQL, and recently led a Playwright testing initiative that cut manual regression effort by 60%. I enjoy solving problems that affect systems at scale — especially if it means developers get fewer headaches.\n\nI'm AWS-certified, casually dangerous with Python and shell scripts, and always curious about how things work under the hood. Let's just say \"saving time and improving dev flow\" is kinda my thing.",
-    "shortBio": "Senior Engineer at Citi building automation and tooling for 500+ dev teams. AWS-certified. Strong in Java, Spring Boot, Angular — and making systems that actually hold up.",
+    "shortBio": "Transitioning toward ML Engineering. I build AI-powered tools, MCP servers, and the backend systems that make ML teams fast. Strong in Python, LLM APIs, RAG, and distributed systems.",
     "openToWork": true,
     "yearsOfExperience": 7,
     "calendlyUrl": "https://calendly.com/haramrit09k",
     "taglines": [
-      "I build backend systems at scale.",
-      "I cut manual testing by 60%.",
-      "I make dev teams ship faster.",
-      "I close 62+ JIRAs and sleep well."
+      "I ship AI-powered products.",
+      "I write MCP servers in my spare time.",
+      "I build the systems ML teams rely on.",
+      "I'm transitioning into ML Engineering."
     ],
-    "contactmessage": "Got a role that involves backend systems, platform tooling, or building things devs actually enjoy using?\nHit me up — email, LinkedIn, or even better, schedule a Zoom through Calendly. Always happy to chat tech (or coffee, if we're being honest ☕).",
+    "contactmessage": "Targeting ML Engineering, MLOps, and AI platform roles. If you're building something at the intersection of systems and intelligence — I want to talk.\nEmail, LinkedIn, or schedule a Zoom through Calendly. Always happy to chat (or grab a coffee ☕).",
     "email": "haramrit09k@gmail.com",
     "phone": "703-341-9667",
     "address": {
@@ -242,6 +242,31 @@
         "name": "MongoDB",
         "description": "Experience with document-based NoSQL databases. Used MongoDB extensively for personal and academic full-stack projects with Node.js backends.",
         "image": "mongo.jpg"
+      },
+      {
+        "name": "LLM Integration",
+        "description": "Built AI-powered applications using OpenAI and Anthropic APIs. Experience with prompt engineering, function calling, and building production LLM pipelines.",
+        "image": "llm.png"
+      },
+      {
+        "name": "RAG / Vector Search",
+        "description": "Built retrieval-augmented generation pipelines using LangChain and vector databases. Applied in f1rstaid — an AI assistant for F-1 students.",
+        "image": "rag.png"
+      },
+      {
+        "name": "MCP (Model Context Protocol)",
+        "description": "Built MCP servers that expose tools and resources to LLM agents. Author of logscribe-mcp — a log analysis MCP server.",
+        "image": "mcp.png"
+      },
+      {
+        "name": "LangChain",
+        "description": "Used LangChain for orchestrating LLM calls, chaining prompts, and building RAG pipelines over structured and unstructured data.",
+        "image": "langchain.png"
+      },
+      {
+        "name": "Scikit-learn",
+        "description": "Applied ML algorithms for classification and prediction tasks — used in classifAI (review classifier) and IPL Predictor.",
+        "image": "scikit.png"
       }
     ]
   },
@@ -306,6 +331,24 @@
         "category": "A stock price dashboard built using Python, Streamlit and Yahoo Finance API",
         "image": "stock.png",
         "url": "https://streamlit-stock-price.herokuapp.com/"
+      },
+      {
+        "title": "f1rstaid",
+        "category": "AI-powered assistant for F-1 students navigating US immigration regulations",
+        "image": "f1rstaid.png",
+        "url": "https://github.com/haramrit09k/f1rstaid"
+      },
+      {
+        "title": "classifAI",
+        "category": "Smart review classifier that reads user feedback and routes it where it belongs",
+        "image": "classifai.png",
+        "url": "https://github.com/haramrit09k/classifAI"
+      },
+      {
+        "title": "logscribe-mcp",
+        "category": "MCP server for intelligent log file analysis using Model Context Protocol",
+        "image": "logscribe.png",
+        "url": "https://github.com/haramrit09k/logscribe-mcp"
       }
     ]
   },

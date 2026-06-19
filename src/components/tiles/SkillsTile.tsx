@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import BentoTile from '../layout/BentoTile'
 import { Skill } from '../../types/resume'
 
-const CATEGORIES = ['Backend & APIs', 'Frontend & UI', 'DevOps & Cloud', 'Testing & Automation'] as const
+const CATEGORIES = ['AI & ML', 'Backend & APIs', 'Frontend & UI', 'DevOps & Cloud', 'Testing & Automation'] as const
 type Category = typeof CATEGORIES[number]
 
 const CATEGORY_MAP: Record<Category, string[]> = {
+  'AI & ML': ['LLM Integration', 'RAG / Vector Search', 'MCP (Model Context Protocol)', 'LangChain', 'Scikit-learn', 'Python', 'Streamlit'],
   'Backend & APIs': ['Java', 'Spring Boot', 'Node.js', 'Oracle SQL', 'REST APIs', 'MongoDB', 'GraphQL', 'Python'],
   'Frontend & UI': ['Angular', 'React', 'Streamlit', 'Electron.js', 'Phaser.js'],
   'DevOps & Cloud': ['AWS', 'CI/CD (Jenkins & GitHub Actions)', 'Docker', 'Monitoring & Logging (Kibana)'],
@@ -28,7 +29,7 @@ interface SkillsTileProps {
 }
 
 export default function SkillsTile({ skills }: SkillsTileProps) {
-  const [activeCategory, setActiveCategory] = useState<Category>('Backend & APIs')
+  const [activeCategory, setActiveCategory] = useState<Category>('AI & ML')
 
   const filteredSkills = skills.filter(s => CATEGORY_MAP[activeCategory].includes(s.name))
 

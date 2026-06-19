@@ -4,24 +4,32 @@ import BentoTile from '../layout/BentoTile'
 import TechBadge from '../shared/TechBadge'
 import { Project } from '../../types/resume'
 
-const FEATURED_TITLES = ['Dist-ML', 'Hippra', 'SpaceTerra', 'wha2do']
+const FEATURED_TITLES = ['f1rstaid', 'logscribe-mcp', 'classifAI', 'Dist-ML', 'wha2do', 'Hippra']
 
 const ENRICHMENT: Record<string, { techStack: string[]; metric: string }> = {
+  'f1rstaid': {
+    techStack: ['Python', 'LangChain', 'RAG', 'OpenAI'],
+    metric: '🤖 AI assistant for F-1 students · RAG + LLM',
+  },
+  'logscribe-mcp': {
+    techStack: ['Python', 'MCP', 'LLM Agents'],
+    metric: '🔧 MCP server for intelligent log analysis',
+  },
+  'classifAI': {
+    techStack: ['Python', 'Scikit-learn', 'NLP'],
+    metric: '🧠 ML-powered review classifier',
+  },
   'Dist-ML': {
     techStack: ['Electron.js', 'Python', 'React'],
     metric: '🏆 1st runner-up · Annual Project Competition',
   },
-  'Hippra': {
-    techStack: ['ASP.NET Core', 'Blazor', 'SQL'],
-    metric: '🏥 HIPAA-compliant · Live production app',
-  },
-  'SpaceTerra': {
-    techStack: ['Phaser.js', 'Node.js', 'MongoDB'],
-    metric: '🎮 Most played game @ Teknack',
-  },
   'wha2do': {
     techStack: ['React Native', 'Firebase'],
     metric: '📱 Live on Google Play Store',
+  },
+  'Hippra': {
+    techStack: ['ASP.NET Core', 'Blazor', 'SQL'],
+    metric: '🏥 HIPAA-compliant · Live production app',
   },
 }
 
@@ -48,7 +56,7 @@ export default function ProjectsTile({ projects }: ProjectsTileProps) {
         </a>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {featured.map((project, i) => {
           const enrichment = ENRICHMENT[project.title]
           const isHovered = hoveredIdx === i
