@@ -4,19 +4,6 @@ object-assign
 @license MIT
 */
 
-/*!
- * jQuery JavaScript Library v3.7.1
- * https://jquery.com/
- *
- * Copyright OpenJS Foundation and other contributors
- * Released under the MIT license
- * https://jquery.org/license
- *
- * Date: 2023-08-28T13:37Z
- */
-
-/*! @license DOMPurify 2.5.4 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/2.5.4/LICENSE */
-
 /** @license React v0.19.1
  * scheduler.production.min.js
  *
