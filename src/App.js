@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 
 const impact = [
-  { value: '2K', label: 'change tickets automated / month' },
+  { value: '≤2K', label: 'change tickets automated / month' },
   { value: '67%', label: 'faster application build' },
   { value: '150K', label: 'rows synchronized daily' },
 ];
@@ -66,26 +66,113 @@ const experience = [
 
 const selectedProjects = [
   {
+    id: 'homeos',
+    title: 'HomeOS',
+    type: 'A useful object, not a demo',
+    lenses: ['systems'],
+    signal: 'Raspberry Pi · Angular · PWA',
+    hook: 'I gave away my Echo Show—then built the one I actually wanted.',
+    story:
+      'A used monitor and Raspberry Pi became an ambient home dashboard. Because it was a one-person system, Google Sheets was enough for the first data layer; a private API and phone PWA made it controllable from anywhere.',
+    decision:
+      'The PWA was deliberate: free iOS provisioning expires after seven days, while a paid membership made little sense for a private utility. A home-screen app removed that signing lifecycle.',
+    proof: 'Built over a few weeks · still controlled from an installed PWA',
+    href: 'https://demo.homeos-hub.xyz/',
+    linkLabel: 'Try the phone control surface',
+    secondaryHref: 'https://demo.homeos-hub.xyz/display',
+    secondaryLinkLabel: 'Watch the ambient display',
+    demoHint: 'Open both views side by side: changes made in the control surface appear on the display in real time. The display was composed for a dedicated monitor, so adjust your browser zoom until the scale feels right for your screen.',
+  },
+  {
+    id: 'spaceterra',
+    title: 'SpaceTerra',
+    type: 'The first scale experiment',
+    lenses: ['systems'],
+    signal: 'Node.js · Phaser · MongoDB · Socket.IO',
+    hook: 'My first Node.js project began as a two-day challenge to myself.',
+    story:
+      'I built the browser game independently for Teknack in 2017 to see whether my first Node.js project could survive event-scale interest. Google Analytics recorded roughly 20,000 plays.',
+    decision:
+      'Years later I revived it with Google authentication, MongoDB Atlas score persistence, and a real-time leaderboard—giving a two-day festival game identity and durable state.',
+    proof: '≈20K plays during its original run · individual build',
+    href: 'https://github.com/haramrit09k/spaceterra',
+    linkLabel: 'Inspect the source',
+    secondaryHref: 'https://spaceterra.herokuapp.com/',
+    secondaryLinkLabel: 'Play SpaceTerra',
+    demoHint: 'The independently hosted game may take a few seconds to wake before it loads.',
+  },
+  {
+    id: 'classifai',
+    title: 'classifAI',
+    type: 'My first complete ML lifecycle',
+    lenses: ['ml'],
+    signal: 'TF-IDF · Logistic regression · FastAPI',
+    hook: 'I wanted machine learning to stop feeling like a black box.',
+    story:
+      'I took 322,641 app reviews through cleaning, weak labeling, training, evaluation, serialization, API serving, and prediction logging. The pipeline routes feedback into five operational classes.',
+    decision:
+      'I chose an interpretable classical NLP baseline and class weighting before reaching for a larger model. Its 84% score measures agreement with heuristic labels—not human accuracy—so the next step is a human-labeled benchmark and error analysis.',
+    proof: '314K cleaned reviews · 5 classes · 63K pseudo-labeled holdout',
+    href: 'https://github.com/haramrit09k/classifAI',
+    linkLabel: 'Inspect the pipeline',
+  },
+  {
+    id: 'distributed-ml',
     title: 'Distributed ML',
-    type: 'Published research · ICAC3 / IEEE',
-    image: '/images/portfolio/dist-ml.png',
+    type: 'Published research · IEEE',
+    lenses: ['systems', 'ml'],
+    signal: 'Distributed training · Electron.js · research',
+    hook: 'What changes when model training becomes a systems problem?',
+    story:
+      'This published capstone distributed machine-learning workloads across machines and paired the experiments with a usable desktop interface.',
+    decision:
+      'We treated orchestration and usability as part of ML performance; the reported result was 10% faster training without accuracy loss.',
+    proof: 'Published at ICAC3 / indexed by IEEE',
     href: 'https://ieeexplore.ieee.org/document/9036818',
-    note: '10% faster training · no accuracy loss',
+    linkLabel: 'Read the publication',
   },
   {
-    title: 'LogScribe-MCP',
-    type: 'Local agent tooling',
-    image: '/images/portfolio/numpy-for-c.png',
-    href: 'https://github.com/haramrit09k',
-    note: 'Python · MCP · log pattern detection',
+    id: 'session-todo',
+    title: 'Session Todo',
+    type: 'Software shaped around attention',
+    lenses: ['systems'],
+    signal: 'Swift 6 · AppKit · local-only',
+    hook: 'Most todo apps store work. I needed one to remember what I was doing.',
+    story:
+      'A floating macOS utility keeps one NOW task dominant and tucks the backlog away. A global shortcut retrieves it anywhere; optional nudges interrupt distraction without becoming another dashboard.',
+    decision:
+      'No accounts, sync, analytics, projects, labels, or streaks. Tasks stay on-device; the product is intentionally smaller because the constraint is the feature.',
+    proof: 'Native AppKit · zero third-party dependencies · local persistence',
+    href: 'https://github.com/haramrit09k/sticky-todo-macos',
+    linkLabel: 'See how it works',
   },
   {
-    title: 'Local Resume Pipeline',
-    type: 'Offline LLM workflow',
-    image: '/images/portfolio/portfolio.png',
-    href: 'https://github.com/haramrit09k',
-    note: 'MCP · Ollama · private by design',
+    id: 'f1rstaid',
+    title: 'F1rstAid',
+    type: 'Retrieval for a high-stakes domain',
+    lenses: ['ml'],
+    signal: 'RAG · FAISS · OpenAI · Streamlit',
+    hook: 'Can an assistant make dense F-1 guidance easier to navigate?',
+    story:
+      'A retrieval-augmented prototype ingests government and university guidance, then retrieves context for questions about F-1 status, CPT, OPT, employment, and travel.',
+    decision:
+      'The important design question is evidence, not fluency. A production version needs source hierarchy, citations, recency checks, and a hard boundary between navigation help and legal advice.',
+    proof: 'Crawler + ingestion pipeline + vector search + tested application',
+    href: 'https://github.com/haramrit09k/f1rstaid',
+    linkLabel: 'Inspect the prototype',
   },
+];
+
+const archiveProjects = [
+  ['LogScribe MCP', 'A local MCP server for reading, searching, filtering, and summarizing log files.', 'Python · MCP', 'https://github.com/haramrit09k/logscribe-mcp'],
+  ['H-1B Decision Tree', 'A visual decision aid for navigating time-sensitive layoff scenarios.', 'Next.js · TypeScript', 'https://github.com/haramrit09k/h1b-layoff-decision-tree'],
+  ['HelpChess', 'Open-source web work supporting a nonprofit growing chess access in India.', 'JavaScript · open source', 'https://github.com/haramrit09k/helpchess'],
+  ['IPL Predictor', 'An academic comparison of machine-learning approaches for match prediction.', 'Python · neural networks', 'https://github.com/haramrit09k/ipl-predictor'],
+  ['Signature Verification', 'An early computer-vision experiment for comparing handwritten signatures.', 'OpenCV · scikit-learn', 'https://github.com/haramrit09k/signature-verification'],
+  ['RockX', 'An Angular interface over SpaceX launch data through a GraphQL API.', 'Angular · GraphQL', 'https://github.com/haramrit09k/rockX'],
+  ['What’s My Neuron', 'A web explorer that retrieves neuron records from the NeuroMorpho API.', 'Django · APIs', 'https://github.com/haramrit09k/whats-my-neuron'],
+  ['Firechat', 'A lightweight real-time chat-room experiment built with React and Firebase.', 'React · Firebase', 'https://github.com/haramrit09k/firechat'],
+  ['SWE 645', 'A containerized student-survey application deployed with Docker and Kubernetes.', 'Docker · Kubernetes', 'https://github.com/haramrit09k/swe645'],
 ];
 
 const strengths = [
@@ -103,6 +190,27 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [indexOpen, setIndexOpen] = useState(false);
   const [activeCase, setActiveCase] = useState('01');
+  const [projectLens, setProjectLens] = useState('all');
+  const [expandedProject, setExpandedProject] = useState('homeos');
+  const lensConsoleRef = useRef(null);
+
+  const changeProjectLens = (value) => {
+    const previousTop = lensConsoleRef.current
+      ? lensConsoleRef.current.getBoundingClientRect().top
+      : null;
+    const firstMatch = selectedProjects.find(
+      (project) => value === 'all' || project.lenses.includes(value)
+    );
+
+    setProjectLens(value);
+    setExpandedProject(firstMatch ? firstMatch.id : null);
+
+    window.requestAnimationFrame(() => {
+      if (previousTop === null || !lensConsoleRef.current) return;
+      const nextTop = lensConsoleRef.current.getBoundingClientRect().top;
+      window.scrollBy(0, nextTop - previousTop);
+    });
+  };
 
   useEffect(() => {
     const onKeyDown = (event) => {
@@ -130,6 +238,7 @@ function App() {
         </a>
         <nav className={menuOpen ? 'site-nav is-open' : 'site-nav'} aria-label="Primary navigation">
           <a href="#work" onClick={() => setMenuOpen(false)}>Selected work</a>
+          <a href="#lab" onClick={() => setMenuOpen(false)}>Personal systems</a>
           <a href="#experience" onClick={() => setMenuOpen(false)}>Experience</a>
           <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
           <button className="nav-index" type="button" onClick={() => { setMenuOpen(false); setIndexOpen(true); }}>
@@ -163,9 +272,10 @@ function App() {
             </div>
             <nav aria-label="Portfolio index">
               <a href="#work" onClick={() => setIndexOpen(false)}><span>01</span> Selected systems <Arrow /></a>
-              <a href="#experience" onClick={() => setIndexOpen(false)}><span>02</span> Experience <Arrow /></a>
-              <a href="#about" onClick={() => setIndexOpen(false)}><span>03</span> The engineer <Arrow /></a>
-              <a href="/resume/master_resume.pdf" target="_blank" rel="noreferrer"><span>04</span> Résumé <Arrow /></a>
+              <a href="#lab" onClick={() => setIndexOpen(false)}><span>02</span> Personal systems <Arrow /></a>
+              <a href="#experience" onClick={() => setIndexOpen(false)}><span>03</span> Experience <Arrow /></a>
+              <a href="#about" onClick={() => setIndexOpen(false)}><span>04</span> The engineer <Arrow /></a>
+              <a href="/resume/master_resume.pdf" target="_blank" rel="noreferrer"><span>05</span> Résumé <Arrow /></a>
             </nav>
             <div className="index-contact">
               <p>One quiet channel remains open.</p>
@@ -186,6 +296,9 @@ function App() {
               <span className="status-dot"></span>
               Software engineer · Dallas–Fort Worth
             </div>
+            <p className="hero-role-signal reveal reveal-1">
+              Engineering range / <span>Software systems</span> / <span>Applied ML</span>
+            </p>
             <h1 id="hero-title" className="reveal reveal-2">
               I build systems that help engineering teams <em>ship faster.</em>
             </h1>
@@ -219,7 +332,7 @@ function App() {
         <section className="proof-strip" aria-label="Engineering profile">
           <span>Backend engineering</span>
           <span>Platform systems</span>
-          <span>Regulated enterprise</span>
+          <span>Applied ML</span>
           <span>Agent tooling</span>
         </section>
 
@@ -279,6 +392,101 @@ function App() {
           </div>
         </section>
 
+        <section className="lab-section section" id="lab" aria-labelledby="lab-title">
+          <div className="section-heading">
+            <div>
+              <p className="kicker">Personal systems / decision traces</p>
+              <h2 id="lab-title">The reason came first.</h2>
+            </div>
+            <p>These are not technology showcases. Each began with a real constraint, then became a way to learn the system underneath it.</p>
+          </div>
+          <div className="lens-console" aria-label="Filter projects by role lens" ref={lensConsoleRef}>
+            <p><span className="status-dot"></span> Read the work through a lens</p>
+            <div>
+              {[
+                ['all', 'Complete signal'],
+                ['systems', 'Software systems'],
+                ['ml', 'Applied ML'],
+              ].map(([value, label]) => (
+                <button
+                  type="button"
+                  key={value}
+                  className={projectLens === value ? 'is-active' : ''}
+                  aria-pressed={projectLens === value}
+                  onClick={() => changeProjectLens(value)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="trace-list">
+            {selectedProjects
+              .filter((project) => projectLens === 'all' || project.lenses.includes(projectLens))
+              .map((project, index) => (
+                <details
+                  className="trace-card"
+                  key={`${projectLens}-${project.id}`}
+                  open={expandedProject === project.id}
+                >
+                  <summary>
+                    <span className="trace-index">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="trace-title">
+                      <small>{project.type}</small>
+                      <strong>{project.title}</strong>
+                    </span>
+                    <span className="trace-hook">{project.hook}</span>
+                    <span className="trace-toggle" aria-hidden="true">+</span>
+                  </summary>
+                  <div className="trace-body">
+                    <p className="trace-signal">{project.signal}</p>
+                    {project.href ? (
+                      <div className="trace-links">
+                        <a href={project.href} target="_blank" rel="noreferrer">{project.linkLabel} <Arrow /></a>
+                        {project.secondaryHref && (
+                          <a href={project.secondaryHref} target="_blank" rel="noreferrer">{project.secondaryLinkLabel} <Arrow /></a>
+                        )}
+                        {project.demoHint && <p>{project.demoHint}</p>}
+                      </div>
+                    ) : (
+                      <p className="private-label">{project.linkLabel} · source remains private</p>
+                    )}
+                    <div>
+                      <span>Origin</span>
+                      <p>{project.story}</p>
+                    </div>
+                    <div>
+                      <span>Decision trace</span>
+                      <p>{project.decision}</p>
+                    </div>
+                    <div className="trace-proof">
+                      <span>Evidence</span>
+                      <strong>{project.proof}</strong>
+                    </div>
+                  </div>
+                </details>
+              ))}
+          </div>
+
+          <div className="archive-heading">
+            <p className="kicker">Earlier explorations / archive</p>
+            <p>Smaller experiments that document range, repetition, and a long habit of building to learn.</p>
+          </div>
+          <div className="archive-grid">
+            {archiveProjects.map(([title, description, stack, href], index) => (
+              <a href={href} target="_blank" rel="noreferrer" key={title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                  <small>{stack}</small>
+                </div>
+                <Arrow />
+              </a>
+            ))}
+          </div>
+        </section>
+
         <section className="experience-section section" id="experience" aria-labelledby="experience-title">
           <div className="section-heading compact">
             <div>
@@ -303,34 +511,6 @@ function App() {
             <p>“If you need someone who takes initiative, drives projects forward, and lifts everyone around him, Haramrit’s your guy.”</p>
             <cite>Nestor Hernandez · Vice President, DBaaS at Citi</cite>
           </blockquote>
-        </section>
-
-        <section className="lab-section section" aria-labelledby="lab-title">
-          <div className="section-heading">
-            <div>
-              <p className="kicker">Outside the day job</p>
-              <h2 id="lab-title">Curiosity, shipped.</h2>
-            </div>
-            <p>Published research and local-first experiments across distributed computing and agent tooling.</p>
-          </div>
-          <div className="project-grid">
-            {selectedProjects.map((project, index) => (
-              <a className="project-card" href={project.href} target="_blank" rel="noreferrer" key={project.title}>
-                <div className="project-image-wrap">
-                  <img src={project.image} alt="" loading="lazy" />
-                  <span>0{index + 1}</span>
-                </div>
-                <div className="project-meta">
-                  <div>
-                    <p>{project.type}</p>
-                    <h3>{project.title}</h3>
-                  </div>
-                  <Arrow />
-                </div>
-                <p className="project-note">{project.note}</p>
-              </a>
-            ))}
-          </div>
         </section>
 
         <section className="about-section section" id="about" aria-labelledby="about-title">
