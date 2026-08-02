@@ -19,9 +19,9 @@ const targets = [
   },
   {
     id: 'homeos',
-    label: 'Public demo API',
+    label: 'Home system API',
     endpoints: [
-      'https://demo.homeos-hub.xyz/api/public/health',
+      'https://api.homeos-hub.xyz/api/public/health',
       'https://demo.homeos-hub.xyz/api/demo/status',
     ],
   },
@@ -71,6 +71,9 @@ function deriveFacts(id, body) {
     const isDemo = body.mode === 'demo' || body.demoMode === true;
     return [
       isDemo ? 'Isolated demo data' : null,
+      body.dataBoundary === 'API-key-protected private data'
+        ? 'Private data API-key protected'
+        : null,
       body.runtime?.realtimeTransport === 'socket.io' ? 'Socket.IO realtime' : null,
     ].filter(Boolean);
   }
