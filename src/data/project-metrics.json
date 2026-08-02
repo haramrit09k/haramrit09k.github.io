@@ -1,0 +1,43 @@
+{
+  "generatedAt": "2026-08-02T22:13:59.543Z",
+  "cadence": "Every 6 hours during portfolio deployment",
+  "projects": {
+    "spaceterra": {
+      "id": "spaceterra",
+      "label": "Live game service",
+      "status": "healthy",
+      "endpoint": "https://spaceterra.herokuapp.com/",
+      "statusCode": 200,
+      "wakeMs": 150,
+      "warmMs": 53,
+      "coldStartVisible": false,
+      "facts": []
+    },
+    "homeos": {
+      "id": "homeos",
+      "label": "Public demo API",
+      "status": "healthy",
+      "endpoint": "https://demo.homeos-hub.xyz/api/demo/status",
+      "statusCode": 200,
+      "wakeMs": 110,
+      "warmMs": 45,
+      "coldStartVisible": false,
+      "facts": [
+        "Isolated demo data"
+      ]
+    },
+    "classifai": {
+      "id": "classifai",
+      "label": "Model-serving API",
+      "status": "healthy",
+      "endpoint": "https://classifai-rsy8.onrender.com/health",
+      "statusCode": 200,
+      "wakeMs": 181,
+      "warmMs": 80,
+      "coldStartVisible": false,
+      "facts": [
+        "Model ready"
+      ]
+    }
+  }
+}
