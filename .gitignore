@@ -1,5 +1,6 @@
 node_modules
 .DS_Store
 build
+dist
 public/.DS_Store
 public/images/.DS_Store
