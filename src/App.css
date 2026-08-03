@@ -50,11 +50,52 @@
 }
 
 .wordmark {
-  width: fit-content;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
   text-decoration: none;
   font-size: 25px;
   font-weight: 600;
   letter-spacing: -0.06em;
+}
+
+.wordmark-type,
+.wordmark-icon {
+  position: absolute;
+  inset: 0;
+  transition: opacity 240ms ease, transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 240ms ease;
+}
+
+.wordmark-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  transform: rotate(0) scale(1);
+}
+
+.wordmark-icon {
+  width: 40px;
+  height: 40px;
+  margin: 2px;
+  opacity: 0;
+  filter: saturate(0.55) brightness(0.72);
+  transform: rotate(-12deg) scale(0.68);
+}
+
+.wordmark:hover .wordmark-type,
+.wordmark:focus-visible .wordmark-type {
+  opacity: 0;
+  transform: rotate(10deg) scale(0.62);
+}
+
+.wordmark:hover .wordmark-icon,
+.wordmark:focus-visible .wordmark-icon {
+  opacity: 1;
+  filter: saturate(1) brightness(1.05);
+  transform: rotate(0) scale(1);
 }
 
 .wordmark-dot {
@@ -956,6 +997,60 @@
   color: var(--muted);
 }
 
+.live-signal {
+  grid-column: 1 / -1;
+  min-height: 58px;
+  padding: 13px 16px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 18px;
+  align-items: center;
+  background: rgba(12, 17, 14, 0.68);
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.live-signal-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.live-signal-label i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 0 4px var(--signal-dark);
+}
+
+.live-signal-data {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 0;
+  color: var(--muted);
+}
+
+.live-signal-data span:not(:last-child)::after {
+  margin: 0 8px;
+  color: var(--line-strong);
+  content: '/';
+}
+
+.live-signal > a {
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--line);
+  color: var(--signal);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 .archive-heading {
   margin: 110px 0 38px;
   display: flex;
@@ -1551,6 +1646,17 @@ button:focus-visible {
   .trace-body > div,
   .trace-proof {
     grid-column: 1;
+  }
+
+  .live-signal {
+    padding: 14px;
+    grid-template-columns: 1fr auto;
+    gap: 10px 14px;
+  }
+
+  .live-signal-data {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 
   .archive-heading {

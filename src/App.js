@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
+import projectMetrics from './data/project-metrics.json';
 
 const impact = [
   { value: '≤2K', label: 'change tickets automated / month' },
@@ -85,6 +86,7 @@ const selectedProjects = [
   },
   {
     id: 'spaceterra',
+    repo: 'spaceterra',
     title: 'SpaceTerra',
     type: 'The first scale experiment',
     lenses: ['systems'],
@@ -103,6 +105,7 @@ const selectedProjects = [
   },
   {
     id: 'classifai',
+    repo: 'classifAI',
     title: 'classifAI',
     type: 'My first complete ML lifecycle',
     lenses: ['ml'],
@@ -133,6 +136,7 @@ const selectedProjects = [
   },
   {
     id: 'session-todo',
+    repo: 'sticky-todo-macos',
     title: 'Session Todo',
     type: 'Software shaped around attention',
     lenses: ['systems'],
@@ -148,6 +152,7 @@ const selectedProjects = [
   },
   {
     id: 'f1rstaid',
+    repo: 'f1rstaid',
     title: 'F1rstAid',
     type: 'Retrieval for a high-stakes domain',
     lenses: ['ml'],
@@ -184,6 +189,33 @@ const strengths = [
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
+}
+
+function formatProbeTime(milliseconds) {
+  return milliseconds >= 1000
+    ? `${(milliseconds / 1000).toFixed(1)}s`
+    : `${milliseconds}ms`;
+}
+
+function LiveSystemSignal({ metric }) {
+  if (!metric || metric.status !== 'healthy') return null;
+
+  const signals = [
+    'Online',
+    `${formatProbeTime(metric.warmMs)} warm response`,
+    metric.coldStartVisible ? `${formatProbeTime(metric.wakeMs)} wake` : null,
+    ...metric.facts,
+  ].filter(Boolean);
+
+  return (
+    <div className="live-signal" title={`Measured ${projectMetrics.generatedAt}. ${projectMetrics.cadence}.`}>
+      <span className="live-signal-label"><i aria-hidden="true"></i> {metric.label}</span>
+      <span className="live-signal-data">
+        {signals.map((signal) => <span key={signal}>{signal}</span>)}
+      </span>
+      <a href={metric.endpoint} target="_blank" rel="noreferrer">Health <Arrow /></a>
+    </div>
+  );
 }
 
 function App() {
@@ -234,7 +266,8 @@ function App() {
 
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Haramrit Khurana, home">
-          HK<span className="wordmark-dot">.</span>
+          <span className="wordmark-type" aria-hidden="true">HK<span className="wordmark-dot">.</span></span>
+          <img className="wordmark-icon" src="/favicon copy.png" alt="" />
         </a>
         <nav className={menuOpen ? 'site-nav is-open' : 'site-nav'} aria-label="Primary navigation">
           <a href="#work" onClick={() => setMenuOpen(false)}>Selected work</a>
@@ -451,6 +484,7 @@ function App() {
                     ) : (
                       <p className="private-label">{project.linkLabel} · source remains private</p>
                     )}
+                    <LiveSystemSignal metric={projectMetrics.projects[project.id]} />
                     <div>
                       <span>Origin</span>
                       <p>{project.story}</p>

@@ -43,3 +43,14 @@ Screenshots were captured at device scale factor 1, so CSS and pixel dimensions 
 ## Final result
 
 passed
+
+## Header wordmark morph correction
+
+- Source asset: `public/favicon copy.png`
+- Resting evidence: `header-morph/01-default-fixed.png`
+- Interactive evidence: `header-morph/02-hover-focus.png`
+- Focused comparison: `header-morph/03-comparison.png`
+- The original `HK.` wordmark remains on one line at rest and morphs into the gold H mark on hover or keyboard focus.
+- Both states share a fixed 44 × 44 CSS-pixel footprint, preventing navigation movement during the transition.
+- The earlier footer-seal treatment was removed so the mark has one intentional location.
+- Unit test, production build, and browser-console checks passed. No P0, P1, or P2 regressions found.

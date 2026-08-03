@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-08-02T22:51:48.788Z",
+  "cadence": "Every 6 hours during portfolio deployment",
+  "projects": {
+    "spaceterra": {
+      "id": "spaceterra",
+      "label": "Live game service",
+      "status": "healthy",
+      "endpoint": "https://spaceterra.herokuapp.com/api/public/health",
+      "statusCode": 200,
+      "wakeMs": 298,
+      "warmMs": 154,
+      "coldStartVisible": false,
+      "facts": [
+        "1,701 scores persisted",
+        "60 scoring players",
+        "MongoDB connected"
+      ]
+    },
+    "homeos": {
+      "id": "homeos",
+      "label": "Home system API",
+      "status": "healthy",
+      "endpoint": "https://api.homeos-hub.xyz/api/public/health",
+      "statusCode": 200,
+      "wakeMs": 132,
+      "warmMs": 57,
+      "coldStartVisible": false,
+      "facts": [
+        "Private data API-key protected",
+        "Socket.IO realtime"
+      ]
+    },
+    "classifai": {
+      "id": "classifai",
+      "label": "Model-serving API",
+      "status": "healthy",
+      "endpoint": "https://classifai-rsy8.onrender.com/health",
+      "statusCode": 200,
+      "wakeMs": 165,
+      "warmMs": 196,
+      "coldStartVisible": false,
+      "facts": [
+        "Model ready",
+        "5 classes",
+        "5,000 text features",
+        "Human benchmark pending"
+      ]
+    }
+  }
+}
