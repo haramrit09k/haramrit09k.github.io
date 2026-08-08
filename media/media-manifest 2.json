@@ -35,5 +35,17 @@
       "distributed-ml-demo.mp4",
       "distributed-ml-demo-poster.jpg"
     ]
+  },
+  "session-todo": {
+    "source": "Four Session Todo screen recordings captured on 2026-08-08",
+    "selection": "capture a focused task, queue the next step, complete the current work, and promote the queued task",
+    "durationSeconds": 24.333,
+    "dimensions": "1440x810",
+    "treatment": "four-operation silent montage with accelerated typing, quiet labels, and short crossfades",
+    "exports": [
+      "session-todo-demo.webm",
+      "session-todo-demo.mp4",
+      "session-todo-demo-poster.jpg"
+    ]
   }
 }
