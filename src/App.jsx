@@ -78,6 +78,13 @@ const selectedProjects = [
     decision:
       'The PWA was deliberate: free iOS provisioning expires after seven days, while a paid membership made little sense for a private utility. A home-screen app removed that signing lifecycle.',
     proof: 'Built over a few weeks · still controlled from an installed PWA',
+    preview: {
+      webm: '/media/homeos-demo.webm',
+      mp4: '/media/homeos-demo.mp4',
+      poster: '/media/homeos-demo-poster.jpg',
+      alt: 'HomeOS phone control surface syncing a todo, grocery item, and persistent alert to the Raspberry Pi display',
+      label: 'Live proof · PWA → Pi display',
+    },
     href: 'https://demo.homeos-hub.xyz/',
     linkLabel: 'Try the phone control surface',
     secondaryHref: 'https://demo.homeos-hub.xyz/display',
@@ -97,6 +104,13 @@ const selectedProjects = [
     decision:
       'Years later I revived it with Google authentication, MongoDB Atlas score persistence, and a real-time leaderboard—giving a two-day festival game identity and durable state.',
     proof: '≈20K plays during its original run · individual build',
+    preview: {
+      webm: '/media/spaceterra-demo.webm',
+      mp4: '/media/spaceterra-demo.mp4',
+      poster: '/media/spaceterra-demo-poster.jpg',
+      alt: 'SpaceTerra gameplay progressing from live scoring to the persisted leaderboard',
+      label: 'Live proof · play → score → leaderboard',
+    },
     href: 'https://github.com/haramrit09k/spaceterra',
     linkLabel: 'Inspect the source',
     secondaryHref: 'https://spaceterra.herokuapp.com/',
@@ -469,6 +483,28 @@ function App() {
                       <strong>{project.title}</strong>
                     </span>
                     <span className="trace-hook">{project.hook}</span>
+                    {project.preview && (
+                      <span className="trace-preview">
+                        <video
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                          poster={project.preview.poster}
+                          aria-label={project.preview.alt}
+                        >
+                          <source src={project.preview.webm} type="video/webm" />
+                          <source src={project.preview.mp4} type="video/mp4" />
+                        </video>
+                        <img
+                          className="trace-preview-fallback"
+                          src={project.preview.poster}
+                          alt={project.preview.alt}
+                        />
+                        <span className="trace-preview-label">{project.preview.label}</span>
+                      </span>
+                    )}
                     <span className="trace-toggle" aria-hidden="true">+</span>
                   </summary>
                   <div className="trace-body">

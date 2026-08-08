@@ -1,0 +1,26 @@
+{
+  "homeos": {
+    "source": "Screen Recording 2026-08-08 at 4.04.39 PM.mov",
+    "selection": "todo submission, grocery-item sync, and persistent display alert set from the phone control surface",
+    "durationSeconds": 16.7,
+    "dimensions": "1440x810",
+    "treatment": "three-operation montage with quiet interface labels and short crossfades",
+    "exports": [
+      "homeos-demo.webm",
+      "homeos-demo.mp4",
+      "homeos-demo-poster.jpg"
+    ]
+  },
+  "spaceterra": {
+    "source": "Screen Recording 2026-08-08 at 4.23.02 PM.mov",
+    "selection": "score 7 through collision and persisted leaderboard",
+    "durationSeconds": 10.3,
+    "dimensions": "1440x810",
+    "treatment": "full game viewport centered over a dark blurred continuation",
+    "exports": [
+      "spaceterra-demo.webm",
+      "spaceterra-demo.mp4",
+      "spaceterra-demo-poster.jpg"
+    ]
+  }
+}

@@ -854,7 +854,7 @@
   min-height: 148px;
   padding: 28px 30px;
   display: grid;
-  grid-template-columns: 55px minmax(170px, 0.55fr) minmax(260px, 1fr) 30px;
+  grid-template-columns: 55px minmax(170px, 0.55fr) minmax(230px, 0.9fr) minmax(250px, 0.8fr) 30px;
   gap: clamp(20px, 3vw, 48px);
   align-items: center;
   cursor: pointer;
@@ -909,6 +909,43 @@
   font-size: clamp(17px, 1.7vw, 24px);
   line-height: 1.4;
   letter-spacing: -0.025em;
+}
+
+.trace-preview {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #050706;
+  box-shadow: inset 0 0 0 1px rgba(183, 242, 63, 0.04);
+}
+
+.trace-preview video,
+.trace-preview-fallback {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.trace-preview-fallback {
+  display: none;
+}
+
+.trace-preview-label {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 6px 8px;
+  border: 1px solid rgba(183, 242, 63, 0.28);
+  background: rgba(5, 7, 6, 0.86);
+  color: var(--signal);
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .trace-toggle {
@@ -1415,7 +1452,7 @@ button:focus-visible {
   }
 
   .trace-card summary {
-    grid-template-columns: 45px minmax(150px, 0.55fr) minmax(240px, 1fr) 24px;
+    grid-template-columns: 45px minmax(150px, 0.55fr) minmax(210px, 0.8fr) minmax(220px, 0.75fr) 24px;
     gap: 22px;
   }
 
@@ -1632,6 +1669,12 @@ button:focus-visible {
     margin-top: 8px;
   }
 
+  .trace-preview {
+    grid-column: 2 / -1;
+    width: 100%;
+    margin-top: 8px;
+  }
+
   .trace-toggle {
     grid-column: 3;
     grid-row: 1;
@@ -1725,4 +1768,6 @@ button:focus-visible {
     transition-duration: 0.01ms !important;
   }
   .reveal { opacity: 1; }
+  .trace-preview video { display: none; }
+  .trace-preview-fallback { display: block; }
 }
