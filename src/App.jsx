@@ -170,6 +170,13 @@ const selectedProjects = [
     decision:
       'No accounts, sync, analytics, projects, labels, or streaks. Tasks stay on-device; the product is intentionally smaller because the constraint is the feature.',
     proof: 'Native AppKit · zero third-party dependencies · local persistence',
+    preview: {
+      webm: '/media/session-todo-demo.webm',
+      mp4: '/media/session-todo-demo.mp4',
+      poster: '/media/session-todo-demo-poster.jpg',
+      alt: 'Session Todo capturing a task, queuing the next step, promoting it after completion, and delivering a focused check-in notification',
+      label: 'Capture → queue → check-in',
+    },
     href: 'https://github.com/haramrit09k/sticky-todo-macos',
     linkLabel: 'See how it works',
   },
@@ -248,6 +255,49 @@ function App() {
   const [projectLens, setProjectLens] = useState('all');
   const [expandedProject, setExpandedProject] = useState('homeos');
   const lensConsoleRef = useRef(null);
+  const projectVideoRefs = useRef({});
+
+  const toggleProject = (projectId) => {
+    setExpandedProject((currentProject) => (
+      currentProject === projectId ? null : projectId
+    ));
+  };
+
+  const openProjectFullscreen = async (projectId) => {
+    const video = projectVideoRefs.current[projectId];
+    if (!video) return;
+
+    video.controls = true;
+
+    const restoreInlineVideo = () => {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        video.controls = false;
+        document.removeEventListener('fullscreenchange', restoreInlineVideo);
+        document.removeEventListener('webkitfullscreenchange', restoreInlineVideo);
+      }
+    };
+
+    try {
+      if (video.requestFullscreen) {
+        document.addEventListener('fullscreenchange', restoreInlineVideo);
+        await video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        document.addEventListener('webkitfullscreenchange', restoreInlineVideo);
+        video.webkitRequestFullscreen();
+      } else if (video.webkitEnterFullscreen) {
+        video.addEventListener('webkitendfullscreen', () => {
+          video.controls = false;
+        }, { once: true });
+        video.webkitEnterFullscreen();
+      } else {
+        video.controls = false;
+      }
+    } catch {
+      video.controls = false;
+      document.removeEventListener('fullscreenchange', restoreInlineVideo);
+      document.removeEventListener('webkitfullscreenchange', restoreInlineVideo);
+    }
+  };
 
   const changeProjectLens = (value) => {
     const previousTop = lensConsoleRef.current
@@ -485,7 +535,10 @@ function App() {
                   key={`${projectLens}-${project.id}`}
                   open={expandedProject === project.id}
                 >
-                  <summary>
+                  <summary onClick={(event) => {
+                    event.preventDefault();
+                    toggleProject(project.id);
+                  }}>
                     <span className="trace-index">{String(index + 1).padStart(2, '0')}</span>
                     <span className="trace-title">
                       <small>{project.type}</small>
@@ -495,6 +548,7 @@ function App() {
                     {project.preview && (
                       <span className="trace-preview">
                         <video
+                          ref={(node) => { projectVideoRefs.current[project.id] = node; }}
                           autoPlay
                           muted
                           loop
@@ -516,6 +570,13 @@ function App() {
                     )}
                     <span className="trace-toggle" aria-hidden="true">+</span>
                   </summary>
+                  {project.preview && expandedProject === project.id && (
+                    <div className="trace-media-actions" aria-label={`${project.title} demo controls`}>
+                      <button type="button" onClick={() => openProjectFullscreen(project.id)}>
+                        View fullscreen <Arrow />
+                      </button>
+                    </div>
+                  )}
                   <div className="trace-body">
                     <p className="trace-signal">{project.signal}</p>
                     {project.href ? (

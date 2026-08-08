@@ -35,5 +35,17 @@
       "distributed-ml-demo.mp4",
       "distributed-ml-demo-poster.jpg"
     ]
+  },
+  "session-todo": {
+    "source": "Four Session Todo screen recordings captured on 2026-08-08",
+    "selection": "global capture, queue the next step, complete-to-next transition, and a real compass-check notification",
+    "durationSeconds": 10.867,
+    "dimensions": "1440x810",
+    "treatment": "punchy silent montage with privacy-cropped notification choices and short crossfades",
+    "exports": [
+      "session-todo-demo.webm",
+      "session-todo-demo.mp4",
+      "session-todo-demo-poster.jpg"
+    ]
   }
 }
