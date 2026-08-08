@@ -22,5 +22,18 @@
       "spaceterra-demo.mp4",
       "spaceterra-demo-poster.jpg"
     ]
+  },
+  "distributed-ml": {
+    "source": "Dist-ML | BE Project Demonstration | DBIT Innovex 2019",
+    "sourceUrl": "https://youtu.be/q6aFGrotY4c",
+    "selection": "parameter-server architecture, three-machine cluster, concurrent training, and single-vs-distributed comparison",
+    "durationSeconds": 14.8,
+    "dimensions": "1440x810",
+    "treatment": "four-beat silent montage with source-preserving labels and short crossfades",
+    "exports": [
+      "distributed-ml-demo.webm",
+      "distributed-ml-demo.mp4",
+      "distributed-ml-demo-poster.jpg"
+    ]
   }
 }

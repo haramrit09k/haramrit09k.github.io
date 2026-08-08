@@ -145,8 +145,17 @@ const selectedProjects = [
     decision:
       'We treated orchestration and usability as part of ML performance; the reported result was 10% faster training without accuracy loss.',
     proof: 'Published at ICAC3 / indexed by IEEE',
+    preview: {
+      webm: '/media/distributed-ml-demo.webm',
+      mp4: '/media/distributed-ml-demo.mp4',
+      poster: '/media/distributed-ml-demo-poster.jpg',
+      alt: 'Distributed ML demonstration progressing from parameter-server architecture to a three-machine training run and comparison result',
+      label: 'Live proof · cluster → result',
+    },
     href: 'https://ieeexplore.ieee.org/document/9036818',
     linkLabel: 'Read the publication',
+    secondaryHref: 'https://youtu.be/q6aFGrotY4c',
+    secondaryLinkLabel: 'Watch the full demonstration',
   },
   {
     id: 'session-todo',
