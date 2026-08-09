@@ -277,6 +277,13 @@ function App() {
   const projectVideoRefs = useRef({});
 
   const toggleProject = (projectId) => {
+    const video = projectVideoRefs.current[projectId];
+
+    if (video?.paused) {
+      const playbackAttempt = video.play();
+      playbackAttempt?.catch(() => {});
+    }
+
     setExpandedProject((currentProject) => (
       currentProject === projectId ? null : projectId
     ));
@@ -576,8 +583,8 @@ function App() {
                           poster={project.preview.poster}
                           aria-label={project.preview.alt}
                         >
-                          <source src={project.preview.webm} type="video/webm" />
                           <source src={project.preview.mp4} type="video/mp4" />
+                          <source src={project.preview.webm} type="video/webm" />
                         </video>
                         <img
                           className="trace-preview-fallback"
