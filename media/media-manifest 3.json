@@ -38,10 +38,10 @@
   },
   "session-todo": {
     "source": "Four Session Todo screen recordings captured on 2026-08-08",
-    "selection": "capture a focused task, queue the next step, complete the current work, and promote the queued task",
-    "durationSeconds": 24.333,
+    "selection": "global capture, queue the next step, complete-to-next transition, and a real compass-check notification",
+    "durationSeconds": 10.867,
     "dimensions": "1440x810",
-    "treatment": "four-operation silent montage with accelerated typing, quiet labels, and short crossfades",
+    "treatment": "punchy silent montage with privacy-cropped notification choices and short crossfades",
     "exports": [
       "session-todo-demo.webm",
       "session-todo-demo.mp4",
