@@ -1,0 +1,64 @@
+{
+  "homeos": {
+    "source": "Screen Recording 2026-08-08 at 4.04.39 PM.mov",
+    "selection": "todo submission, grocery-item sync, and persistent display alert set from the phone control surface",
+    "durationSeconds": 16.7,
+    "dimensions": "1440x810",
+    "treatment": "three-operation montage with quiet interface labels and short crossfades",
+    "exports": [
+      "homeos-demo.webm",
+      "homeos-demo.mp4",
+      "homeos-demo-poster.jpg"
+    ]
+  },
+  "spaceterra": {
+    "source": "Screen Recording 2026-08-08 at 4.23.02 PM.mov",
+    "selection": "score 7 through collision and persisted leaderboard",
+    "durationSeconds": 10.3,
+    "dimensions": "1440x810",
+    "treatment": "full game viewport centered over a dark blurred continuation",
+    "exports": [
+      "spaceterra-demo.webm",
+      "spaceterra-demo.mp4",
+      "spaceterra-demo-poster.jpg"
+    ]
+  },
+  "distributed-ml": {
+    "source": "Dist-ML | BE Project Demonstration | DBIT Innovex 2019",
+    "sourceUrl": "https://youtu.be/q6aFGrotY4c",
+    "selection": "parameter-server architecture, three-machine cluster, concurrent training, and single-vs-distributed comparison",
+    "durationSeconds": 14.8,
+    "dimensions": "1440x810",
+    "treatment": "four-beat silent montage with source-preserving labels and short crossfades",
+    "exports": [
+      "distributed-ml-demo.webm",
+      "distributed-ml-demo.mp4",
+      "distributed-ml-demo-poster.jpg"
+    ]
+  },
+  "session-todo": {
+    "source": "Four Session Todo screen recordings captured on 2026-08-08",
+    "selection": "global capture, queue the next step, complete-to-next transition, and a real compass-check notification",
+    "durationSeconds": 10.867,
+    "dimensions": "1440x810",
+    "treatment": "punchy silent montage with privacy-cropped notification choices and short crossfades",
+    "exports": [
+      "session-todo-demo.webm",
+      "session-todo-demo.mp4",
+      "session-todo-demo-poster.jpg"
+    ]
+  },
+  "rockx": {
+    "source": "Live Portal Search Desk deployment",
+    "sourceUrl": "https://portal-search-desk-359b5c84a84b.herokuapp.com/",
+    "selection": "character search, appearance trail, episode dossier, and cast traversal",
+    "durationSeconds": 9.2,
+    "dimensions": "1280x720",
+    "treatment": "silent browser interaction sequence captured from the live application",
+    "exports": [
+      "rockx-demo.webm",
+      "rockx-demo.mp4",
+      "rockx-demo-poster.jpg"
+    ]
+  }
+}

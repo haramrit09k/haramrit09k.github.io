@@ -78,6 +78,12 @@ const selectedProjects = [
     decision:
       'The PWA was deliberate: free iOS provisioning expires after seven days, while a paid membership made little sense for a private utility. A home-screen app removed that signing lifecycle.',
     proof: 'Built over a few weeks · still controlled from an installed PWA',
+    preview: {
+      webm: '/media/homeos-demo.webm',
+      mp4: '/media/homeos-demo.mp4',
+      poster: '/media/homeos-demo-poster.jpg',
+      alt: 'HomeOS phone control surface syncing a todo, grocery item, and persistent alert to the Raspberry Pi display',
+    },
     href: 'https://demo.homeos-hub.xyz/',
     linkLabel: 'Try the phone control surface',
     secondaryHref: 'https://demo.homeos-hub.xyz/display',
@@ -97,11 +103,41 @@ const selectedProjects = [
     decision:
       'Years later I revived it with Google authentication, MongoDB Atlas score persistence, and a real-time leaderboard—giving a two-day festival game identity and durable state.',
     proof: '≈20K plays during its original run · individual build',
+    preview: {
+      webm: '/media/spaceterra-demo.webm',
+      mp4: '/media/spaceterra-demo.mp4',
+      poster: '/media/spaceterra-demo-poster.jpg',
+      alt: 'SpaceTerra gameplay progressing from live scoring to the persisted leaderboard',
+    },
     href: 'https://github.com/haramrit09k/spaceterra',
     linkLabel: 'Inspect the source',
     secondaryHref: 'https://spaceterra.herokuapp.com/',
     secondaryLinkLabel: 'Play SpaceTerra',
     demoHint: 'The independently hosted game may take a few seconds to wake before it loads.',
+  },
+  {
+    id: 'rockx',
+    repo: 'rockX',
+    title: 'Portal Search Desk',
+    type: 'An API failure became a product pivot',
+    lenses: ['systems'],
+    signal: 'Angular 11 · GraphQL · Apollo · Docker',
+    hook: 'The SpaceX API failed, so I rebuilt the product around a healthier graph.',
+    story:
+      'RockX began as a SpaceX launch browser. When its upstream stopped working, I treated the dependency failure as a product constraint and rebuilt it as Portal Search Desk—an exploration interface over the Rick and Morty graph.',
+    decision:
+      'The experience follows relationships instead of isolated result pages: search leads to a character file, its appearance trail, an episode dossier, and the full cast. Debounced search cancels stale requests, Apollo uses a cache-first policy, and favorites stay browser-local.',
+    proof: 'Live GraphQL search · character → episode → cast traversal · deployed on Heroku',
+    preview: {
+      webm: '/media/rockx-demo.webm',
+      mp4: '/media/rockx-demo.mp4',
+      poster: '/media/rockx-demo-poster.jpg',
+      alt: 'Portal Search Desk searching for Pickle Rick, opening the character appearance trail, and traversing to the episode cast',
+    },
+    href: 'https://github.com/haramrit09k/rockX',
+    linkLabel: 'Inspect the rebuild',
+    secondaryHref: 'https://portal-search-desk-359b5c84a84b.herokuapp.com/',
+    secondaryLinkLabel: 'Search the multiverse',
   },
   {
     id: 'classifai',
@@ -131,8 +167,16 @@ const selectedProjects = [
     decision:
       'We treated orchestration and usability as part of ML performance; the reported result was 10% faster training without accuracy loss.',
     proof: 'Published at ICAC3 / indexed by IEEE',
+    preview: {
+      webm: '/media/distributed-ml-demo.webm',
+      mp4: '/media/distributed-ml-demo.mp4',
+      poster: '/media/distributed-ml-demo-poster.jpg',
+      alt: 'Distributed ML demonstration progressing from parameter-server architecture to a three-machine training run and comparison result',
+    },
     href: 'https://ieeexplore.ieee.org/document/9036818',
     linkLabel: 'Read the publication',
+    secondaryHref: 'https://youtu.be/q6aFGrotY4c',
+    secondaryLinkLabel: 'Watch the full demonstration',
   },
   {
     id: 'session-todo',
@@ -147,6 +191,12 @@ const selectedProjects = [
     decision:
       'No accounts, sync, analytics, projects, labels, or streaks. Tasks stay on-device; the product is intentionally smaller because the constraint is the feature.',
     proof: 'Native AppKit · zero third-party dependencies · local persistence',
+    preview: {
+      webm: '/media/session-todo-demo.webm',
+      mp4: '/media/session-todo-demo.mp4',
+      poster: '/media/session-todo-demo-poster.jpg',
+      alt: 'Session Todo capturing a task, queuing the next step, promoting it after completion, and delivering a focused check-in notification',
+    },
     href: 'https://github.com/haramrit09k/sticky-todo-macos',
     linkLabel: 'See how it works',
   },
@@ -174,7 +224,6 @@ const archiveProjects = [
   ['HelpChess', 'Open-source web work supporting a nonprofit growing chess access in India.', 'JavaScript · open source', 'https://github.com/haramrit09k/helpchess'],
   ['IPL Predictor', 'An academic comparison of machine-learning approaches for match prediction.', 'Python · neural networks', 'https://github.com/haramrit09k/ipl-predictor'],
   ['Signature Verification', 'An early computer-vision experiment for comparing handwritten signatures.', 'OpenCV · scikit-learn', 'https://github.com/haramrit09k/signature-verification'],
-  ['RockX', 'An Angular interface over SpaceX launch data through a GraphQL API.', 'Angular · GraphQL', 'https://github.com/haramrit09k/rockX'],
   ['What’s My Neuron', 'A web explorer that retrieves neuron records from the NeuroMorpho API.', 'Django · APIs', 'https://github.com/haramrit09k/whats-my-neuron'],
   ['Firechat', 'A lightweight real-time chat-room experiment built with React and Firebase.', 'React · Firebase', 'https://github.com/haramrit09k/firechat'],
   ['SWE 645', 'A containerized student-survey application deployed with Docker and Kubernetes.', 'Docker · Kubernetes', 'https://github.com/haramrit09k/swe645'],
@@ -225,6 +274,49 @@ function App() {
   const [projectLens, setProjectLens] = useState('all');
   const [expandedProject, setExpandedProject] = useState('homeos');
   const lensConsoleRef = useRef(null);
+  const projectVideoRefs = useRef({});
+
+  const toggleProject = (projectId) => {
+    setExpandedProject((currentProject) => (
+      currentProject === projectId ? null : projectId
+    ));
+  };
+
+  const openProjectFullscreen = async (projectId) => {
+    const video = projectVideoRefs.current[projectId];
+    if (!video) return;
+
+    video.controls = true;
+
+    const restoreInlineVideo = () => {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        video.controls = false;
+        document.removeEventListener('fullscreenchange', restoreInlineVideo);
+        document.removeEventListener('webkitfullscreenchange', restoreInlineVideo);
+      }
+    };
+
+    try {
+      if (video.requestFullscreen) {
+        document.addEventListener('fullscreenchange', restoreInlineVideo);
+        await video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        document.addEventListener('webkitfullscreenchange', restoreInlineVideo);
+        video.webkitRequestFullscreen();
+      } else if (video.webkitEnterFullscreen) {
+        video.addEventListener('webkitendfullscreen', () => {
+          video.controls = false;
+        }, { once: true });
+        video.webkitEnterFullscreen();
+      } else {
+        video.controls = false;
+      }
+    } catch {
+      video.controls = false;
+      document.removeEventListener('fullscreenchange', restoreInlineVideo);
+      document.removeEventListener('webkitfullscreenchange', restoreInlineVideo);
+    }
+  };
 
   const changeProjectLens = (value) => {
     const previousTop = lensConsoleRef.current
@@ -462,15 +554,47 @@ function App() {
                   key={`${projectLens}-${project.id}`}
                   open={expandedProject === project.id}
                 >
-                  <summary>
+                  <summary onClick={(event) => {
+                    event.preventDefault();
+                    toggleProject(project.id);
+                  }}>
                     <span className="trace-index">{String(index + 1).padStart(2, '0')}</span>
                     <span className="trace-title">
                       <small>{project.type}</small>
                       <strong>{project.title}</strong>
                     </span>
                     <span className="trace-hook">{project.hook}</span>
+                    {project.preview && (
+                      <span className="trace-preview">
+                        <video
+                          ref={(node) => { projectVideoRefs.current[project.id] = node; }}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                          poster={project.preview.poster}
+                          aria-label={project.preview.alt}
+                        >
+                          <source src={project.preview.webm} type="video/webm" />
+                          <source src={project.preview.mp4} type="video/mp4" />
+                        </video>
+                        <img
+                          className="trace-preview-fallback"
+                          src={project.preview.poster}
+                          alt={project.preview.alt}
+                        />
+                      </span>
+                    )}
                     <span className="trace-toggle" aria-hidden="true">+</span>
                   </summary>
+                  {project.preview && expandedProject === project.id && (
+                    <div className="trace-media-actions" aria-label={`${project.title} demo controls`}>
+                      <button type="button" onClick={() => openProjectFullscreen(project.id)}>
+                        View fullscreen <Arrow />
+                      </button>
+                    </div>
+                  )}
                   <div className="trace-body">
                     <p className="trace-signal">{project.signal}</p>
                     {project.href ? (
