@@ -83,7 +83,6 @@ const selectedProjects = [
       mp4: '/media/homeos-demo.mp4',
       poster: '/media/homeos-demo-poster.jpg',
       alt: 'HomeOS phone control surface syncing a todo, grocery item, and persistent alert to the Raspberry Pi display',
-      label: 'Live proof · PWA → Pi display',
     },
     href: 'https://demo.homeos-hub.xyz/',
     linkLabel: 'Try the phone control surface',
@@ -109,7 +108,6 @@ const selectedProjects = [
       mp4: '/media/spaceterra-demo.mp4',
       poster: '/media/spaceterra-demo-poster.jpg',
       alt: 'SpaceTerra gameplay progressing from live scoring to the persisted leaderboard',
-      label: 'Live proof · play → score → leaderboard',
     },
     href: 'https://github.com/haramrit09k/spaceterra',
     linkLabel: 'Inspect the source',
@@ -150,7 +148,6 @@ const selectedProjects = [
       mp4: '/media/distributed-ml-demo.mp4',
       poster: '/media/distributed-ml-demo-poster.jpg',
       alt: 'Distributed ML demonstration progressing from parameter-server architecture to a three-machine training run and comparison result',
-      label: 'Live proof · cluster → result',
     },
     href: 'https://ieeexplore.ieee.org/document/9036818',
     linkLabel: 'Read the publication',
@@ -175,7 +172,6 @@ const selectedProjects = [
       mp4: '/media/session-todo-demo.mp4',
       poster: '/media/session-todo-demo-poster.jpg',
       alt: 'Session Todo capturing a task, queuing the next step, promoting it after completion, and delivering a focused check-in notification',
-      label: 'Capture → queue → check-in',
     },
     href: 'https://github.com/haramrit09k/sticky-todo-macos',
     linkLabel: 'See how it works',
@@ -565,7 +561,6 @@ function App() {
                           src={project.preview.poster}
                           alt={project.preview.alt}
                         />
-                        <span className="trace-preview-label">{project.preview.label}</span>
                       </span>
                     )}
                     <span className="trace-toggle" aria-hidden="true">+</span>

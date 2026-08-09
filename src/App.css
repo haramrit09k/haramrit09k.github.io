@@ -934,20 +934,6 @@
   display: none;
 }
 
-.trace-preview-label {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  padding: 6px 8px;
-  border: 1px solid rgba(183, 242, 63, 0.28);
-  background: rgba(5, 7, 6, 0.86);
-  color: var(--signal);
-  font-family: 'SFMono-Regular', Consolas, monospace;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 @media (min-width: 761px) {
   .trace-card[open] summary {
     min-height: 0;
