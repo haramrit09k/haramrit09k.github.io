@@ -116,6 +116,30 @@ const selectedProjects = [
     demoHint: 'The independently hosted game may take a few seconds to wake before it loads.',
   },
   {
+    id: 'rockx',
+    repo: 'rockX',
+    title: 'Portal Search Desk',
+    type: 'An API failure became a product pivot',
+    lenses: ['systems'],
+    signal: 'Angular 11 · GraphQL · Apollo · Docker',
+    hook: 'The SpaceX API failed, so I rebuilt the product around a healthier graph.',
+    story:
+      'RockX began as a SpaceX launch browser. When its upstream stopped working, I treated the dependency failure as a product constraint and rebuilt it as Portal Search Desk—an exploration interface over the Rick and Morty graph.',
+    decision:
+      'The experience follows relationships instead of isolated result pages: search leads to a character file, its appearance trail, an episode dossier, and the full cast. Debounced search cancels stale requests, Apollo uses a cache-first policy, and favorites stay browser-local.',
+    proof: 'Live GraphQL search · character → episode → cast traversal · deployed on Heroku',
+    preview: {
+      webm: '/media/rockx-demo.webm',
+      mp4: '/media/rockx-demo.mp4',
+      poster: '/media/rockx-demo-poster.jpg',
+      alt: 'Portal Search Desk searching for Pickle Rick, opening the character appearance trail, and traversing to the episode cast',
+    },
+    href: 'https://github.com/haramrit09k/rockX',
+    linkLabel: 'Inspect the rebuild',
+    secondaryHref: 'https://portal-search-desk-359b5c84a84b.herokuapp.com/',
+    secondaryLinkLabel: 'Search the multiverse',
+  },
+  {
     id: 'classifai',
     repo: 'classifAI',
     title: 'classifAI',
@@ -200,7 +224,6 @@ const archiveProjects = [
   ['HelpChess', 'Open-source web work supporting a nonprofit growing chess access in India.', 'JavaScript · open source', 'https://github.com/haramrit09k/helpchess'],
   ['IPL Predictor', 'An academic comparison of machine-learning approaches for match prediction.', 'Python · neural networks', 'https://github.com/haramrit09k/ipl-predictor'],
   ['Signature Verification', 'An early computer-vision experiment for comparing handwritten signatures.', 'OpenCV · scikit-learn', 'https://github.com/haramrit09k/signature-verification'],
-  ['RockX', 'An Angular interface over SpaceX launch data through a GraphQL API.', 'Angular · GraphQL', 'https://github.com/haramrit09k/rockX'],
   ['What’s My Neuron', 'A web explorer that retrieves neuron records from the NeuroMorpho API.', 'Django · APIs', 'https://github.com/haramrit09k/whats-my-neuron'],
   ['Firechat', 'A lightweight real-time chat-room experiment built with React and Firebase.', 'React · Firebase', 'https://github.com/haramrit09k/firechat'],
   ['SWE 645', 'A containerized student-survey application deployed with Docker and Kubernetes.', 'Docker · Kubernetes', 'https://github.com/haramrit09k/swe645'],

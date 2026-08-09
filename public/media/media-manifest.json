@@ -47,5 +47,18 @@
       "session-todo-demo.mp4",
       "session-todo-demo-poster.jpg"
     ]
+  },
+  "rockx": {
+    "source": "Live Portal Search Desk deployment",
+    "sourceUrl": "https://portal-search-desk-359b5c84a84b.herokuapp.com/",
+    "selection": "character search, appearance trail, episode dossier, and cast traversal",
+    "durationSeconds": 9.2,
+    "dimensions": "1280x720",
+    "treatment": "silent browser interaction sequence captured from the live application",
+    "exports": [
+      "rockx-demo.webm",
+      "rockx-demo.mp4",
+      "rockx-demo-poster.jpg"
+    ]
   }
 }
