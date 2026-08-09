@@ -54,7 +54,7 @@
     "selection": "character search, appearance trail, episode dossier, and cast traversal",
     "durationSeconds": 9.2,
     "dimensions": "1280x720",
-    "treatment": "silent browser interaction sequence captured from the live application",
+    "treatment": "silent browser interaction sequence with three restrained product-story captions integrated into the application header",
     "exports": [
       "rockx-demo.webm",
       "rockx-demo.mp4",
