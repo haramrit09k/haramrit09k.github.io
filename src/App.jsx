@@ -213,8 +213,16 @@ const selectedProjects = [
     decision:
       'The important design question is evidence, not fluency. A production version needs source hierarchy, citations, recency checks, and a hard boundary between navigation help and legal advice.',
     proof: 'Crawler + ingestion pipeline + vector search + tested application',
+    preview: {
+      webm: '/media/f1rstaid-demo.webm',
+      mp4: '/media/f1rstaid-demo.mp4',
+      poster: '/media/f1rstaid-demo-poster.jpg',
+      alt: 'F1rstAid calculating an initial OPT unemployment deadline and a SEVIS address-reporting deadline, then expanding the official DHS citation',
+    },
     href: 'https://github.com/haramrit09k/f1rstaid',
     linkLabel: 'Inspect the prototype',
+    secondaryHref: 'https://f1rstaid-064025a9fcc1.herokuapp.com/',
+    secondaryLinkLabel: 'Try F1rstAid',
   },
 ];
 

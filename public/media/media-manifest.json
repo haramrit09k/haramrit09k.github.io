@@ -60,5 +60,19 @@
       "rockx-demo.mp4",
       "rockx-demo-poster.jpg"
     ]
+  },
+  "f1rstaid": {
+    "source": "Live F1rstAid deployment",
+    "sourceUrl": "https://f1rstaid-064025a9fcc1.herokuapp.com/",
+    "selection": "initial-OPT unemployment deadline, SEVIS address-reporting deadline, and official DHS source expansion",
+    "durationSeconds": 15.5,
+    "dimensions": "1440x810",
+    "treatment": "two-scenario silent browser montage with real typing, exact-date proof captions, an official-source proof caption, and short crossfades",
+    "exports": [
+      "f1rstaid-demo.webm",
+      "f1rstaid-demo.mp4",
+      "f1rstaid-demo-poster.jpg"
+    ],
+    "alternateExport": "f1rstaid-demo.gif"
   }
 }
