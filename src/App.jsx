@@ -152,8 +152,16 @@ const selectedProjects = [
     decision:
       'I chose an interpretable classical NLP baseline and class weighting before reaching for a larger model. Its 84% score measures agreement with heuristic labels—not human accuracy—so the next step is a human-labeled benchmark and error analysis.',
     proof: '314K cleaned reviews · 5 classes · 63K pseudo-labeled holdout',
+    preview: {
+      webm: '/media/classifai-demo.webm',
+      mp4: '/media/classifai-demo.mp4',
+      poster: '/media/classifai-demo-poster.jpg',
+      alt: 'ClassifAI receiving an app review, sending it through the hosted model, and returning a Bug Report classification',
+    },
     href: 'https://github.com/haramrit09k/classifAI',
     linkLabel: 'Inspect the pipeline',
+    secondaryHref: 'https://classifai-rsy8.onrender.com/docs',
+    secondaryLinkLabel: 'Try the live model API',
   },
   {
     id: 'distributed-ml',
@@ -283,6 +291,9 @@ function App() {
   const [expandedProject, setExpandedProject] = useState('homeos');
   const lensConsoleRef = useRef(null);
   const projectVideoRefs = useRef({});
+  const indexDialogRef = useRef(null);
+  const indexCloseRef = useRef(null);
+  const indexReturnFocusRef = useRef(null);
 
   const toggleProject = (projectId) => {
     const video = projectVideoRefs.current[projectId];
@@ -355,7 +366,6 @@ function App() {
     const onKeyDown = (event) => {
       if (event.key === 'Escape') {
         setMenuOpen(false);
-        setIndexOpen(false);
       }
     };
     window.addEventListener('keydown', onKeyDown);
@@ -365,6 +375,54 @@ function App() {
   useEffect(() => {
     document.body.style.overflow = indexOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
+  }, [indexOpen]);
+
+  useEffect(() => {
+    if (!indexOpen) return undefined;
+
+    indexReturnFocusRef.current = document.activeElement;
+    indexCloseRef.current?.focus();
+
+    const handleDialogKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setIndexOpen(false);
+        return;
+      }
+
+      if (event.key !== 'Tab' || !indexDialogRef.current) return;
+
+      const focusableElements = Array.from(
+        indexDialogRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleDialogKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleDialogKeyDown);
+      if (indexReturnFocusRef.current?.isConnected) {
+        indexReturnFocusRef.current.focus({ preventScroll: true });
+      }
+    };
   }, [indexOpen]);
 
   return (
@@ -381,11 +439,11 @@ function App() {
           <a href="#lab" onClick={() => setMenuOpen(false)}>Personal systems</a>
           <a href="#experience" onClick={() => setMenuOpen(false)}>Experience</a>
           <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-          <button className="nav-index" type="button" onClick={() => { setMenuOpen(false); setIndexOpen(true); }}>
+          <button className="nav-index" type="button" aria-haspopup="dialog" aria-controls="system-index-dialog" aria-expanded={indexOpen} onClick={() => { setMenuOpen(false); setIndexOpen(true); }}>
             System index +
           </button>
         </nav>
-        <button className="index-trigger" type="button" onClick={() => setIndexOpen(true)} aria-haspopup="dialog">
+        <button className="index-trigger" type="button" onClick={() => setIndexOpen(true)} aria-haspopup="dialog" aria-controls="system-index-dialog" aria-expanded={indexOpen}>
           System index <span aria-hidden="true">+</span>
         </button>
         <button
@@ -400,10 +458,10 @@ function App() {
       </header>
 
       {indexOpen && (
-        <div className="index-overlay" role="dialog" aria-modal="true" aria-labelledby="index-title">
+        <div id="system-index-dialog" className="index-overlay" role="dialog" aria-modal="true" aria-labelledby="index-title" ref={indexDialogRef}>
           <div className="index-bar">
             <p>HK / Portfolio system index</p>
-            <button type="button" onClick={() => setIndexOpen(false)}>Close ×</button>
+            <button type="button" ref={indexCloseRef} onClick={() => setIndexOpen(false)}>Close ×</button>
           </div>
           <div className="index-content">
             <div>
