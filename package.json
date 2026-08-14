@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://lilsardarx.dev/",
   "dependencies": {
-    "react": "^16.13.1",
+    "react": "^19.2.8",
     "react-dom": "^16.13.1"
   },
   "scripts": {
