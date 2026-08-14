@@ -61,6 +61,19 @@
       "rockx-demo-poster.jpg"
     ]
   },
+  "classifai": {
+    "source": "Live ClassifAI deployment",
+    "sourceUrl": "https://classifai-rsy8.onrender.com/",
+    "selection": "synthetic crash review submitted to the hosted prediction contract and returned as Bug Report",
+    "durationSeconds": 10.467,
+    "dimensions": "1280x720",
+    "treatment": "silent three-beat sequence using the live interface, exact synthetic request, and verified hosted API response",
+    "exports": [
+      "classifai-demo.webm",
+      "classifai-demo.mp4",
+      "classifai-demo-poster.jpg"
+    ]
+  },
   "f1rstaid": {
     "source": "Live F1rstAid deployment",
     "sourceUrl": "https://f1rstaid-064025a9fcc1.herokuapp.com/",
