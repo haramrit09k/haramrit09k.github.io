@@ -1,14 +1,14 @@
 {
-  "short_name": "hsk.dev",
-  "name": "Haramrit Singh Khurana - hsk.dev",
+  "short_name": "lilsardarx.dev",
+  "name": "Haramrit Singh Khurana — Software Engineer",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "/favicon copy.png",
+      "sizes": "400x400",
+      "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#080b0a",
   "background_color": "#080b0a"
