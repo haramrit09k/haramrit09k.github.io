@@ -209,6 +209,25 @@ const selectedProjects = [
     linkLabel: 'See how it works',
   },
   {
+    id: 'portal-search-desk',
+    repo: 'rockX',
+    title: 'Portal Search Desk',
+    type: 'RockX, rebuilt for the graph it deserved',
+    lenses: ['systems'],
+    signal: 'Angular 11 · Apollo GraphQL · Rick and Morty API',
+    hook: 'RockX proved I could wire Angular to GraphQL. It never proved I could use GraphQL.',
+    story:
+      'The original RockX rendered one flat SpaceX launch list through a single query—mostly Angular CLI scaffolding with a fetch swapped in. Keeping the same Angular 11 + Apollo foundation, I replaced the data source with a public API that is actually shaped like a graph: characters connect to episodes, episodes connect to cast. That let me build real traversal—character search into appearance trails, episode pages that reveal their full cast—instead of another list.',
+    decision:
+      'The public API publishes no rate-limit contract, so the client had to assume scarcity: debounced search, canceled in-flight queries on filter change, cache-first Apollo policies, and field-scoped queries that only widen on detail pages. The README also states explicit product boundaries—no streaming links, no invented episode summaries, unofficial fan project—because a demo built on someone else’s IP needs a stated scope, not just a feature list.',
+    proof: 'Angular 11 + Apollo Client · nested GraphQL relationships · localStorage favorites · documented rate-limit posture',
+    href: 'https://github.com/haramrit09k/rockX/tree/agent/rick-and-morty-repo-cleanup',
+    linkLabel: 'Inspect the source',
+    secondaryHref: 'https://portal-search-desk-359b5c84a84b.herokuapp.com/',
+    secondaryLinkLabel: 'Open Portal Search Desk',
+    demoHint: 'The Heroku-hosted app may take a few seconds to wake before it loads.',
+  },
+  {
     id: 'f1rstaid',
     repo: 'f1rstaid',
     title: 'F1rstAid',
