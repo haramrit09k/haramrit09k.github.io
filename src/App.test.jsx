@@ -159,3 +159,18 @@ it('starts without selected previews, cases, filters, or expanded projects', () 
   click(Array.from(view.querySelectorAll('.lens-console button')).find(button => button.textContent === 'GenAI & ML'));
   expect(view.querySelector('.trace-card[open]')).toBeNull();
 });
+
+it('cancels an in-flight project transition when motion is paused', () => {
+  const view = renderPortfolio();
+  const card = view.querySelector('.trace-card');
+  const cancel = vi.fn();
+  card.animate = vi.fn(() => ({ cancel }));
+  click(card.querySelector('summary'));
+  expect(card.animate).toHaveBeenCalledTimes(1);
+  click(view.querySelector('.quick-access button'));
+  expect(cancel).toHaveBeenCalled();
+  card.animate.mockClear();
+  click(card.querySelector('summary'));
+  expect(card.animate).not.toHaveBeenCalled();
+  expect(card.open).toBe(false);
+});
