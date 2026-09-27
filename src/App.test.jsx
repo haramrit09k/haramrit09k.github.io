@@ -25,6 +25,7 @@ function click(element) {
 }
 
 beforeAll(() => {
+  Object.defineProperty(HTMLMediaElement.prototype, 'pause', { configurable: true, value: () => {} });
   Object.defineProperty(HTMLMediaElement.prototype, 'play', {
     configurable: true,
     value: () => Promise.resolve(),
@@ -51,28 +52,26 @@ it('renders the dual-track recruiter story and primary proof', () => {
 
   expect(view.textContent).toContain('I build systems that help engineering teams ship faster.');
   expect(view.textContent).toContain('Software systems');
-  expect(view.textContent).toContain('Applied ML');
-  expect(view.textContent).toContain('Proof, not promises.');
-  expect(view.textContent.indexOf('The reason came first.')).toBeLessThan(
-    view.textContent.indexOf('Built by owning the hard parts.')
+  expect(view.textContent).toContain('GenAI & applied ML');
+  expect(view.textContent).toContain('Selected work.');
+  expect(view.textContent.indexOf('Things I’ve built.')).toBeLessThan(
+    view.textContent.indexOf('Experience.')
   );
   expect(view.querySelector('.wordmark-icon').getAttribute('src')).toBe('/favicon copy.png');
   expect(view.querySelector('.maker-seal')).toBeNull();
-  expect(view.querySelectorAll('.live-signal')).toHaveLength(3);
-  expect(view.textContent).toContain('Private data API-key protected');
 });
 
 it('filters featured work for an Applied ML recruiter', () => {
   const view = renderPortfolio();
   const appliedMlButton = Array.from(view.querySelectorAll('.lens-console button'))
-    .find((button) => button.textContent === 'Applied ML');
+    .find((button) => button.textContent === 'GenAI & ML');
 
   click(appliedMlButton);
 
   const projectText = Array.from(view.querySelectorAll('.trace-card summary'))
     .map((summary) => summary.textContent);
 
-  expect(projectText).toHaveLength(3);
+  expect(projectText).toHaveLength(4);
   expect(projectText.join(' ')).toContain('classifAI');
   expect(projectText.join(' ')).toContain('Distributed ML');
   expect(projectText.join(' ')).toContain('F1rstAid');
@@ -85,7 +84,7 @@ it('expands one project at a time and exposes the ClassifAI live proof', () => {
   const homeOsCard = summaries.find((summary) => summary.textContent.includes('HomeOS')).closest('details');
   const classifAiSummary = summaries.find((summary) => summary.textContent.includes('classifAI'));
 
-  expect(homeOsCard.open).toBe(true);
+  expect(homeOsCard.open).toBe(false);
   click(classifAiSummary);
 
   expect(homeOsCard.open).toBe(false);
@@ -104,34 +103,6 @@ it('opens and closes the mobile navigation state', () => {
   expect(view.querySelector('.site-nav').classList.contains('is-open')).toBe(true);
 });
 
-it('traps focus in the System Index and restores it after Escape', () => {
-  const view = renderPortfolio();
-  const trigger = view.querySelector('.index-trigger');
-
-  trigger.focus();
-  click(trigger);
-
-  const dialog = view.querySelector('[role="dialog"]');
-  const closeButton = dialog.querySelector('.index-bar button');
-  const focusable = dialog.querySelectorAll('a[href], button:not([disabled])');
-  const lastLink = focusable[focusable.length - 1];
-
-  expect(document.activeElement).toBe(closeButton);
-
-  lastLink.focus();
-  act(() => {
-    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
-  });
-  expect(document.activeElement).toBe(closeButton);
-
-  act(() => {
-    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-  });
-
-  expect(view.querySelector('[role="dialog"]')).toBeNull();
-  expect(document.activeElement).toBe(trigger);
-});
-
 it('ships every referenced project-media asset', () => {
   const view = renderPortfolio();
   const mediaPaths = Array.from(view.querySelectorAll('video source, video[poster]'))
@@ -142,4 +113,49 @@ it('ships every referenced project-media asset', () => {
   mediaPaths.forEach((mediaPath) => {
     expect(existsSync(resolve(process.cwd(), 'public', mediaPath.replace(/^\//, '')))).toBe(true);
   });
+});
+
+
+it('connects headline outcomes to their supporting case studies', () => {
+  const view = renderPortfolio();
+  click(view.querySelectorAll('.impact-stat')[1]);
+  expect(view.querySelector('#tab-02').getAttribute('aria-selected')).toBe('true');
+  expect(view.querySelector('#panel-02').hidden).toBe(false);
+  expect(view.querySelector('#panel-01').hidden).toBe(true);
+});
+
+it('lets visitors pause and resume motion without hiding content', () => {
+  const view = renderPortfolio();
+  const toggle = view.querySelector('.quick-access button');
+  click(toggle);
+  expect(toggle.getAttribute('aria-pressed')).toBe('true');
+  expect(view.querySelector('.site-shell').classList.contains('motion-paused')).toBe(true);
+  expect(toggle.textContent).toBe('Resume motion');
+  click(toggle);
+  expect(toggle.getAttribute('aria-pressed')).toBe('false');
+});
+
+it('opens the project chosen in the hero spotlight', () => {
+  const view = renderPortfolio();
+  const picker = Array.from(view.querySelectorAll('.spotlight-picker button'))
+    .find((button) => button.textContent === 'classifAI');
+  click(picker);
+  expect(view.querySelector('.studio-preview strong').textContent).toBe('classifAI');
+  click(view.querySelector('.studio-preview'));
+  const card = Array.from(view.querySelectorAll('.trace-card')).find((item) => item.textContent.includes('classifAI'));
+  expect(card.open).toBe(true);
+});
+
+it('starts without selected previews, cases, filters, or expanded projects', () => {
+  const view = renderPortfolio();
+  expect(view.querySelector('.studio-preview strong').textContent).toBe('Choose a project');
+  expect(view.querySelector('.spotlight-picker [aria-pressed="true"]')).toBeNull();
+  expect(view.querySelector('.case-tab[aria-selected="true"]')).toBeNull();
+  expect(view.querySelector('.lens-console [aria-pressed="true"]')).toBeNull();
+  expect(view.querySelector('.trace-card[open]')).toBeNull();
+  const summary = view.querySelector('.trace-card summary');
+  click(summary);
+  expect(summary.closest('details').open).toBe(true);
+  click(Array.from(view.querySelectorAll('.lens-console button')).find(button => button.textContent === 'GenAI & ML'));
+  expect(view.querySelector('.trace-card[open]')).toBeNull();
 });

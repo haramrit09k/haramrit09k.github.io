@@ -1,75 +1,136 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
-import projectMetrics from './data/project-metrics.json';
 
 const impact = [
-  { value: '≤2K', label: 'change tickets automated / month' },
-  { value: '67%', label: 'faster application build' },
-  { value: '150K', label: 'rows synchronized daily' },
+  { value: '~2.5K', label: 'MongoDB clusters on the DBaaS platform', caseId: '01' },
+  { value: '1.4 GB → 470 MB', label: 'peak JVM heap in metadata ingestion', caseId: '02' },
+  { value: '67%', label: 'faster Angular application build', caseId: '06' },
 ];
 
 const caseStudies = [
   {
-    id: '01',
-    label: 'Self-service operations',
-    title: 'Removed the Ops queue from change management.',
-    summary:
-      'Architected ServiceNow change-ticket automation for DBaaS self-service workflows, making ticket creation instant and fully automated.',
-    outcome: '300–2,000 tickets automated monthly',
+    id: '01', label: 'Production GenAI',
+    title: 'LLM-assisted MongoDB diagnostics.',
+    summary: 'Built a production diagnostics workflow at Citi using an internal enterprise framework based on Google ADK. Natural-language issues become targeted database checks through a Mongo-focused MCP server invoking Apigee-backed APIs.',
+    outcome: 'Shipped read-only diagnostics and grounded guidance',
+    stack: ['LLM orchestration', 'MCP', 'Apigee', 'MongoDB DBaaS'],
+    detail: 'Evaluated an Approve button for low-risk remediation, but kept the shipped workflow read-only because of production-data sensitivity and probabilistic model behavior. The internal platform supports roughly 2,500 clusters, 600 daily UI users, and 7,000–8,000 API requests per day.',
+  },
+  {
+    id: '02', label: 'Java performance',
+    title: 'Reduced memory use in high-volume ingestion.',
+    summary: 'Redesigned a metadata ingestion workflow handling roughly 49K records with more than 150 fields.',
+    outcome: 'Peak heap: ~1.4 GB → 470 MB',
+    stack: ['Java', 'Streaming', 'Large-payload processing'],
+    detail: 'Focused on memory optimization and streaming in a workflow processing large metadata payloads.',
+  },
+  {
+    id: '03', label: 'Database performance',
+    title: 'Optimized a production-critical Oracle workflow.',
+    summary: 'Moved a problematic GraphQL/data-access path to efficient JDBC to improve a production-critical workflow.',
+    outcome: 'Oracle plan cost: ~20,000 → 370; response under 10 seconds',
+    stack: ['Oracle', 'JDBC', 'SQL'],
+    detail: 'Reworked the database access path and optimized execution to bring response times below 10 seconds.',
+  },
+  {
+    id: '04', label: 'Enterprise automation',
+    title: 'Automated change-ticket preparation.',
+    summary: 'Automated ServiceNow CHG creation for three critical MongoDB operations, deriving required change metadata from platform context.',
+    outcome: 'Three operations live with approval controls preserved',
     stack: ['Java', 'Spring Boot', 'ServiceNow'],
-    detail:
-      'The system eliminated manual Ops-team involvement—even through high-volume MongoDB release windows—without compromising the regulated change process.',
+    detail: 'Eliminated repetitive manual ticket preparation. Expansion to more change-gated operations is planned, rather than presented as already shipped.',
   },
   {
-    id: '02',
-    label: 'Frontend architecture',
-    title: 'Made a shared platform build 67% faster.',
-    summary:
-      'Owned the Angular 19 upgrade for the MaaS application and shared DBaaS component library across four consumer teams.',
-    outcome: '4m48s → 1m34s build time',
-    stack: ['Angular 19', 'TypeScript', 'Architecture'],
-    detail:
-      'Breaking changes were coordinated across MSaaS, OraaS, PgaaS, and CaaS while 10 unused components and three dead services were removed.',
+    id: '05', label: 'Asynchronous workflows',
+    title: 'Automated CyberArk account migrations.',
+    summary: 'Automated FID migrations after cluster topology and capacity changes, replacing an incident-driven manual process.',
+    outcome: 'Job tracking, per-account status, and escalation on failure',
+    stack: ['CyberArk', 'Asynchronous jobs', 'Platform integration'],
+    detail: 'Jobs can run for roughly 24 hours. Conservative hourly polling and on-demand refresh provide visibility without excessive downstream requests.',
   },
   {
-    id: '03',
-    label: 'Data infrastructure',
-    title: 'Rebuilt a platform-wide data sync for real scale.',
-    summary:
-      'Migrated a raw SQL cronjob into a GraphQL-based Spring Boot worker that powers authentication and approval routing.',
-    outcome: '150K rows × 130 columns daily',
-    stack: ['GraphQL', 'Spring Boot', 'JDBC'],
-    detail:
-      'In a related 30K-row extraction flow, benchmarking exposed a scaling risk and drove a normalized schema that cut bulk insert time in half.',
+    id: '06', label: 'Platform modernization',
+    title: 'Made the Angular application build 67% faster.',
+    summary: 'Modernized the frontend from Angular 16 to 19 and services from Spring Boot 2.7 to 3.3.',
+    outcome: 'Build time: 4m48s → 1m34s',
+    stack: ['Angular', 'TypeScript', 'Spring Boot'],
+    detail: 'Also owned releases across roughly four microservices and four or more teams, and built a Playwright nightly regression suite integrated with Jenkins.',
   },
 ];
 
 const experience = [
   {
-    years: '2022 — NOW',
+    years: 'DEC 2022 — NOW',
     company: 'Citi',
-    role: 'Software Engineer · Enterprise DBaaS',
-    copy: 'Owning automation, platform architecture, and production reliability for DBaaS services in a regulated enterprise environment.',
+    role: 'Senior Software Engineer (AVP) · MongoDB DBaaS',
+    copy: 'Building enterprise database-platform features, production LLM-assisted diagnostics, performance improvements, and workflow automation since December 2022.',
   },
   {
-    years: '2021 — 2022',
+    years: 'JUN 2021 — OCT 2022',
     company: 'Optimal Satcom',
     role: 'Software Engineer',
     copy: 'Modernized enterprise SATCOM tooling, stabilized high-risk modules, and redesigned core database workflows.',
   },
   {
-    years: '2020',
+    years: 'MAY — AUG 2020',
     company: 'Nexus 8 International',
     role: 'Software Engineer Intern',
     copy: 'Built HIPAA-compliant healthcare features and reduced patient-record upload time by 30%.',
+  },
+  {
+    years: 'JAN 2020 — MAY 2021',
+    company: 'George Mason University',
+    role: 'Teaching Assistant · Applied IT Programming',
+    copy: 'Teaching assistant for Applied IT Programming while completing my M.S. in Computer Science.',
   },
 ];
 
 const selectedProjects = [
   {
+    id: 'interview-mentor', title: 'AI Interview Prep Mentor',
+    type: 'LLM application', lenses: ['ml', 'systems'],
+    signal: 'React · TypeScript · Express · Gemini · PostgreSQL · Redis · Stripe',
+    hook: 'AI-generated interview questions with evaluation and feedback.',
+    story: 'An interview-preparation application with Gemini-generated questions tailored to your skill and chosen difficulty, plus AI evaluation of responses. You can also add specific questions you have encountered elsewhere and an ideal answer to practice against.',
+    decision: 'Built the product around Google login, Stripe quotas, Redis caching, and a PostgreSQL production database.',
+    proof: 'Deployed at ace-interview.app',
+    preview: {
+      webm: '/media/ace-interview-demo.webm',
+      mp4: '/media/ace-interview-demo.mp4',
+      poster: '/media/ace-interview-demo-poster.jpg',
+      alt: 'ACE interface preview showing skill selection, practice-session setup, and adding a custom interview question',
+    },
+    demoHint: 'Interface preview: choose a difficulty for AI-generated questions, or add specific questions you want to practice.',
+    href: 'https://ace-interview.app', linkLabel: 'Open AI Interview Prep Mentor',
+  },
+  {
+    id: 'f1rstaid',
+    repo: 'f1rstaid',
+    title: 'F1rstAid',
+    type: 'F-1 immigration RAG assistant',
+    lenses: ['ml'],
+    signal: 'Python · LangChain · OpenAI · FAISS · Streamlit',
+    hook: 'Can an assistant make dense F-1 guidance easier to navigate?',
+    story:
+      'A retrieval-augmented prototype ingests government and university guidance, then retrieves context for questions about F-1 status, CPT, OPT, employment, and travel.',
+    decision:
+      'The important design question is evidence, not fluency. A production version needs source hierarchy, citations, recency checks, and a hard boundary between navigation help and legal advice.',
+    proof: 'Crawler + ingestion pipeline + vector search + tested application',
+    preview: {
+      webm: '/media/f1rstaid-demo.webm',
+      mp4: '/media/f1rstaid-demo.mp4',
+      poster: '/media/f1rstaid-demo-poster.jpg',
+      alt: 'F1rstAid calculating an initial OPT unemployment deadline and a SEVIS address-reporting deadline, then expanding the official DHS citation',
+    },
+    href: 'https://github.com/haramrit09k/f1rstaid',
+    linkLabel: 'Inspect the prototype',
+    secondaryHref: 'https://f1rstaid-064025a9fcc1.herokuapp.com/',
+    secondaryLinkLabel: 'Try F1rstAid',
+  },
+  {
     id: 'homeos',
     title: 'HomeOS',
-    type: 'A useful object, not a demo',
+    type: 'Home dashboard',
     lenses: ['systems'],
     signal: 'Raspberry Pi · Angular · PWA',
     hook: 'I gave away my Echo Show—then built the one I actually wanted.',
@@ -94,12 +155,12 @@ const selectedProjects = [
     id: 'spaceterra',
     repo: 'spaceterra',
     title: 'SpaceTerra',
-    type: 'The first scale experiment',
+    type: 'Browser game',
     lenses: ['systems'],
     signal: 'Node.js · Phaser · MongoDB · Socket.IO',
     hook: 'My first Node.js project began as a two-day challenge to myself.',
     story:
-      'I built the browser game independently for Teknack in 2017 to see whether my first Node.js project could survive event-scale interest. Google Analytics recorded roughly 20,000 plays.',
+      'I built the browser game independently for Teknack in 2017 to see whether my first Node.js project could survive event-scale interest. The game reached more than 12,000 players.',
     decision:
       'Years later I revived it with Google authentication, MongoDB Atlas score persistence, and a real-time leaderboard—giving a two-day festival game identity and durable state.',
     proof: '≈20K plays during its original run · individual build',
@@ -119,7 +180,7 @@ const selectedProjects = [
     id: 'rockx',
     repo: 'rockX',
     title: 'Portal Search Desk',
-    type: 'An API failure became a product pivot',
+    type: 'API explorer',
     lenses: ['systems'],
     signal: 'Angular 11 · GraphQL · Apollo · Docker',
     hook: 'The SpaceX API failed, so I rebuilt the product around a healthier graph.',
@@ -143,7 +204,7 @@ const selectedProjects = [
     id: 'classifai',
     repo: 'classifAI',
     title: 'classifAI',
-    type: 'My first complete ML lifecycle',
+    type: 'Review classification',
     lenses: ['ml'],
     signal: 'TF-IDF · Logistic regression · FastAPI',
     hook: 'I wanted machine learning to stop feeling like a black box.',
@@ -190,7 +251,7 @@ const selectedProjects = [
     id: 'session-todo',
     repo: 'sticky-todo-macos',
     title: 'Session Todo',
-    type: 'Software shaped around attention',
+    type: 'Task management',
     lenses: ['systems'],
     signal: 'Swift 6 · AppKit · local-only',
     hook: 'Most todo apps store work. I needed one to remember what I was doing.',
@@ -208,34 +269,11 @@ const selectedProjects = [
     href: 'https://github.com/haramrit09k/sticky-todo-macos',
     linkLabel: 'See how it works',
   },
-  {
-    id: 'f1rstaid',
-    repo: 'f1rstaid',
-    title: 'F1rstAid',
-    type: 'Retrieval for a high-stakes domain',
-    lenses: ['ml'],
-    signal: 'RAG · FAISS · OpenAI · Streamlit',
-    hook: 'Can an assistant make dense F-1 guidance easier to navigate?',
-    story:
-      'A retrieval-augmented prototype ingests government and university guidance, then retrieves context for questions about F-1 status, CPT, OPT, employment, and travel.',
-    decision:
-      'The important design question is evidence, not fluency. A production version needs source hierarchy, citations, recency checks, and a hard boundary between navigation help and legal advice.',
-    proof: 'Crawler + ingestion pipeline + vector search + tested application',
-    preview: {
-      webm: '/media/f1rstaid-demo.webm',
-      mp4: '/media/f1rstaid-demo.mp4',
-      poster: '/media/f1rstaid-demo-poster.jpg',
-      alt: 'F1rstAid calculating an initial OPT unemployment deadline and a SEVIS address-reporting deadline, then expanding the official DHS citation',
-    },
-    href: 'https://github.com/haramrit09k/f1rstaid',
-    linkLabel: 'Inspect the prototype',
-    secondaryHref: 'https://f1rstaid-064025a9fcc1.herokuapp.com/',
-    secondaryLinkLabel: 'Try F1rstAid',
-  },
+
 ];
 
 const archiveProjects = [
-  ['LogScribe MCP', 'A local MCP server for reading, searching, filtering, and summarizing log files.', 'Python · MCP', 'https://github.com/haramrit09k/logscribe-mcp'],
+  ['LogScribe MCP', 'Structured log-search, filtering, and analytics tools for Claude Desktop.', 'Python · MCP · Pytest', 'https://github.com/haramrit09k/logscribe-mcp'],
   ['H-1B Decision Tree', 'A visual decision aid for navigating time-sensitive layoff scenarios.', 'Next.js · TypeScript', 'https://github.com/haramrit09k/h1b-layoff-decision-tree'],
   ['HelpChess', 'Open-source web work supporting a nonprofit growing chess access in India.', 'JavaScript · open source', 'https://github.com/haramrit09k/helpchess'],
   ['IPL Predictor', 'An academic comparison of machine-learning approaches for match prediction.', 'Python · neural networks', 'https://github.com/haramrit09k/ipl-predictor'],
@@ -247,58 +285,101 @@ const archiveProjects = [
 
 const strengths = [
   ['Backend systems', 'Java · Spring Boot · REST · Node.js'],
-  ['Runtime & platform', 'OpenShift · Kubernetes · Helm · CI/CD'],
-  ['Data & integration', 'SQL · GraphQL · JDBC · performance'],
-  ['Product & agents', 'Angular · TypeScript · MCP · local LLM tooling'],
+  ['Runtime & delivery', 'OpenShift · Docker · Playwright · Jenkins'],
+  ['Data & integration', 'Oracle · PostgreSQL · SQL Server · JDBC · MongoDB DBaaS / Ops Manager'],
+  ['Frontend', 'Angular · React · TypeScript'],
+  ['GenAI & agents', 'LLM applications · MCP · Gemini · RAG · LangChain · FAISS · OpenAI APIs'],
+  ['Enterprise AI', 'Internal enterprise framework based on Google ADK · Apigee · read-only diagnostics'],
 ];
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
 
-function formatProbeTime(milliseconds) {
-  return milliseconds >= 1000
-    ? `${(milliseconds / 1000).toFixed(1)}s`
-    : `${milliseconds}ms`;
-}
-
-function LiveSystemSignal({ metric }) {
-  if (!metric || metric.status !== 'healthy') return null;
-
-  const signals = [
-    'Online',
-    `${formatProbeTime(metric.warmMs)} warm response`,
-    metric.coldStartVisible ? `${formatProbeTime(metric.wakeMs)} wake` : null,
-    ...metric.facts,
-  ].filter(Boolean);
-
-  return (
-    <div className="live-signal" title={`Measured ${projectMetrics.generatedAt}. ${projectMetrics.cadence}.`}>
-      <span className="live-signal-label"><i aria-hidden="true"></i> {metric.label}</span>
-      <span className="live-signal-data">
-        {signals.map((signal) => <span key={signal}>{signal}</span>)}
-      </span>
-      <a href={metric.endpoint} target="_blank" rel="noreferrer">Health <Arrow /></a>
-    </div>
-  );
-}
-
 function App() {
+  const [spotlight, setSpotlight] = useState(null);
+  const spotlights = selectedProjects.filter((project) => ['f1rstaid', 'homeos', 'classifai'].includes(project.id));
+  const spotlightProject = spotlight === null ? null : spotlights[spotlight];
+  const [motionPaused, setMotionPaused] = useState(false);
+  const studioRef = useRef(null);
+  const progressRef = useRef(null);
+  const heroVideoRef = useRef(null);
+  const [activeSection, setActiveSection] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [indexOpen, setIndexOpen] = useState(false);
-  const [activeCase, setActiveCase] = useState('01');
-  const [projectLens, setProjectLens] = useState('all');
-  const [expandedProject, setExpandedProject] = useState('homeos');
+  const [activeCase, setActiveCase] = useState(null);
+  const [projectLens, setProjectLens] = useState(null);
+  const [expandedProject, setExpandedProject] = useState(null);
   const lensConsoleRef = useRef(null);
   const projectVideoRefs = useRef({});
-  const indexDialogRef = useRef(null);
-  const indexCloseRef = useRef(null);
-  const indexReturnFocusRef = useRef(null);
+
+  useEffect(() => {
+    if (!('IntersectionObserver' in window) || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const elements = document.querySelectorAll('.section-heading, .timeline-row, .archive-grid > a, .about-portrait, .about-copy, .contact-section h2, .trace-card summary, .testimonial, .case-grid, .impact-stat');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    elements.forEach((element) => {
+      if (element.matches('.archive-grid > a, .impact-stat')) {
+        element.style.setProperty('--reveal-delay', `${Array.from(element.parentElement.children).indexOf(element) % 3 * 90}ms`);
+      }
+      element.classList.add('scroll-reveal');
+      observer.observe(element);
+    });
+    return () => {
+      observer.disconnect();
+      elements.forEach((element) => element.classList.remove('scroll-reveal'));
+    };
+  }, []);
+
+  useEffect(() => {
+    let frame;
+    const update = () => {
+      const range = document.documentElement.scrollHeight - window.innerHeight;
+      if (progressRef.current) progressRef.current.style.transform = `scaleX(${range > 0 ? window.scrollY / range : 0})`;
+      const sections = ['work', 'lab', 'experience', 'about'];
+      let current = '';
+      sections.forEach((id) => {
+        if (document.getElementById(id)?.getBoundingClientRect().top <= 180) current = id;
+      });
+      setActiveSection(current);
+      if (studioRef.current) studioRef.current.style.setProperty('--hero-drift', `${Math.min(window.scrollY * .09, 36)}px`);
+      frame = null;
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(frame); };
+  }, []);
+
+  useEffect(() => {
+    const preference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    const sync = () => {
+      document.querySelectorAll('video').forEach((video) => {
+        if (motionPaused || preference?.matches) video.pause();
+        else video.play()?.catch(() => {});
+      });
+    };
+    sync();
+    preference?.addEventListener?.('change', sync);
+    return () => preference?.removeEventListener?.('change', sync);
+  }, [motionPaused, projectLens, spotlight]);
+
+  const moveStudio = (event) => {
+    if (motionPaused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || event.pointerType !== 'mouse') return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    event.currentTarget.style.setProperty('--tilt-x', `${((event.clientX - rect.left) / rect.width - .5) * 7}deg`);
+    event.currentTarget.style.setProperty('--tilt-y', `${((event.clientY - rect.top) / rect.height - .5) * -7}deg`);
+  };
 
   const toggleProject = (projectId) => {
     const video = projectVideoRefs.current[projectId];
 
-    if (video?.paused) {
+    if (video?.paused && !motionPaused && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
       const playbackAttempt = video.play();
       playbackAttempt?.catch(() => {});
     }
@@ -348,12 +429,8 @@ function App() {
     const previousTop = lensConsoleRef.current
       ? lensConsoleRef.current.getBoundingClientRect().top
       : null;
-    const firstMatch = selectedProjects.find(
-      (project) => value === 'all' || project.lenses.includes(value)
-    );
-
     setProjectLens(value);
-    setExpandedProject(firstMatch ? firstMatch.id : null);
+    setExpandedProject(null);
 
     window.requestAnimationFrame(() => {
       if (previousTop === null || !lensConsoleRef.current) return;
@@ -372,61 +449,15 @@ function App() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = indexOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [indexOpen]);
-
-  useEffect(() => {
-    if (!indexOpen) return undefined;
-
-    indexReturnFocusRef.current = document.activeElement;
-    indexCloseRef.current?.focus();
-
-    const handleDialogKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        setIndexOpen(false);
-        return;
-      }
-
-      if (event.key !== 'Tab' || !indexDialogRef.current) return;
-
-      const focusableElements = Array.from(
-        indexDialogRef.current.querySelectorAll(
-          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        )
-      );
-
-      if (focusableElements.length === 0) {
-        event.preventDefault();
-        return;
-      }
-
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-
-      if (event.shiftKey && document.activeElement === firstElement) {
-        event.preventDefault();
-        lastElement.focus();
-      } else if (!event.shiftKey && document.activeElement === lastElement) {
-        event.preventDefault();
-        firstElement.focus();
-      }
-    };
-
-    document.addEventListener('keydown', handleDialogKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleDialogKeyDown);
-      if (indexReturnFocusRef.current?.isConnected) {
-        indexReturnFocusRef.current.focus({ preventScroll: true });
-      }
-    };
-  }, [indexOpen]);
 
   return (
-    <div className="site-shell">
+    <div className={motionPaused ? 'site-shell motion-paused' : 'site-shell'}>
+      <div className="reading-progress" ref={progressRef} aria-hidden="true" />
+      <div className="quick-access" aria-label="Quick access">
+        <a href="/resume/master_resume.pdf" target="_blank" rel="noreferrer">Résumé <Arrow /></a>
+        <a href="mailto:haramrit09k@gmail.com">Get in touch <Arrow /></a>
+        <button type="button" aria-pressed={motionPaused} onClick={() => setMotionPaused(!motionPaused)}>{motionPaused ? 'Resume motion' : 'Pause motion'}</button>
+      </div>
       <a className="skip-link" href="#main">Skip to main content</a>
 
       <header className="site-header">
@@ -435,17 +466,12 @@ function App() {
           <img className="wordmark-icon" src="/favicon copy.png" alt="" />
         </a>
         <nav className={menuOpen ? 'site-nav is-open' : 'site-nav'} aria-label="Primary navigation">
-          <a href="#work" onClick={() => setMenuOpen(false)}>Selected work</a>
-          <a href="#lab" onClick={() => setMenuOpen(false)}>Personal systems</a>
-          <a href="#experience" onClick={() => setMenuOpen(false)}>Experience</a>
-          <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-          <button className="nav-index" type="button" aria-haspopup="dialog" aria-controls="system-index-dialog" aria-expanded={indexOpen} onClick={() => { setMenuOpen(false); setIndexOpen(true); }}>
-            System index +
-          </button>
+          <a href="#work" aria-current={activeSection === 'work' ? 'location' : undefined} onClick={() => setMenuOpen(false)}>Selected work</a>
+          <a href="#lab" aria-current={activeSection === 'lab' ? 'location' : undefined} onClick={() => setMenuOpen(false)}>Personal projects</a>
+          <a href="#experience" aria-current={activeSection === 'experience' ? 'location' : undefined} onClick={() => setMenuOpen(false)}>Experience</a>
+          <a href="#about" aria-current={activeSection === 'about' ? 'location' : undefined} onClick={() => setMenuOpen(false)}>About</a>
         </nav>
-        <button className="index-trigger" type="button" onClick={() => setIndexOpen(true)} aria-haspopup="dialog" aria-controls="system-index-dialog" aria-expanded={indexOpen}>
-          System index <span aria-hidden="true">+</span>
-        </button>
+        <a className="header-resume" href="/resume/master_resume.pdf" target="_blank" rel="noreferrer">Résumé <Arrow /></a>
         <button
           className="menu-button"
           type="button"
@@ -457,36 +483,6 @@ function App() {
         </button>
       </header>
 
-      {indexOpen && (
-        <div id="system-index-dialog" className="index-overlay" role="dialog" aria-modal="true" aria-labelledby="index-title" ref={indexDialogRef}>
-          <div className="index-bar">
-            <p>HK / Portfolio system index</p>
-            <button type="button" ref={indexCloseRef} onClick={() => setIndexOpen(false)}>Close ×</button>
-          </div>
-          <div className="index-content">
-            <div>
-              <p className="kicker">Navigate</p>
-              <h2 id="index-title">Everything has<br />a trace.</h2>
-            </div>
-            <nav aria-label="Portfolio index">
-              <a href="#work" onClick={() => setIndexOpen(false)}><span>01</span> Selected systems <Arrow /></a>
-              <a href="#lab" onClick={() => setIndexOpen(false)}><span>02</span> Personal systems <Arrow /></a>
-              <a href="#experience" onClick={() => setIndexOpen(false)}><span>03</span> Experience <Arrow /></a>
-              <a href="#about" onClick={() => setIndexOpen(false)}><span>04</span> The engineer <Arrow /></a>
-              <a href="/resume/master_resume.pdf" target="_blank" rel="noreferrer"><span>05</span> Résumé <Arrow /></a>
-            </nav>
-            <div className="index-contact">
-              <p>One quiet channel remains open.</p>
-              <a href="mailto:haramrit09k@gmail.com">haramrit09k@gmail.com <Arrow /></a>
-              <div>
-                <a href="https://www.linkedin.com/in/haramrit09k/" target="_blank" rel="noreferrer">LinkedIn</a>
-                <a href="https://github.com/haramrit09k" target="_blank" rel="noreferrer">GitHub</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       <main id="main">
         <section className="hero" id="top" aria-labelledby="hero-title">
           <div className="hero-main">
@@ -495,29 +491,45 @@ function App() {
               Software engineer · Dallas–Fort Worth
             </div>
             <p className="hero-role-signal reveal reveal-1">
-              Engineering range / <span>Software systems</span> / <span>Applied ML</span>
+              Focus / <span>Software systems</span> / <span>GenAI &amp; applied ML</span>
             </p>
+            <p className="role-context reveal reveal-1"><strong>Senior Software Engineer (AVP) at Citi</strong><span>MongoDB DBaaS · December 2022–present</span></p>
             <h1 id="hero-title" className="reveal reveal-2">
-              I build systems that help engineering teams <em>ship faster.</em>
+              <span className="headline-line"><span>Hi, I’m Haramrit.</span></span>
+              <em><span className="headline-line"><span>I like figuring</span></span><span className="headline-line"><span>things out.</span></span></em>
             </h1>
             <p className="hero-copy reveal reveal-3">
-              I turn operational drag into reliable platforms—so developers spend less time fighting workflows and more time delivering products.
+              I build systems that help engineering teams ship faster. At Citi, I work on enterprise MongoDB DBaaS platforms and production LLM-assisted diagnostics. Outside work, I build AI applications and developer tools.
             </p>
+            <p className="hero-stack reveal reveal-3">Java / Spring Boot / Angular / LLM applications / MCP / RAG</p>
             <div className="hero-actions reveal reveal-4">
               <a className="text-link" href="/resume/master_resume.pdf" target="_blank" rel="noreferrer">
                 View résumé <Arrow />
               </a>
-              <a className="text-link quiet-link" href="#work">Trace the work ↓</a>
+              <a className="text-link quiet-link" href="#work">Explore my work ↓</a>
+            </div>
+          </div>
+
+          <div className="hero-studio reveal reveal-3" ref={studioRef} onPointerMove={moveStudio} onPointerLeave={(event) => { event.currentTarget.style.setProperty('--tilt-x', '0deg'); event.currentTarget.style.setProperty('--tilt-y', '0deg'); }}>
+            <figure className="hero-portrait">
+              <img src="/images/profile-pic-new.png" alt="Haramrit smiling outdoors on a snowy day" fetchpriority="high" />
+            </figure>
+            {spotlightProject ? <a className="studio-preview" href="#lab" key={spotlightProject.id} onClick={() => { setProjectLens('all'); setExpandedProject(spotlightProject.id); }}>
+              <span className="studio-media"><video ref={heroVideoRef} muted loop playsInline preload="metadata" poster={spotlightProject.preview.poster} aria-label={spotlightProject.preview.alt}><source src={spotlightProject.preview.mp4} type="video/mp4" /><source src={spotlightProject.preview.webm} type="video/webm" /></video><img src={spotlightProject.preview.poster} alt={spotlightProject.title + ' project preview'} /></span>
+              <span><small>{spotlightProject.type}</small><strong>{spotlightProject.title}</strong><span>Explore this project <Arrow /></span></span>
+            </a> : <div className="studio-preview studio-preview-empty"><span><small>Project previews</small><strong>Choose a project</strong><span>Select a preview below.</span></span></div>}
+            <div className="spotlight-picker" aria-label="Preview a project">
+              {spotlights.map((project, index) => <button key={project.id} type="button" aria-pressed={spotlight === index} onClick={() => setSpotlight(index)}>{project.title}</button>)}
             </div>
           </div>
 
           <aside className="impact-rail reveal reveal-3" aria-label="Selected impact">
-            {impact.map((item) => (
-              <div className="impact-stat" key={item.label}>
+            {impact.map((item, index) => (
+              <a className="impact-stat" key={item.label} href="#work" onClick={() => setActiveCase(item.caseId)}>
                 <strong>{item.value}</strong>
                 <span>{item.label}</span>
-                <i aria-hidden="true"></i>
-              </div>
+                <small>See the engineering behind it <Arrow /></small>
+              </a>
             ))}
             <div className="operational-status">
               <span className="status-dot"></span>
@@ -530,17 +542,17 @@ function App() {
         <section className="proof-strip" aria-label="Engineering profile">
           <span>Backend engineering</span>
           <span>Platform systems</span>
-          <span>Applied ML</span>
+          <span>GenAI &amp; applied ML</span>
           <span>Agent tooling</span>
         </section>
 
         <section className="work-section section" id="work" aria-labelledby="work-title">
           <div className="section-heading">
             <div>
-              <p className="kicker">Selected systems / 03</p>
-              <h2 id="work-title">Proof, not promises.</h2>
+              <p className="kicker">Citi / Enterprise platforms &amp; GenAI</p>
+              <h2 id="work-title">Selected work.</h2>
             </div>
-            <p>Three examples of ambiguous platform problems turned into measurable engineering outcomes.</p>
+            <p>Production AI, database performance, and automation work on Citi’s internal MongoDB DBaaS platform.</p>
           </div>
 
           <div className="case-grid">
@@ -556,12 +568,13 @@ function App() {
                   onClick={() => setActiveCase(item.id)}
                 >
                   <span>{item.id}</span>
-                  <strong>{item.title}</strong>
+                  <strong>{item.title}<small className="case-tab-result">{item.outcome}</small></strong>
                   <i aria-hidden="true">→</i>
                 </button>
               ))}
             </div>
 
+            {!activeCase && <div className="case-panel case-placeholder"><p className="kicker">Case studies</p><h3>Choose a case study.</h3><p className="case-summary">Select an outcome to see the problem, approach, and result.</p></div>}
             {caseStudies.map((item) => (
               <article
                 key={item.id}
@@ -593,18 +606,18 @@ function App() {
         <section className="lab-section section" id="lab" aria-labelledby="lab-title">
           <div className="section-heading">
             <div>
-              <p className="kicker">Personal systems / decision traces</p>
-              <h2 id="lab-title">The reason came first.</h2>
+              <p className="kicker">Personal projects</p>
+              <h2 id="lab-title">Things I’ve built.</h2>
             </div>
-            <p>These are not technology showcases. Each began with a real constraint, then became a way to learn the system underneath it.</p>
+            <p>Projects I’ve built to solve everyday problems and explore new technologies.</p>
           </div>
           <div className="lens-console" aria-label="Filter projects by role lens" ref={lensConsoleRef}>
-            <p><span className="status-dot"></span> Read the work through a lens</p>
+            <p><span className="status-dot"></span> Filter projects</p>
             <div>
               {[
-                ['all', 'Complete signal'],
+                ['all', 'All projects'],
                 ['systems', 'Software systems'],
-                ['ml', 'Applied ML'],
+                ['ml', 'GenAI & ML'],
               ].map(([value, label]) => (
                 <button
                   type="button"
@@ -620,7 +633,7 @@ function App() {
           </div>
           <div className="trace-list">
             {selectedProjects
-              .filter((project) => projectLens === 'all' || project.lenses.includes(projectLens))
+              .filter((project) => !projectLens || projectLens === 'all' || project.lenses.includes(projectLens))
               .map((project, index) => (
                 <details
                   className="trace-card"
@@ -681,17 +694,16 @@ function App() {
                     ) : (
                       <p className="private-label">{project.linkLabel} · source remains private</p>
                     )}
-                    <LiveSystemSignal metric={projectMetrics.projects[project.id]} />
                     <div>
-                      <span>Origin</span>
+                      <span>The problem</span>
                       <p>{project.story}</p>
                     </div>
                     <div>
-                      <span>Decision trace</span>
+                      <span>What I chose and why</span>
                       <p>{project.decision}</p>
                     </div>
                     <div className="trace-proof">
-                      <span>Evidence</span>
+                      <span>The result</span>
                       <strong>{project.proof}</strong>
                     </div>
                   </div>
@@ -700,8 +712,8 @@ function App() {
           </div>
 
           <div className="archive-heading">
-            <p className="kicker">Earlier explorations / archive</p>
-            <p>Smaller experiments that document range, repetition, and a long habit of building to learn.</p>
+            <p className="kicker">More projects</p>
+            <p>Other projects and open-source contributions.</p>
           </div>
           <div className="archive-grid">
             {archiveProjects.map(([title, description, stack, href], index) => (
@@ -722,7 +734,7 @@ function App() {
           <div className="section-heading compact">
             <div>
               <p className="kicker">Trajectory</p>
-              <h2 id="experience-title">Built by owning the hard parts.</h2>
+              <h2 id="experience-title">Experience.</h2>
             </div>
           </div>
           <div className="timeline">
@@ -739,25 +751,29 @@ function App() {
             ))}
           </div>
           <blockquote className="testimonial">
-            <p>“If you need someone who takes initiative, drives projects forward, and lifts everyone around him, Haramrit’s your guy.”</p>
+            <p><a className="recommendation-quote" href="https://www.linkedin.com/in/haramrit09k/details/recommendations/?detailScreenTabIndex=0#:~:text=if%20you%20need%20someone%20who%20takes%20initiative%2C%20drives%20projects%20forward%2C%20and%20lifts%20everyone%20around%20him%2C%20Haramrit%E2%80%99s%20your%20guy">“If you need someone who takes initiative, drives projects forward, and lifts everyone around him, Haramrit’s your guy.”</a></p>
             <cite>Nestor Hernandez · Vice President, DBaaS at Citi</cite>
+
           </blockquote>
         </section>
 
         <section className="about-section section" id="about" aria-labelledby="about-title">
           <div className="about-portrait">
             <img src="/images/profile-pic-new.png" alt="Haramrit Singh Khurana smiling outdoors" loading="lazy" />
-            <div className="portrait-label"><span className="status-dot"></span> Human behind the systems</div>
+            <div className="portrait-label"><span className="status-dot"></span> Haramrit Khurana</div>
           </div>
           <div className="about-copy">
             <p className="kicker">The engineer</p>
-            <h2 id="about-title">Calm in the incident. Curious in the architecture.</h2>
+            <h2 id="about-title">A bit about me.</h2>
             <p className="about-lead">
-              I’m Haramrit—an engineer who likes the messy, consequential work between “something is broken” and “this now works for everyone.”
+              I’m a Senior Software Engineer (AVP) at Citi, based in Grapevine, Texas. I build and operate features for an internal MongoDB DBaaS platform used by application teams across the company globally.
             </p>
             <p>
-              My best work sits where backend systems, developer experience, and operational reliability meet. I ask the extra question, make the invisible problem visible, and leave teams with a path they can run without me.
+              My work spans Java and Spring Boot services, Angular applications, database performance, enterprise workflow automation, and LLM-assisted diagnostics. Outside work, I build AI Interview Prep Mentor, F1rstAid, and LogScribe MCP.
             </p>
+            <div className="background-facts">
+              <p><strong>Certification</strong><span>AWS Solutions Architect – Associate · 2020–2023</span></p>
+            </div>
             <div className="strength-list">
               {strengths.map(([title, tools], index) => (
                 <div key={title}>
@@ -771,10 +787,10 @@ function App() {
         </section>
 
         <section className="contact-section" id="contact" aria-labelledby="contact-title">
-          <div className="contact-orbit" aria-hidden="true"><span>END OF TRANSMISSION</span></div>
-          <p className="kicker">Signal / 00</p>
-          <h2 id="contact-title">The rest is<br /><em>better live.</em></h2>
-          <p>There’s always another system worth understanding.</p>
+
+          <p className="kicker">Contact</p>
+          <h2 id="contact-title">Let’s talk.</h2>
+          <p>You can reach me by email or on LinkedIn.</p>
           <a className="signature-link" href="mailto:haramrit09k@gmail.com">
             haramrit09k@gmail.com <Arrow />
           </a>
