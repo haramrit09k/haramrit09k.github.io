@@ -2192,3 +2192,22 @@ button:focus-visible {
   .site-shell:not(.motion-paused) .impact-stat:hover small svg,
   .site-shell:not(.motion-paused) .impact-stat:focus-visible small svg { transform: translateX(4px); }
 }
+
+/* Existing brand assets add recognition beside their text labels. */
+.technology-label { display: inline-flex; align-items: center; gap: 8px; }
+.technology-icon { width: 26px; height: 26px; object-fit: contain; flex: 0 0 26px; border-radius: 5px; }
+.hero-stack { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.hero-stack .technology-label { white-space: nowrap; }
+.tag-list li { display: inline-flex; align-items: center; }
+.tag-list .technology-icon { width: 22px; height: 22px; flex-basis: 22px; }
+.strength-list .skill-tools { display: flex; flex-wrap: wrap; gap: 12px 16px; margin: 0; }
+.strength-list .technology-label, .strength-list .technology-label > span { font: inherit; color: inherit; }
+.company-heading { display: flex; align-items: center; gap: 14px; }
+.company-logo { width: 58px; height: 40px; object-fit: contain; background: #f5f7f5; border-radius: 6px; padding: 5px; flex-shrink: 0; }
+@media (max-width: 760px) {
+  .hero-stack { gap: 10px 14px; }
+  .technology-icon { width: 23px; height: 23px; flex-basis: 23px; }
+}
+.archive-tools { display: flex; flex-wrap: wrap; gap: 8px 12px; }
+.archive-tools .technology-label { font: inherit; letter-spacing: inherit; color: inherit; }
+.archive-tools .technology-icon { width: 20px; height: 20px; flex-basis: 20px; }
