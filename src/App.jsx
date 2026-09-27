@@ -292,6 +292,45 @@ const strengths = [
   ['Enterprise AI', 'Internal enterprise framework based on Google ADK · Apigee · read-only diagnostics'],
 ];
 
+const technologyIcons = {
+  Java: 'java.jpg', 'Spring Boot': 'spring-boot.png', Angular: 'angular.png',
+  'Node.js': 'node.svg', Docker: 'docker.png', Playwright: 'playwright.png',
+  Oracle: 'oracle-sql.png', React: 'react.jpg', Python: 'python.png',
+  GraphQL: 'graphql.png', MongoDB: 'mongo.jpg', 'MongoDB DBaaS': 'mongo.jpg',
+  'MongoDB DBaaS / Ops Manager': 'mongo.jpg',
+  OpenShift: 'simple-icons/redhatopenshift.svg', Jenkins: 'simple-icons/jenkins.svg',
+  PostgreSQL: 'simple-icons/postgresql.svg', TypeScript: 'simple-icons/typescript.svg',
+  Gemini: 'simple-icons/googlegemini.svg', LangChain: 'simple-icons/langchain.svg',
+  'Next.js': 'simple-icons/nextdotjs.svg', JavaScript: 'simple-icons/javascript.svg',
+  OpenCV: 'simple-icons/opencv.svg', 'scikit-learn': 'simple-icons/scikitlearn.svg',
+  Django: 'simple-icons/django.svg', Firebase: 'simple-icons/firebase.svg',
+  Kubernetes: 'simple-icons/kubernetes.svg', Pytest: 'simple-icons/pytest.svg',
+  MCP: 'simple-icons/modelcontextprotocol.svg',
+  REST: 'lucide/network.svg', APIs: 'lucide/network.svg', Apigee: 'lucide/network.svg',
+  'LLM applications': 'lucide/brain-circuit.svg', 'LLM orchestration': 'lucide/workflow.svg',
+  RAG: 'lucide/search.svg', FAISS: 'lucide/database.svg',
+  'SQL Server': 'lucide/database.svg', SQL: 'lucide/database.svg', JDBC: 'lucide/plug.svg',
+  'OpenAI APIs': 'lucide/bot.svg',
+  'Internal enterprise framework based on Google ADK': 'lucide/bot.svg',
+  'read-only diagnostics': 'lucide/shield-check.svg', CyberArk: 'lucide/shield-check.svg',
+  ServiceNow: 'lucide/ticket-check.svg', Streaming: 'lucide/layers.svg',
+  'Large-payload processing': 'lucide/file-code.svg', 'Asynchronous jobs': 'lucide/workflow.svg',
+  'Platform integration': 'lucide/plug.svg', 'open source': 'lucide/git-fork.svg',
+  'neural networks': 'lucide/brain-circuit.svg',
+
+};
+const companyLogos = {
+  Citi: '/images/work/citi.png',
+  'Optimal Satcom': '/images/work/optimal.png',
+  'Nexus 8 International': '/images/work/nexus.png',
+  'George Mason University': '/images/education/gmu.png',
+};
+
+function TechnologyLabel({ name }) {
+  const icon = technologyIcons[name] || 'lucide/code.svg';
+  return <span className="technology-label">{icon && <img className="technology-icon" src={`/images/tech/${icon}`} alt="" aria-hidden="true" width="26" height="26" loading="lazy" />}<span>{name}</span></span>;
+}
+
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
@@ -553,7 +592,7 @@ function App() {
             <p className="hero-copy reveal reveal-3">
               I build systems that help engineering teams ship faster. At Citi, I work on enterprise MongoDB DBaaS platforms and production LLM-assisted diagnostics. Outside work, I build AI applications and developer tools.
             </p>
-            <p className="hero-stack reveal reveal-3">Java / Spring Boot / Angular / LLM applications / MCP / RAG</p>
+            <p className="hero-stack reveal reveal-3">{['Java', 'Spring Boot', 'Angular', 'LLM applications', 'MCP', 'RAG'].map(name => <TechnologyLabel key={name} name={name} />)}</p>
             <div className="hero-actions reveal reveal-4">
               <a className="text-link" href="/resume/master_resume.pdf" target="_blank" rel="noreferrer">
                 View résumé <Arrow />
@@ -649,7 +688,7 @@ function App() {
                 </div>
                 <p className="case-detail">{item.detail}</p>
                 <ul className="tag-list" aria-label="Technologies and strengths">
-                  {item.stack.map((tech) => <li key={tech}>{tech}</li>)}
+                  {item.stack.map((tech) => <li key={tech}><TechnologyLabel name={tech} /></li>)}
                 </ul>
               </article>
             ))}
@@ -776,7 +815,7 @@ function App() {
                 <div>
                   <h3>{title}</h3>
                   <p>{description}</p>
-                  <small>{stack}</small>
+                  <small className="archive-tools">{stack.split(' · ').map(name => <TechnologyLabel key={name} name={name} />)}</small>
                 </div>
                 <Arrow />
               </a>
@@ -797,7 +836,7 @@ function App() {
                 <span className="timeline-index">0{index + 1}</span>
                 <p className="timeline-years">{job.years}</p>
                 <div>
-                  <h3>{job.company}</h3>
+                  <h3 className="company-heading">{companyLogos[job.company] && <img className="company-logo" src={companyLogos[job.company]} alt="" aria-hidden="true" width="48" height="40" loading="lazy" />}<span>{job.company}</span></h3>
                   <p className="timeline-role">{job.role}</p>
                 </div>
                 <p className="timeline-copy">{job.copy}</p>
@@ -833,7 +872,7 @@ function App() {
                 <div key={title}>
                   <span>0{index + 1}</span>
                   <strong>{title}</strong>
-                  <p>{tools}</p>
+                  <p className="skill-tools">{tools.split(' · ').map(name => <TechnologyLabel key={name} name={name} />)}</p>
                 </div>
               ))}
             </div>
