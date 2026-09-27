@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import './App.css';
 
 const impact = [
@@ -62,7 +62,7 @@ const experience = [
   {
     years: 'DEC 2022 — NOW',
     company: 'Citi',
-    role: 'Senior Software Engineer (AVP) · MongoDB DBaaS',
+    role: 'Senior Software Engineer (AVP)',
     copy: 'Building enterprise database-platform features, production LLM-assisted diagnostics, performance improvements, and workflow automation since December 2022.',
   },
   {
@@ -311,6 +311,38 @@ function App() {
   const [expandedProject, setExpandedProject] = useState(null);
   const lensConsoleRef = useRef(null);
   const projectVideoRefs = useRef({});
+  const projectCardRefs = useRef({});
+  const projectMotionSnapshot = useRef([]);
+  const projectAnimations = useRef([]);
+
+  useLayoutEffect(() => {
+    projectAnimations.current.forEach((animation) => animation.cancel());
+    projectAnimations.current = [];
+    const snapshots = projectMotionSnapshot.current;
+    projectMotionSnapshot.current = [];
+    if (motionPaused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const timing = { duration: 720, easing: 'cubic-bezier(.22, 1, .36, 1)' };
+    snapshots.forEach(({ card, height, open, previewRect }) => {
+      if (!card.isConnected || card.open === open || !card.animate) return;
+      const nextHeight = card.getBoundingClientRect().height;
+      projectAnimations.current.push(card.animate([
+        { height: `${height}px`, overflow: 'clip' },
+        { height: `${nextHeight}px`, overflow: 'clip' },
+      ], timing));
+      const preview = card.querySelector('.trace-preview');
+      if (preview && previewRect) {
+        const next = preview.getBoundingClientRect();
+        if (next.width && next.height) {
+          projectAnimations.current.push(preview.animate([
+            { transformOrigin: 'top left', transform: `translate(${previewRect.left - next.left}px, ${previewRect.top - next.top}px) scale(${previewRect.width / next.width}, ${previewRect.height / next.height})` },
+            { transformOrigin: 'top left', transform: 'translate(0, 0) scale(1)' },
+          ], timing));
+        }
+      }
+    });
+  }, [expandedProject, motionPaused]);
+
+  useEffect(() => () => projectAnimations.current.forEach((animation) => animation.cancel()), []);
 
   useEffect(() => {
     if (!('IntersectionObserver' in window) || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
@@ -324,6 +356,12 @@ function App() {
       });
     }, { threshold: 0.12 });
     elements.forEach((element) => {
+      if (element.matches('.about-portrait, .about-copy')) element.dataset.revealDirection = element.matches('.about-portrait') ? 'left' : 'right';
+      if (element.matches('.timeline-row')) {
+        const index = Array.from(element.parentElement.children).indexOf(element);
+        element.dataset.revealDirection = index % 2 === 0 ? 'left' : 'right';
+        element.style.setProperty('--reveal-delay', `${index % 3 * 110}ms`);
+      }
       if (element.matches('.archive-grid > a, .impact-stat')) {
         element.style.setProperty('--reveal-delay', `${Array.from(element.parentElement.children).indexOf(element) % 3 * 90}ms`);
       }
@@ -334,7 +372,7 @@ function App() {
       observer.disconnect();
       elements.forEach((element) => element.classList.remove('scroll-reveal'));
     };
-  }, []);
+  }, [projectLens]);
 
   useEffect(() => {
     let frame;
@@ -376,7 +414,21 @@ function App() {
     event.currentTarget.style.setProperty('--tilt-y', `${((event.clientY - rect.top) / rect.height - .5) * -7}deg`);
   };
 
+  const movePortrait = (event) => {
+    if (motionPaused || event.pointerType !== 'mouse' || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = Math.max(0, Math.min(100, (event.clientX - rect.left) / rect.width * 100));
+    const y = Math.max(0, Math.min(100, (event.clientY - rect.top) / rect.height * 100));
+    event.currentTarget.style.setProperty('--portrait-x', `${x}%`);
+    event.currentTarget.style.setProperty('--portrait-y', `${y}%`);
+    event.currentTarget.dataset.pointerActive = 'true';
+  };
+
   const toggleProject = (projectId) => {
+    projectMotionSnapshot.current = Object.values(projectCardRefs.current).filter(Boolean).map((card) => ({
+      card, height: card.getBoundingClientRect().height, open: card.open,
+      previewRect: card.querySelector('.trace-preview')?.getBoundingClientRect(),
+    }));
     const video = projectVideoRefs.current[projectId];
 
     if (video?.paused && !motionPaused && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
@@ -493,7 +545,7 @@ function App() {
             <p className="hero-role-signal reveal reveal-1">
               Focus / <span>Software systems</span> / <span>GenAI &amp; applied ML</span>
             </p>
-            <p className="role-context reveal reveal-1"><strong>Senior Software Engineer (AVP) at Citi</strong><span>MongoDB DBaaS · December 2022–present</span></p>
+            <p className="role-context reveal reveal-1"><strong>Senior Software Engineer (AVP) at Citi</strong><span>December 2022–present</span></p>
             <h1 id="hero-title" className="reveal reveal-2">
               <span className="headline-line"><span>Hi, I’m Haramrit.</span></span>
               <em><span className="headline-line"><span>I like figuring</span></span><span className="headline-line"><span>things out.</span></span></em>
@@ -511,8 +563,9 @@ function App() {
           </div>
 
           <div className="hero-studio reveal reveal-3" ref={studioRef} onPointerMove={moveStudio} onPointerLeave={(event) => { event.currentTarget.style.setProperty('--tilt-x', '0deg'); event.currentTarget.style.setProperty('--tilt-y', '0deg'); }}>
-            <figure className="hero-portrait">
-              <img src="/images/profile-pic-new.png" alt="Haramrit smiling outdoors on a snowy day" fetchpriority="high" />
+            <figure className="hero-portrait" onPointerMove={movePortrait} onPointerLeave={(event) => { delete event.currentTarget.dataset.pointerActive; event.currentTarget.style.removeProperty('--portrait-x'); event.currentTarget.style.removeProperty('--portrait-y'); }}>
+              <img className="portrait-base" src="/images/profile-pic-new.png" alt="Haramrit smiling outdoors on a snowy day" fetchpriority="high" draggable="false" />
+              <span className="portrait-light" aria-hidden="true" />
             </figure>
             {spotlightProject ? <a className="studio-preview" href="#lab" key={spotlightProject.id} onClick={() => { setProjectLens('all'); setExpandedProject(spotlightProject.id); }}>
               <span className="studio-media"><video ref={heroVideoRef} muted loop playsInline preload="metadata" poster={spotlightProject.preview.poster} aria-label={spotlightProject.preview.alt}><source src={spotlightProject.preview.mp4} type="video/mp4" /><source src={spotlightProject.preview.webm} type="video/webm" /></video><img src={spotlightProject.preview.poster} alt={spotlightProject.title + ' project preview'} /></span>
@@ -636,6 +689,7 @@ function App() {
               .filter((project) => !projectLens || projectLens === 'all' || project.lenses.includes(projectLens))
               .map((project, index) => (
                 <details
+                  ref={(node) => { projectCardRefs.current[project.id] = node; }}
                   className="trace-card"
                   key={`${projectLens}-${project.id}`}
                   open={expandedProject === project.id}
