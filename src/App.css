@@ -2211,3 +2211,59 @@ button:focus-visible {
 .archive-tools { display: flex; flex-wrap: wrap; gap: 8px 12px; }
 .archive-tools .technology-label { font: inherit; letter-spacing: inherit; color: inherit; }
 .archive-tools .technology-icon { width: 20px; height: 20px; flex-basis: 20px; }
+
+/* Quiet system activity sits behind the content, never behind its interactions. */
+.hero { position: relative; isolation: isolate; }
+.hero > .hero-network { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: .22; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 45%, #000 85%, transparent); }
+.network-wires { fill: none; stroke: #9cba8f; stroke-width: .6; opacity: .3; }
+.network-nodes { fill: #b7f23f; opacity: .45; }
+.network-pulses { fill: none; stroke: #b7f23f; stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 10 1500; }
+.network-pulses path { animation: network-flow 24s linear infinite; }
+@keyframes network-flow { from { stroke-dashoffset: 1510; } to { stroke-dashoffset: 0; } }
+.outcome-chart { margin: 28px 0; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.outcome-chart figcaption { margin-bottom: 18px; color: var(--muted); font: 11px 'SFMono-Regular', Consolas, monospace; }
+.outcome-chart-row { display: grid; grid-template-columns: 52px minmax(0, 1fr) 75px; align-items: center; gap: 14px; margin-top: 12px; font: 11px 'SFMono-Regular', Consolas, monospace; }
+.outcome-chart-row > span { color: var(--muted); }
+.outcome-chart-row strong { text-align: right; font-weight: 400; }
+.outcome-chart-track { height: 8px; background: #ffffff05; border-radius: 2px; overflow: hidden; }
+.outcome-bar { display: block; height: 100%; width: 100%; transform-origin: left; border-radius: 2px; }
+.outcome-bar.before { background: #71806c; }
+.outcome-bar.after { background: var(--signal); }
+.case-panel.is-active .outcome-bar { animation: outcome-grow 1100ms 350ms cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes outcome-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.motion-paused .outcome-bar { animation: none !important; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .network-pulses { display: none; }
+  .case-panel.is-active .outcome-bar { animation: none; }
+}
+@media (max-width: 760px) {
+  .hero > .hero-network { opacity: .13; }
+  .outcome-chart-row { gap: 10px; grid-template-columns: 44px minmax(0, 1fr) 68px; }
+}
+
+.filter-buttons { position: relative; isolation: isolate; }
+.filter-indicator { position: absolute; pointer-events: none; z-index: -1; left: var(--indicator-left, 0px); top: var(--indicator-top, 0px); width: var(--indicator-width, 0px); height: var(--indicator-height, 42px); border: 1px solid var(--signal); background: var(--signal-dark); opacity: 0; transition: left 500ms cubic-bezier(.22, 1, .36, 1), top 500ms ease, width 500ms cubic-bezier(.22, 1, .36, 1), height 500ms ease, opacity 250ms ease; }
+.filter-indicator.is-visible { opacity: 1; }
+.filter-buttons button.is-active { background: transparent; border-color: transparent; }
+.diagnostic-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; list-style: none; margin: 28px 0; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.diagnostic-flow > li { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.diagnostic-flow strong { font-size: 14px; font-weight: 500; }
+.diagnostic-flow > li > span:not(.flow-connector) { font: 11px/1.6 'SFMono-Regular', Consolas, monospace; color: var(--muted); }
+.flow-connector { position: absolute; left: 38px; right: -14px; top: 12px; height: 1px; background: var(--line); overflow: hidden; }
+.flow-connector > span { display: block; height: 1px; width: 28px; background: var(--signal); transform: translateX(-30px); opacity: 0; }
+.case-panel.is-active .flow-connector > span { animation: diagnostic-pulse 1400ms calc(600ms + var(--step) * 1400ms) ease-in-out both; }
+@keyframes diagnostic-pulse { 0% { opacity: 0; transform: translateX(-30px); } 15% { opacity: .8; } 85% { opacity: .8; } 100% { opacity: 0; transform: translateX(260px); } }
+.motion-paused .flow-connector > span { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .filter-indicator { transition: none; }
+  .case-panel.is-active .flow-connector > span { animation: none; }
+}
+@media (max-width: 600px) {
+  .diagnostic-flow { grid-template-columns: 1fr; gap: 30px; }
+  .diagnostic-flow > li { padding-left: 40px; }
+  .diagnostic-flow img { position: absolute; left: 0; top: 0; }
+  .flow-connector { left: 12px; right: auto; top: 32px; height: calc(100% - 12px); width: 1px; }
+  .flow-connector > span { width: 1px; height: 14px; }
+  .case-panel.is-active .flow-connector > span { animation-name: diagnostic-pulse-vertical; }
+  @keyframes diagnostic-pulse-vertical { 0% { opacity: 0; transform: translateY(-15px); } 20% { opacity: .8; } 80% { opacity: .8; } 100% { opacity: 0; transform: translateY(90px); } }
+}

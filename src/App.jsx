@@ -331,6 +331,45 @@ function TechnologyLabel({ name }) {
   return <span className="technology-label">{icon && <img className="technology-icon" src={`/images/tech/${icon}`} alt="" aria-hidden="true" width="26" height="26" loading="lazy" />}<span>{name}</span></span>;
 }
 
+function HeroNetwork() {
+  const paths = ['M30 190 H190 V75 H410 V155 H620 V65 H850', 'M90 420 H300 V310 H530 V385 H760 V245 H970', 'M410 155 V310', 'M620 155 H760 V245'];
+  return <svg className="hero-network" viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <g className="network-wires">{paths.map(path => <path key={path} d={path} />)}</g>
+    <g className="network-pulses">{paths.slice(0, 2).map((path, index) => <path key={path} d={path} style={{ animationDelay: `${index * -7}s` }} />)}</g>
+    <g className="network-nodes">{[[190,190],[190,75],[410,75],[410,155],[620,155],[620,65],[850,65],[300,420],[300,310],[530,310],[530,385],[760,385],[760,245]].map(([x,y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r="3" />)}</g>
+  </svg>;
+}
+
+const outcomeCharts = {
+  '02': { title: 'Peak JVM heap', before: '≈1.4 GB', after: '470 MB', ratio: 470 / 1400 },
+  '06': { title: 'Angular build time', before: '4m 48s', after: '1m 34s', ratio: 94 / 288 },
+};
+
+function OutcomeChart({ caseId }) {
+  const chart = outcomeCharts[caseId];
+  if (!chart) return null;
+  return <figure className="outcome-chart" aria-label={`${chart.title}: before ${chart.before}, after ${chart.after}`}>
+    <figcaption>{chart.title}</figcaption>
+    <div className="outcome-chart-row"><span>Before</span><div className="outcome-chart-track"><span className="outcome-bar before" /></div><strong>{chart.before}</strong></div>
+    <div className="outcome-chart-row"><span>After</span><div className="outcome-chart-track"><span className="outcome-bar after" style={{ width: `${chart.ratio * 100}%` }} /></div><strong>{chart.after}</strong></div>
+  </figure>;
+}
+
+function DiagnosticFlow() {
+  const steps = [
+    ['Question', 'Natural-language issue', 'lucide/brain-circuit.svg'],
+    ['Diagnostic tools', 'Read-only checks via MCP', 'simple-icons/modelcontextprotocol.svg'],
+    ['Grounded guidance', 'Based on diagnostic results', 'lucide/shield-check.svg'],
+  ];
+  return <ol className="diagnostic-flow" aria-label="Diagnostics workflow">
+    {steps.map(([title, detail, icon], index) => <li key={title} style={{ '--step': index }}>
+      <img src={`/images/tech/${icon}`} width="24" height="24" alt="" aria-hidden="true" />
+      <strong>{title}</strong><span>{detail}</span>
+      {index < steps.length - 1 && <span className="flow-connector" aria-hidden="true"><span /></span>}
+    </li>)}
+  </ol>;
+}
+
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
@@ -351,6 +390,54 @@ function App() {
   const lensConsoleRef = useRef(null);
   const projectVideoRefs = useRef({});
   const projectCardRefs = useRef({});
+  const filterSnapshot = useRef(null);
+  const filterAnimations = useRef([]);
+  const filterButtonsRef = useRef(null);
+  const filterIndicatorRef = useRef(null);
+  const traceListRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const buttons = filterButtonsRef.current;
+    const updateIndicator = () => {
+      const active = buttons?.querySelector('[aria-pressed="true"]');
+      if (!active || !filterIndicatorRef.current) return;
+      filterIndicatorRef.current.style.setProperty('--indicator-left', `${active.offsetLeft}px`);
+      filterIndicatorRef.current.style.setProperty('--indicator-top', `${active.offsetTop}px`);
+      filterIndicatorRef.current.style.setProperty('--indicator-width', `${active.offsetWidth}px`);
+      filterIndicatorRef.current.style.setProperty('--indicator-height', `${active.offsetHeight}px`);
+    };
+    updateIndicator();
+    if (!buttons || !('ResizeObserver' in window)) return;
+    const observer = new ResizeObserver(updateIndicator);
+    observer.observe(buttons);
+    return () => observer.disconnect();
+  }, [projectLens]);
+
+  useLayoutEffect(() => {
+    filterAnimations.current.forEach(animation => animation.cancel());
+    filterAnimations.current = [];
+    const snapshot = filterSnapshot.current;
+    filterSnapshot.current = null;
+    if (!snapshot || motionPaused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const timing = { duration: 650, easing: 'cubic-bezier(.22, 1, .36, 1)' };
+    Object.entries(projectCardRefs.current).forEach(([id, card]) => {
+      if (!card?.isConnected || !card.animate) return;
+      const previous = snapshot.positions[id];
+      const offset = previous === undefined ? 24 : previous - card.getBoundingClientRect().top;
+      filterAnimations.current.push(card.animate([
+        { transform: `translateY(${offset}px)`, opacity: previous === undefined ? 0 : 1 },
+        { transform: 'translateY(0)', opacity: 1 },
+      ], timing));
+    });
+    const list = traceListRef.current;
+    if (list?.animate) filterAnimations.current.push(list.animate([
+      { height: `${snapshot.height}px`, overflow: 'clip' },
+      { height: `${list.getBoundingClientRect().height}px`, overflow: 'clip' },
+    ], timing));
+  }, [projectLens, motionPaused]);
+
+  useEffect(() => () => filterAnimations.current.forEach(animation => animation.cancel()), []);
+
   const projectMotionSnapshot = useRef([]);
   const projectAnimations = useRef([]);
 
@@ -517,6 +604,11 @@ function App() {
   };
 
   const changeProjectLens = (value) => {
+    if (value === projectLens) return;
+    filterSnapshot.current = {
+      height: traceListRef.current?.getBoundingClientRect().height || 0,
+      positions: Object.fromEntries(Object.entries(projectCardRefs.current).filter(([, card]) => card?.isConnected).map(([id, card]) => [id, card.getBoundingClientRect().top])),
+    };
     const previousTop = lensConsoleRef.current
       ? lensConsoleRef.current.getBoundingClientRect().top
       : null;
@@ -576,6 +668,7 @@ function App() {
 
       <main id="main">
         <section className="hero" id="top" aria-labelledby="hero-title">
+          <HeroNetwork />
           <div className="hero-main">
             <div className="eyebrow reveal reveal-1">
               <span className="status-dot"></span>
@@ -686,6 +779,8 @@ function App() {
                   <span>Outcome</span>
                   <strong>{item.outcome}</strong>
                 </div>
+                {item.id === '01' && <DiagnosticFlow />}
+                <OutcomeChart caseId={item.id} />
                 <p className="case-detail">{item.detail}</p>
                 <ul className="tag-list" aria-label="Technologies and strengths">
                   {item.stack.map((tech) => <li key={tech}><TechnologyLabel name={tech} /></li>)}
@@ -705,7 +800,8 @@ function App() {
           </div>
           <div className="lens-console" aria-label="Filter projects by role lens" ref={lensConsoleRef}>
             <p><span className="status-dot"></span> Filter projects</p>
-            <div>
+            <div ref={filterButtonsRef} className="filter-buttons">
+              <span ref={filterIndicatorRef} className={projectLens ? 'filter-indicator is-visible' : 'filter-indicator'} aria-hidden="true" />
               {[
                 ['all', 'All projects'],
                 ['systems', 'Software systems'],
@@ -723,14 +819,14 @@ function App() {
               ))}
             </div>
           </div>
-          <div className="trace-list">
+          <div className="trace-list" ref={traceListRef}>
             {selectedProjects
               .filter((project) => !projectLens || projectLens === 'all' || project.lenses.includes(projectLens))
               .map((project, index) => (
                 <details
                   ref={(node) => { projectCardRefs.current[project.id] = node; }}
                   className="trace-card"
-                  key={`${projectLens}-${project.id}`}
+                  key={project.id}
                   open={expandedProject === project.id}
                 >
                   <summary onClick={(event) => {
