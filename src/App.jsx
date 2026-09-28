@@ -4,7 +4,7 @@ import './App.css';
 const impact = [
   { value: '~2.5K', label: 'MongoDB clusters on the DBaaS platform', caseId: '01' },
   { value: '1.4 GB → 470 MB', label: 'peak JVM heap in metadata ingestion', caseId: '02' },
-  { value: '67%', label: 'faster Angular application build', caseId: '05' },
+  { value: '67%', label: 'faster builds, from a new automated regression suite', caseId: '05' },
 ];
 
 const caseStudies = [
@@ -41,12 +41,12 @@ const caseStudies = [
     detail: 'Migrations can take up to a day, so the tool checks in hourly (or on demand) to show status without overloading downstream systems.',
   },
   {
-    id: '05', label: 'Platform modernization',
-    title: 'Made the Angular application build 67% faster.',
-    summary: 'Upgraded the frontend from Angular 16 to 19 and the backend from Spring Boot 2.7 to 3.3.',
-    outcome: 'Build time: 4m48s → 1m34s',
-    stack: ['Angular', 'TypeScript', 'Spring Boot'],
-    detail: 'Also managed releases across about four microservices and four-plus teams, and set up an automated nightly test suite with Playwright and Jenkins.',
+    id: '05', label: 'Test automation',
+    title: 'Built automated integration testing for a multi-team codebase.',
+    summary: 'Set up a nightly Playwright regression suite wired into Jenkins to catch integration issues automatically, across roughly four microservices shared by four-plus teams shipping into the same codebase.',
+    outcome: 'Automated nightly regression coverage across ~4 services',
+    stack: ['Playwright', 'Jenkins', 'Angular'],
+    detail: 'Also modernized the frontend from Angular 16 to 19 and the backend from Spring Boot 2.7 to 3.3, which cut build time from 4m48s to 1m34s as a side effect. But the bigger win was the regression suite — it catches breakage automatically instead of relying on manual QA across teams.',
   },
 ];
 
