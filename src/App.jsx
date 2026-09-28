@@ -4,57 +4,49 @@ import './App.css';
 const impact = [
   { value: '~2.5K', label: 'MongoDB clusters on the DBaaS platform', caseId: '01' },
   { value: '1.4 GB → 470 MB', label: 'peak JVM heap in metadata ingestion', caseId: '02' },
-  { value: '67%', label: 'faster Angular application build', caseId: '06' },
+  { value: '67%', label: 'faster builds, from a new automated regression suite', caseId: '05' },
 ];
 
 const caseStudies = [
   {
     id: '01', label: 'Production GenAI',
     title: 'LLM-assisted MongoDB diagnostics.',
-    summary: 'Built a production diagnostics workflow at Citi using an internal enterprise framework based on Google ADK. Natural-language issues become targeted database checks through a Mongo-focused MCP server invoking Apigee-backed APIs.',
+    summary: 'Built a diagnostics tool at Citi that turns plain-English questions into targeted MongoDB checks, using an internal AI framework and an API layer built for Mongo.',
     outcome: 'Shipped read-only diagnostics and grounded guidance',
     stack: ['LLM orchestration', 'MCP', 'Apigee', 'MongoDB DBaaS'],
-    detail: 'Evaluated an Approve button for low-risk remediation, but kept the shipped workflow read-only because of production-data sensitivity and probabilistic model behavior. The internal platform supports roughly 2,500 clusters, 600 daily UI users, and 7,000–8,000 API requests per day.',
+    detail: 'I considered adding a one-click "fix it" button, but kept the tool read-only since it touches live production data and AI output isn’t always predictable. The platform it runs on supports about 2,500 database clusters, 600 daily users, and 7,000–8,000 API calls a day.',
   },
   {
     id: '02', label: 'Java performance',
     title: 'Reduced memory use in high-volume ingestion.',
-    summary: 'Redesigned a metadata ingestion workflow handling roughly 49K records with more than 150 fields.',
+    summary: 'Redesigned how the system ingests metadata — about 49K records with 150+ fields each.',
     outcome: 'Peak heap: ~1.4 GB → 470 MB',
     stack: ['Java', 'Streaming', 'Large-payload processing'],
-    detail: 'Focused on memory optimization and streaming in a workflow processing large metadata payloads.',
+    detail: 'Switched to a streaming approach instead of loading everything into memory at once, cutting peak memory use dramatically.',
   },
   {
-    id: '03', label: 'Database performance',
-    title: 'Optimized a production-critical Oracle workflow.',
-    summary: 'Moved a problematic GraphQL/data-access path to efficient JDBC to improve a production-critical workflow.',
-    outcome: 'Oracle plan cost: ~20,000 → 370; response under 10 seconds',
-    stack: ['Oracle', 'JDBC', 'SQL'],
-    detail: 'Reworked the database access path and optimized execution to bring response times below 10 seconds.',
-  },
-  {
-    id: '04', label: 'Enterprise automation',
+    id: '03', label: 'Enterprise automation',
     title: 'Automated change-ticket preparation.',
-    summary: 'Automated ServiceNow CHG creation for three critical MongoDB operations, deriving required change metadata from platform context.',
+    summary: 'Automated change-request ticket creation for three critical MongoDB operations, pulling the required details straight from the platform.',
     outcome: 'Three operations live with approval controls preserved',
     stack: ['Java', 'Spring Boot', 'ServiceNow'],
-    detail: 'Eliminated repetitive manual ticket preparation. Expansion to more change-gated operations is planned, rather than presented as already shipped.',
+    detail: 'This removed a repetitive manual step while keeping the existing approval process intact. More operations are planned to get the same treatment.',
   },
   {
-    id: '05', label: 'Asynchronous workflows',
+    id: '04', label: 'Asynchronous workflows',
     title: 'Automated CyberArk account migrations.',
-    summary: 'Automated FID migrations after cluster topology and capacity changes, replacing an incident-driven manual process.',
+    summary: 'Automated credential migrations that used to happen manually after database changes — usually only after something broke.',
     outcome: 'Job tracking, per-account status, and escalation on failure',
     stack: ['CyberArk', 'Asynchronous jobs', 'Platform integration'],
-    detail: 'Jobs can run for roughly 24 hours. Conservative hourly polling and on-demand refresh provide visibility without excessive downstream requests.',
+    detail: 'Migrations can take up to a day, so the tool checks in hourly (or on demand) to show status without overloading downstream systems.',
   },
   {
-    id: '06', label: 'Platform modernization',
-    title: 'Made the Angular application build 67% faster.',
-    summary: 'Modernized the frontend from Angular 16 to 19 and services from Spring Boot 2.7 to 3.3.',
-    outcome: 'Build time: 4m48s → 1m34s',
-    stack: ['Angular', 'TypeScript', 'Spring Boot'],
-    detail: 'Also owned releases across roughly four microservices and four or more teams, and built a Playwright nightly regression suite integrated with Jenkins.',
+    id: '05', label: 'Test automation',
+    title: 'Cut manual QA on releases with automated integration testing.',
+    summary: 'Before this, developers manually tested even core operations before every release. I built a nightly Playwright regression suite wired into Jenkins to cover those core operations automatically, across roughly four microservices shared by four-plus teams.',
+    outcome: 'Manual testing still exists, but shrank significantly',
+    stack: ['Playwright', 'Jenkins', 'Angular'],
+    detail: 'Manual testing didn’t go away entirely, but it’s no longer the default for core operations — Playwright catches those automatically now, so QA time goes toward the edge cases that actually need a human. Also modernized the frontend from Angular 16 to 19 and the backend from Spring Boot 2.7 to 3.3, which cut build time from 4m48s to 1m34s as a side effect.',
   },
 ];
 
@@ -347,7 +339,6 @@ function HeroNetwork() {
 
 const outcomeCharts = {
   '02': { title: 'Peak JVM heap', before: '≈1.4 GB', after: '470 MB', ratio: 470 / 1400 },
-  '06': { title: 'Angular build time', before: '4m 48s', after: '1m 34s', ratio: 94 / 288 },
 };
 
 function OutcomeChart({ caseId }) {
@@ -358,6 +349,106 @@ function OutcomeChart({ caseId }) {
     <div className="outcome-chart-row"><span>Before</span><div className="outcome-chart-track"><span className="outcome-bar before" /></div><strong>{chart.before}</strong></div>
     <div className="outcome-chart-row"><span>After</span><div className="outcome-chart-track"><span className="outcome-bar after" style={{ width: `${chart.ratio * 100}%` }} /></div><strong>{chart.after}</strong></div>
   </figure>;
+}
+
+const TOIL_OPERATIONS = 10;
+const TOIL_MINUTES_PER_OP = 20;
+
+function ManualTestingLoop({ motionPaused }) {
+  const [value, setValue] = useState(0);
+  const [played, setPlayed] = useState(false);
+  const containerRef = useRef(null);
+  const rafRef = useRef(null);
+  const reducedMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const motionDisabled = motionPaused || reducedMotion;
+
+  const stopSweep = () => {
+    if (rafRef.current) {
+      window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    if (played) return undefined;
+    if (motionDisabled) {
+      setValue(100);
+      setPlayed(true);
+      return undefined;
+    }
+    const el = containerRef.current;
+    const runSweep = () => {
+      const duration = 1500;
+      const start = performance.now();
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - (1 - t) ** 3;
+        setValue(Math.round(eased * 100));
+        if (t < 1) rafRef.current = window.requestAnimationFrame(tick);
+      };
+      rafRef.current = window.requestAnimationFrame(tick);
+    };
+    if (!el || !('IntersectionObserver' in window)) {
+      runSweep();
+      setPlayed(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        runSweep();
+        setPlayed(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.4 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [played, motionDisabled]);
+
+  useEffect(() => () => stopSweep(), []);
+
+  const automatedCount = Math.round((value / 100) * TOIL_OPERATIONS);
+  const minutesLeft = (TOIL_OPERATIONS - automatedCount) * TOIL_MINUTES_PER_OP;
+
+  return (
+    <figure className="toil-slider" ref={containerRef}>
+      <figcaption>Manual QA toil, automated one operation at a time</figcaption>
+      <div className="toil-slider-card">
+        <div className="toil-slider-stat-row">
+          <strong className="toil-slider-stat" data-full={automatedCount === TOIL_OPERATIONS}>
+            {minutesLeft}<span> min manual</span>
+          </strong>
+          <span className="toil-slider-count">{automatedCount}/{TOIL_OPERATIONS} core ops automated</span>
+        </div>
+        <div className="toil-slider-ops" aria-hidden="true">
+          {Array.from({ length: TOIL_OPERATIONS }).map((_, index) => (
+            <span
+              key={index}
+              className={index < automatedCount ? 'is-done' : ''}
+              style={{ transitionDelay: `${index * 18}ms` }}
+            />
+          ))}
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={value}
+          onPointerDown={stopSweep}
+          onChange={(event) => setValue(Number(event.target.value))}
+          className="toil-slider-input"
+          aria-label="Drag to automate core operations with Playwright"
+        />
+        <div className="toil-slider-labels">
+          <span className={value < 50 ? 'is-active' : ''}>Before · manual</span>
+          <span className={value >= 50 ? 'is-active' : ''}>After · automated</span>
+        </div>
+      </div>
+      <span className="sr-only">
+        Before Playwright, each release needed about 200 minutes of manual testing across 10 core operations, roughly 20 minutes each, plus any new-feature testing.
+        After Playwright, those 10 core operations run automatically, so manual testing is limited to new, feature-specific work.
+      </span>
+    </figure>
+  );
 }
 
 function DiagnosticFlow() {
@@ -877,6 +968,7 @@ function App() {
                   <strong>{item.outcome}</strong>
                 </div>
                 {item.id === '01' && <DiagnosticFlow />}
+                {item.id === '05' && <ManualTestingLoop motionPaused={motionPaused} />}
                 <OutcomeChart caseId={item.id} />
                 <p className="case-detail">{item.detail}</p>
                 <ul className="tag-list" aria-label="Technologies and strengths">
