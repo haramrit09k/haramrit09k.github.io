@@ -4,7 +4,7 @@ import './App.css';
 const impact = [
   { value: '~2.5K', label: 'MongoDB clusters on the DBaaS platform', caseId: '01' },
   { value: '1.4 GB → 470 MB', label: 'peak JVM heap in metadata ingestion', caseId: '02' },
-  { value: '67%', label: 'faster Angular application build', caseId: '06' },
+  { value: '67%', label: 'faster Angular application build', caseId: '05' },
 ];
 
 const caseStudies = [
@@ -25,15 +25,7 @@ const caseStudies = [
     detail: 'Switched to a streaming approach instead of loading everything into memory at once, cutting peak memory use dramatically.',
   },
   {
-    id: '03', label: 'Database performance',
-    title: 'Optimized a production-critical Oracle workflow.',
-    summary: 'Replaced a slow, GraphQL-based data path with a faster, more direct database query for a production-critical workflow.',
-    outcome: 'Oracle plan cost: ~20,000 → 370; response under 10 seconds',
-    stack: ['Oracle', 'JDBC', 'SQL'],
-    detail: 'Rewrote how the query ran and tuned its execution plan so responses came back in under 10 seconds instead of timing out.',
-  },
-  {
-    id: '04', label: 'Enterprise automation',
+    id: '03', label: 'Enterprise automation',
     title: 'Automated change-ticket preparation.',
     summary: 'Automated change-request ticket creation for three critical MongoDB operations, pulling the required details straight from the platform.',
     outcome: 'Three operations live with approval controls preserved',
@@ -41,7 +33,7 @@ const caseStudies = [
     detail: 'This removed a repetitive manual step while keeping the existing approval process intact. More operations are planned to get the same treatment.',
   },
   {
-    id: '05', label: 'Asynchronous workflows',
+    id: '04', label: 'Asynchronous workflows',
     title: 'Automated CyberArk account migrations.',
     summary: 'Automated credential migrations that used to happen manually after database changes — usually only after something broke.',
     outcome: 'Job tracking, per-account status, and escalation on failure',
@@ -49,7 +41,7 @@ const caseStudies = [
     detail: 'Migrations can take up to a day, so the tool checks in hourly (or on demand) to show status without overloading downstream systems.',
   },
   {
-    id: '06', label: 'Platform modernization',
+    id: '05', label: 'Platform modernization',
     title: 'Made the Angular application build 67% faster.',
     summary: 'Upgraded the frontend from Angular 16 to 19 and the backend from Spring Boot 2.7 to 3.3.',
     outcome: 'Build time: 4m48s → 1m34s',
@@ -347,7 +339,7 @@ function HeroNetwork() {
 
 const outcomeCharts = {
   '02': { title: 'Peak JVM heap', before: '≈1.4 GB', after: '470 MB', ratio: 470 / 1400 },
-  '06': { title: 'Angular build time', before: '4m 48s', after: '1m 34s', ratio: 94 / 288 },
+  '05': { title: 'Angular build time', before: '4m 48s', after: '1m 34s', ratio: 94 / 288 },
 };
 
 function OutcomeChart({ caseId }) {
