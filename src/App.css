@@ -1267,15 +1267,24 @@
   filter: none;
 }
 
+.about-copy {
+  position: relative;
+  padding-top: clamp(66px, 8vw, 86px);
+}
+
 .about-motifs {
   position: absolute;
   z-index: 3;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(66px, 8vw, 86px);
   pointer-events: none;
 }
 
 .about-motif {
   position: absolute;
+  top: 2px;
   width: 42px;
   height: 42px;
   display: grid;
@@ -1286,8 +1295,8 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, .2);
   color: #d8efa6;
   opacity: .76;
+  cursor: pointer;
   pointer-events: auto;
-  animation: about-motif-drift 10s ease-in-out infinite;
   transition: opacity 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
 }
 
@@ -1297,10 +1306,10 @@
   transition: transform 300ms ease;
 }
 
-.about-motif-pickleball { top: 7%; left: 7%; }
-.about-motif-location { top: 12%; right: 7%; animation-delay: -3s; }
-.about-motif-terminal { top: 47%; right: 7%; animation-delay: -8s; }
-.about-motif-gaming { bottom: 18%; left: 7%; animation-delay: -6s; }
+.about-motif-pickleball { left: 0%; animation: about-motif-orbit-a 11s ease-in-out infinite; }
+.about-motif-location { left: 34%; top: 12px; animation: about-motif-orbit-b 13s ease-in-out infinite; animation-delay: -4s; }
+.about-motif-terminal { left: 66%; animation: about-motif-orbit-b 12s ease-in-out infinite; animation-delay: -9s; }
+.about-motif-gaming { right: 0%; top: 12px; animation: about-motif-orbit-a 14s ease-in-out infinite; animation-delay: -6s; }
 
 .about-motif:hover {
   opacity: 1;
@@ -1309,17 +1318,62 @@
   animation-play-state: paused;
 }
 
-.about-motif:hover svg { transform: translateY(-3px) rotate(-7deg); }
+.about-motif:hover svg { transform: translateY(-3px) rotate(-7deg) scale(1.08); }
 
-@keyframes about-motif-drift {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+.about-motif::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  white-space: nowrap;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: .02em;
+  color: var(--bg);
+  background: var(--signal);
+  padding: 4px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  z-index: 5;
+}
+
+.about-motif:hover::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.about-motif-pickleball::after { left: 0; transform: translate(0, 4px); }
+.about-motif-pickleball:hover::after { transform: translate(0, 0); }
+
+.about-motif-gaming::after { left: auto; right: 0; transform: translate(0, 4px); }
+.about-motif-gaming:hover::after { transform: translate(0, 0); }
+
+@keyframes about-motif-orbit-a {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(5px, -6px); }
+  50% { transform: translate(8px, 1px); }
+  75% { transform: translate(2px, 6px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes about-motif-orbit-b {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-5px, 5px); }
+  50% { transform: translate(-2px, 8px); }
+  75% { transform: translate(5px, 3px); }
+  100% { transform: translate(0, 0); }
 }
 
 @media (max-width: 760px) {
-  .about-motif { width: 36px; height: 36px; }
-  .about-motif svg { width: 23px; height: 23px; }
-  .about-motif-gaming { display: none; }
+  .about-copy { padding-top: 60px; }
+  .about-motifs { height: 60px; }
+  .about-motif { width: 34px; height: 34px; }
+  .about-motif svg { width: 21px; height: 21px; }
+  .about-motif-location,
+  .about-motif-gaming { top: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -379,6 +379,23 @@ function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
 
+// Sound effects sourced from Mixkit (mixkit.co), free license, no attribution required.
+// See public/sounds/SOUNDS-LICENSE.txt for details.
+const motifSoundSrc = {
+  pickleball: '/sounds/pickleball-dink.mp3',
+  terminal: '/sounds/keyboard-key.mp3',
+  location: '/sounds/flight-takeoff.mp3',
+  gaming: '/sounds/arcade-coin.mp3',
+};
+
+function playMotifSound(kind) {
+  const src = motifSoundSrc[kind];
+  if (!src) return;
+  const audio = new Audio(src);
+  audio.volume = 0.5;
+  audio.play().catch(() => {});
+}
+
 function App() {
   const [spotlight, setSpotlight] = useState(0);
   const spotlightProject = featuredProjects[spotlight];
@@ -1036,22 +1053,22 @@ function App() {
           <div className="about-copy">
             {/* Adapted Material Symbols by Google; see public/images/tech/material-symbols-LICENSE.txt. */}
             <div className="about-motifs" aria-hidden="true">
-              <span className="about-motif about-motif-pickleball">
+              <span className="about-motif about-motif-pickleball" data-tip="🥒-ball" onClick={() => playMotifSound('pickleball')}>
                 <svg viewBox="0 -960 960 960" fill="currentColor">
                   <path d="M283-381q19 19 42 28t48 9q25 0 48-9t42-28l36-36q19-19 28-42t9-48q0-25-9-47.5T499-596L347-748q-12-12-28.5-12T290-748L132-589q-12 12-12 28t12 28l151 152ZM743-80 508-315q-29 26-64.5 38T372-265q-40 0-77.5-15T227-325L75-476q-17-17-26-39.5T40-561q0-23 9-45.5T75-646l159-159q17-17 39.5-26t45.5-9q23 0 45.5 9t39.5 26l151 152q30 30 45 67.5t15 77.5q0 36-12.5 71.5T564-372l236 236-57 56Zm37-520q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 58-41 99t-99 41Zm0-80q25 0 42.5-17.5T840-740q0-25-17.5-42.5T780-800q-25 0-42.5 17.5T720-740q0 25 17.5 42.5T780-680Z" />
                 </svg>
               </span>
-              <span className="about-motif about-motif-location">
+              <span className="about-motif about-motif-location" data-tip="Fav site: Expedia" onClick={() => playMotifSound('location')}>
                 <svg viewBox="0 -960 960 960" fill="currentColor">
                   <path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z" />
                 </svg>
               </span>
-              <span className="about-motif about-motif-terminal">
+              <span className="about-motif about-motif-terminal" data-tip="sudo fix-everything" onClick={() => playMotifSound('terminal')}>
                 <svg viewBox="0 -960 960 960" fill="currentColor">
                   <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H160v400Zm140-40-56-56 103-104-104-104 57-56 160 160-160 160Zm180 0v-80h240v80H480Z" />
                 </svg>
               </span>
-              <span className="about-motif about-motif-gaming">
+              <span className="about-motif about-motif-gaming" data-tip="Fortnite?" onClick={() => playMotifSound('gaming')}>
                 <svg viewBox="0 -960 960 960" fill="currentColor">
                   <path d="M182-200q-51 0-79-35.5T82-322l42-300q9-60 53.5-99T282-760h396q60 0 104.5 39t53.5 99l42 300q7 51-21 86.5T778-200q-21 0-39-7.5T706-230l-90-90H344l-90 90q-15 15-33 22.5t-39 7.5Zm16-86 114-114h336l114 114q2 2 16 6 11 0 17.5-6.5T800-304l-44-308q-4-29-26-48.5T678-680H282q-30 0-52 19.5T204-612l-44 308q-2 11 4.5 17.5T182-280q2 0 16-6Zm482-154q17 0 28.5-11.5T720-480q0-17-11.5-28.5T680-520q-17 0-28.5 11.5T640-480q0 17 11.5 28.5T680-440Zm-80-120q17 0 28.5-11.5T640-600q0-17-11.5-28.5T600-640q-17 0-28.5 11.5T560-600q0 17 11.5 28.5T600-560ZM310-440h60v-70h70v-60h-70v-70h-60v70h-70v60h70v70Z" />
                 </svg>
