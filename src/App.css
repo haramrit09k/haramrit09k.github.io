@@ -2218,6 +2218,8 @@ button:focus-visible {
 .background-facts { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--line); display: grid; gap: 18px; }
 .background-facts p { margin: 0; display: grid; gap: 6px; font-size: 13px; line-height: 1.6; color: var(--muted); }
 .background-facts strong { color: var(--text); font-weight: 500; }
+.cert-detail { display: flex; align-items: center; gap: 8px; }
+.cert-icon { width: 22px; height: 22px; border-radius: 5px; object-fit: cover; flex-shrink: 0; }
 .hero .impact-stat:nth-child(2) strong { font-size: clamp(19px, 2.4vw, 34px); letter-spacing: -.04em; }
 .case-tabs { grid-template-rows: none; }
 .case-tab { min-height: 130px; }

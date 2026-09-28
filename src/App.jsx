@@ -1084,7 +1084,7 @@ function App() {
             </p>
             <p>I like technology, but I care even more about understanding how things work and building things that are genuinely useful.</p>
             <div className="background-facts">
-              <p><strong>Certification</strong><span>AWS Solutions Architect – Associate · 2020–2023</span></p>
+              <p><strong>Certification</strong><span className="cert-detail"><img src="/images/tech/aws.jpeg" alt="" aria-hidden="true" className="cert-icon" width="22" height="22" loading="lazy" />AWS Solutions Architect – Associate · 2020–2023</span></p>
             </div>
             <div className="strength-list">
               {strengths.map(([title, tools], index) => (
