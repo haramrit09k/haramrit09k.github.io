@@ -42,11 +42,11 @@ const caseStudies = [
   },
   {
     id: '05', label: 'Test automation',
-    title: 'Built automated integration testing for a multi-team codebase.',
-    summary: 'Set up a nightly Playwright regression suite wired into Jenkins to catch integration issues automatically, across roughly four microservices shared by four-plus teams shipping into the same codebase.',
-    outcome: 'Automated nightly regression coverage across ~4 services',
+    title: 'Cut manual QA on releases with automated integration testing.',
+    summary: 'Before this, developers manually tested even core operations before every release. I built a nightly Playwright regression suite wired into Jenkins to cover those core operations automatically, across roughly four microservices shared by four-plus teams.',
+    outcome: 'Manual testing still exists, but shrank significantly',
     stack: ['Playwright', 'Jenkins', 'Angular'],
-    detail: 'Also modernized the frontend from Angular 16 to 19 and the backend from Spring Boot 2.7 to 3.3, which cut build time from 4m48s to 1m34s as a side effect. But the bigger win was the regression suite — it catches breakage automatically instead of relying on manual QA across teams.',
+    detail: 'Manual testing didn’t go away entirely, but it’s no longer the default for core operations — Playwright catches those automatically now, so QA time goes toward the edge cases that actually need a human. Also modernized the frontend from Angular 16 to 19 and the backend from Spring Boot 2.7 to 3.3, which cut build time from 4m48s to 1m34s as a side effect.',
   },
 ];
 
