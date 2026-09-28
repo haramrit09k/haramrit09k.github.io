@@ -1084,7 +1084,7 @@ function App() {
             </p>
             <p>I like technology, but I care even more about understanding how things work and building things that are genuinely useful.</p>
             <div className="background-facts">
-              <p><strong>Certification</strong><span>AWS Solutions Architect – Associate · 2020–2023</span></p>
+              <p><strong>Certification</strong><a className="cert-detail" href="https://www.credly.com/badges/3aa0970f-4add-4c7b-b16f-93accebeae0a" target="_blank" rel="noreferrer"><img src="/images/tech/aws.jpeg" alt="" aria-hidden="true" className="cert-icon" width="22" height="22" loading="lazy" />AWS Solutions Architect – Associate · 2020–2023</a></p>
             </div>
             <div className="strength-list">
               {strengths.map(([title, tools], index) => (
