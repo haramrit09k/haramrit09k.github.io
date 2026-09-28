@@ -341,23 +341,6 @@ const outcomeCharts = {
   '02': { title: 'Peak JVM heap', before: '≈1.4 GB', after: '470 MB', ratio: 470 / 1400 },
 };
 
-const manualTestingPhases = [
-  {
-    key: 'before',
-    tag: 'Before Playwright',
-    stat: '~200 min',
-    label: 'manual testing per release',
-    detail: '10 core operations × ~20 min each, plus whatever new-feature testing that release needed.',
-  },
-  {
-    key: 'after',
-    tag: 'After Playwright',
-    stat: '0 min',
-    label: 'on core operations',
-    detail: 'Core operations run automatically overnight. Manual testing is now limited to new, feature-specific work.',
-  },
-];
-
 function OutcomeChart({ caseId }) {
   const chart = outcomeCharts[caseId];
   if (!chart) return null;
@@ -368,94 +351,101 @@ function OutcomeChart({ caseId }) {
   </figure>;
 }
 
-const SCRAMBLE_CHARS = '01#/%>_ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-function useScrambleText(target, disabled) {
-  const [display, setDisplay] = useState(target);
-  const prevTarget = useRef(target);
-  const frameRef = useRef(null);
-
-  useEffect(() => {
-    if (disabled || prevTarget.current === target) {
-      setDisplay(target);
-      prevTarget.current = target;
-      return undefined;
-    }
-    const frameMs = 32;
-    const steps = 14;
-    const len = target.length;
-    let step = 0;
-    frameRef.current = window.setInterval(() => {
-      step += 1;
-      const revealCount = Math.round((step / steps) * len);
-      let next = '';
-      for (let i = 0; i < len; i += 1) {
-        if (i < revealCount || target[i] === ' ' || target[i] === '~') {
-          next += target[i];
-        } else {
-          next += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
-        }
-      }
-      setDisplay(next);
-      if (step >= steps) {
-        window.clearInterval(frameRef.current);
-        setDisplay(target);
-        prevTarget.current = target;
-      }
-    }, frameMs);
-    return () => window.clearInterval(frameRef.current);
-  }, [target, disabled]);
-
-  return display;
-}
+const TOIL_OPERATIONS = 10;
+const TOIL_MINUTES_PER_OP = 20;
 
 function ManualTestingLoop({ motionPaused }) {
-  const [phase, setPhase] = useState(0);
-  const [isMorphing, setIsMorphing] = useState(false);
-  const hasMounted = useRef(false);
+  const [value, setValue] = useState(0);
+  const [played, setPlayed] = useState(false);
+  const containerRef = useRef(null);
+  const rafRef = useRef(null);
   const reducedMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  const morphDisabled = motionPaused || reducedMotion;
+  const motionDisabled = motionPaused || reducedMotion;
+
+  const stopSweep = () => {
+    if (rafRef.current) {
+      window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+  };
 
   useEffect(() => {
-    if (morphDisabled) return undefined;
-    const timer = window.setInterval(() => setPhase((current) => (current + 1) % manualTestingPhases.length), 3800);
-    return () => window.clearInterval(timer);
-  }, [morphDisabled]);
-
-  useEffect(() => {
-    if (!hasMounted.current) {
-      hasMounted.current = true;
+    if (played) return undefined;
+    if (motionDisabled) {
+      setValue(100);
+      setPlayed(true);
       return undefined;
     }
-    if (morphDisabled) return undefined;
-    setIsMorphing(true);
-    const timeout = window.setTimeout(() => setIsMorphing(false), 500);
-    return () => window.clearTimeout(timeout);
-  }, [phase, morphDisabled]);
+    const el = containerRef.current;
+    const runSweep = () => {
+      const duration = 1500;
+      const start = performance.now();
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - (1 - t) ** 3;
+        setValue(Math.round(eased * 100));
+        if (t < 1) rafRef.current = window.requestAnimationFrame(tick);
+      };
+      rafRef.current = window.requestAnimationFrame(tick);
+    };
+    if (!el || !('IntersectionObserver' in window)) {
+      runSweep();
+      setPlayed(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        runSweep();
+        setPlayed(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.4 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [played, motionDisabled]);
 
-  const current = manualTestingPhases[phase];
-  const stat = useScrambleText(current.stat, morphDisabled);
-  const tag = useScrambleText(current.tag, morphDisabled);
+  useEffect(() => () => stopSweep(), []);
+
+  const automatedCount = Math.round((value / 100) * TOIL_OPERATIONS);
+  const minutesLeft = (TOIL_OPERATIONS - automatedCount) * TOIL_MINUTES_PER_OP;
 
   return (
-    <figure className="toil-loop">
-      <figcaption>Manual QA toil per release</figcaption>
-      <div className={isMorphing ? 'toil-loop-card is-morphing' : 'toil-loop-card'} data-phase={current.key}>
-        <span className="toil-loop-tag">{tag}</span>
-        <strong className="toil-loop-stat">{stat}</strong>
-        <div className={isMorphing ? 'toil-loop-meta is-fading' : 'toil-loop-meta'}>
-          <span className="toil-loop-label">{current.label}</span>
-          <p className="toil-loop-detail">{current.detail}</p>
+    <figure className="toil-slider" ref={containerRef}>
+      <figcaption>Manual QA toil, automated one operation at a time</figcaption>
+      <div className="toil-slider-card">
+        <div className="toil-slider-stat-row">
+          <strong className="toil-slider-stat" data-full={automatedCount === TOIL_OPERATIONS}>
+            {minutesLeft}<span> min manual</span>
+          </strong>
+          <span className="toil-slider-count">{automatedCount}/{TOIL_OPERATIONS} core ops automated</span>
+        </div>
+        <div className="toil-slider-ops" aria-hidden="true">
+          {Array.from({ length: TOIL_OPERATIONS }).map((_, index) => (
+            <span
+              key={index}
+              className={index < automatedCount ? 'is-done' : ''}
+              style={{ transitionDelay: `${index * 18}ms` }}
+            />
+          ))}
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={value}
+          onPointerDown={stopSweep}
+          onChange={(event) => setValue(Number(event.target.value))}
+          className="toil-slider-input"
+          aria-label="Drag to automate core operations with Playwright"
+        />
+        <div className="toil-slider-labels">
+          <span className={value < 50 ? 'is-active' : ''}>Before · manual</span>
+          <span className={value >= 50 ? 'is-active' : ''}>After · automated</span>
         </div>
       </div>
-      <div className="toil-loop-dots" aria-hidden="true">
-        {manualTestingPhases.map((item, index) => (
-          <span key={item.key} className={index === phase ? 'is-active' : ''} />
-        ))}
-      </div>
       <span className="sr-only">
-        Before Playwright: about 200 minutes of manual testing per release, from 10 core operations at roughly 20 minutes each, plus any new-feature testing.
-        After Playwright: core operations run automatically overnight, so manual testing is limited to new, feature-specific work.
+        Before Playwright, each release needed about 200 minutes of manual testing across 10 core operations, roughly 20 minutes each, plus any new-feature testing.
+        After Playwright, those 10 core operations run automatically, so manual testing is limited to new, feature-specific work.
       </span>
     </figure>
   );
