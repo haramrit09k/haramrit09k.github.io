@@ -368,24 +368,85 @@ function OutcomeChart({ caseId }) {
   </figure>;
 }
 
-function ManualTestingLoop({ motionPaused }) {
-  const [phase, setPhase] = useState(0);
+const SCRAMBLE_CHARS = '01#/%>_ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+function useScrambleText(target, disabled) {
+  const [display, setDisplay] = useState(target);
+  const prevTarget = useRef(target);
+  const frameRef = useRef(null);
 
   useEffect(() => {
-    if (motionPaused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
-    const timer = window.setInterval(() => setPhase((current) => (current + 1) % manualTestingPhases.length), 3400);
+    if (disabled || prevTarget.current === target) {
+      setDisplay(target);
+      prevTarget.current = target;
+      return undefined;
+    }
+    const frameMs = 32;
+    const steps = 14;
+    const len = target.length;
+    let step = 0;
+    frameRef.current = window.setInterval(() => {
+      step += 1;
+      const revealCount = Math.round((step / steps) * len);
+      let next = '';
+      for (let i = 0; i < len; i += 1) {
+        if (i < revealCount || target[i] === ' ' || target[i] === '~') {
+          next += target[i];
+        } else {
+          next += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        }
+      }
+      setDisplay(next);
+      if (step >= steps) {
+        window.clearInterval(frameRef.current);
+        setDisplay(target);
+        prevTarget.current = target;
+      }
+    }, frameMs);
+    return () => window.clearInterval(frameRef.current);
+  }, [target, disabled]);
+
+  return display;
+}
+
+function ManualTestingLoop({ motionPaused }) {
+  const [phase, setPhase] = useState(0);
+  const [isMorphing, setIsMorphing] = useState(false);
+  const hasMounted = useRef(false);
+  const reducedMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const morphDisabled = motionPaused || reducedMotion;
+
+  useEffect(() => {
+    if (morphDisabled) return undefined;
+    const timer = window.setInterval(() => setPhase((current) => (current + 1) % manualTestingPhases.length), 3800);
     return () => window.clearInterval(timer);
-  }, [motionPaused]);
+  }, [morphDisabled]);
+
+  useEffect(() => {
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return undefined;
+    }
+    if (morphDisabled) return undefined;
+    setIsMorphing(true);
+    const timeout = window.setTimeout(() => setIsMorphing(false), 500);
+    return () => window.clearTimeout(timeout);
+  }, [phase, morphDisabled]);
 
   const current = manualTestingPhases[phase];
+  const stat = useScrambleText(current.stat, morphDisabled);
+  const tag = useScrambleText(current.tag, morphDisabled);
+
   return (
     <figure className="toil-loop">
       <figcaption>Manual QA toil per release</figcaption>
-      <div className="toil-loop-card" data-phase={current.key} key={current.key}>
-        <span className="toil-loop-tag">{current.tag}</span>
-        <strong className="toil-loop-stat">{current.stat}</strong>
-        <span className="toil-loop-label">{current.label}</span>
-        <p className="toil-loop-detail">{current.detail}</p>
+      <div className={isMorphing ? 'toil-loop-card is-morphing' : 'toil-loop-card'} data-phase={current.key}>
+        <span className="toil-loop-tag">{tag}</span>
+        <strong className="toil-loop-stat">{stat}</strong>
+        <div className={isMorphing ? 'toil-loop-meta is-fading' : 'toil-loop-meta'}>
+          <span className="toil-loop-label">{current.label}</span>
+          <p className="toil-loop-detail">{current.detail}</p>
+        </div>
       </div>
       <div className="toil-loop-dots" aria-hidden="true">
         {manualTestingPhases.map((item, index) => (
