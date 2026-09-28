@@ -1,0 +1,7 @@
+Finally gave my personal website a bit of a refresh.
+
+I've built a few side projects over the years and wanted to give them a better home, with short demos and a little context about why I built them.
+
+Spent some time cleaning up the layout and adding a few small interactions. A fun project in itself.
+
+https://lilsardarx.dev/

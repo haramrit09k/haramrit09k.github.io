@@ -272,6 +272,11 @@ const selectedProjects = [
 
 ];
 
+// Hero Featured Projects: edit these IDs to choose and order the carousel.
+// Names, media, and metadata come from the project entries above.
+const featuredProjectIds = ['homeos', 'spaceterra', 'f1rstaid'];
+const featuredProjects = featuredProjectIds.map((id) => selectedProjects.find((project) => project.id === id));
+
 const archiveProjects = [
   ['LogScribe MCP', 'Structured log-search, filtering, and analytics tools for Claude Desktop.', 'Python · MCP · Pytest', 'https://github.com/haramrit09k/logscribe-mcp'],
   ['H-1B Decision Tree', 'A visual decision aid for navigating time-sensitive layoff scenarios.', 'Next.js · TypeScript', 'https://github.com/haramrit09k/h1b-layoff-decision-tree'],
@@ -375,16 +380,19 @@ function Arrow() {
 }
 
 function App() {
-  const [spotlight, setSpotlight] = useState(null);
-  const spotlights = selectedProjects.filter((project) => ['f1rstaid', 'homeos', 'classifai'].includes(project.id));
-  const spotlightProject = spotlight === null ? null : spotlights[spotlight];
+  const [spotlight, setSpotlight] = useState(0);
+  const spotlightProject = featuredProjects[spotlight];
   const [motionPaused, setMotionPaused] = useState(false);
+  const [carouselInteracting, setCarouselInteracting] = useState(false);
+  const [carouselInView, setCarouselInView] = useState(true);
+  const [carouselDocumentVisible, setCarouselDocumentVisible] = useState(document.visibilityState === 'visible');
+  const [carouselCycle, setCarouselCycle] = useState(0);
   const studioRef = useRef(null);
   const progressRef = useRef(null);
   const heroVideoRef = useRef(null);
   const [activeSection, setActiveSection] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeCase, setActiveCase] = useState(null);
+  const [activeCase, setActiveCase] = useState('01');
   const [projectLens, setProjectLens] = useState(null);
   const [expandedProject, setExpandedProject] = useState(null);
   const lensConsoleRef = useRef(null);
@@ -395,6 +403,60 @@ function App() {
   const filterButtonsRef = useRef(null);
   const filterIndicatorRef = useRef(null);
   const traceListRef = useRef(null);
+
+  useEffect(() => {
+    if (!('IntersectionObserver' in window) || !studioRef.current) return;
+    const observer = new IntersectionObserver(([entry]) => setCarouselInView(entry.isIntersecting), { threshold: 0.15 });
+    observer.observe(studioRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onVisibilityChange = () => setCarouselDocumentVisible(document.visibilityState === 'visible');
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', onVisibilityChange);
+  }, []);
+
+  useEffect(() => {
+    if (motionPaused || carouselInteracting || !carouselInView || !carouselDocumentVisible || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = window.setTimeout(() => setSpotlight((current) => (current + 1) % featuredProjects.length), 9000);
+    return () => window.clearTimeout(timer);
+  }, [spotlight, carouselCycle, motionPaused, carouselInteracting, carouselInView, carouselDocumentVisible]);
+
+  const chooseSpotlight = (index) => {
+    setSpotlight((index + featuredProjects.length) % featuredProjects.length);
+    setCarouselCycle((cycle) => cycle + 1);
+  };
+
+  const chooseCase = (caseId, event, allowCollapse = false) => {
+    const nextCase = allowCollapse && activeCase === caseId ? null : caseId;
+    setActiveCase(nextCase);
+    if (!nextCase || !window.matchMedia?.('(max-width: 760px)').matches) return;
+    event?.preventDefault();
+    window.requestAnimationFrame(() => {
+      document.getElementById(`tab-${caseId}`)?.scrollIntoView?.({
+        block: 'start',
+        behavior: motionPaused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+    });
+  };
+
+  useEffect(() => {
+    const diagrams = document.querySelectorAll('.case-panel.is-active .diagnostic-flow, .case-panel.is-active .outcome-chart');
+    if (!diagrams.length) return;
+    if (!('IntersectionObserver' in window)) {
+      diagrams.forEach((diagram) => diagram.classList.add('is-in-view'));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => entry.target.classList.toggle('is-in-view', entry.isIntersecting));
+    }, { threshold: 0.2 });
+    diagrams.forEach((diagram) => observer.observe(diagram));
+    return () => {
+      observer.disconnect();
+      diagrams.forEach((diagram) => diagram.classList.remove('is-in-view'));
+    };
+  }, [activeCase]);
 
   useLayoutEffect(() => {
     const buttons = filterButtonsRef.current;
@@ -675,7 +737,7 @@ function App() {
               Software engineer · Dallas–Fort Worth
             </div>
             <p className="hero-role-signal reveal reveal-1">
-              Focus / <span>Software systems</span> / <span>GenAI &amp; applied ML</span>
+              Focus / <span>Backend systems</span> / <span>Platform engineering</span> / <span>GenAI</span>
             </p>
             <p className="role-context reveal reveal-1"><strong>Senior Software Engineer (AVP) at Citi</strong><span>December 2022–present</span></p>
             <h1 id="hero-title" className="reveal reveal-2">
@@ -696,21 +758,34 @@ function App() {
 
           <div className="hero-studio reveal reveal-3" ref={studioRef} onPointerMove={moveStudio} onPointerLeave={(event) => { event.currentTarget.style.setProperty('--tilt-x', '0deg'); event.currentTarget.style.setProperty('--tilt-y', '0deg'); }}>
             <figure className="hero-portrait" onPointerMove={movePortrait} onPointerLeave={(event) => { delete event.currentTarget.dataset.pointerActive; event.currentTarget.style.removeProperty('--portrait-x'); event.currentTarget.style.removeProperty('--portrait-y'); }}>
-              <img className="portrait-base" src="/images/profile-pic-new.png" alt="Haramrit smiling outdoors on a snowy day" fetchpriority="high" draggable="false" />
+              <img className="portrait-base" src="/images/hero-portrait-2026.jpg" alt="Haramrit standing outdoors in warm sunlight" fetchpriority="high" draggable="false" />
               <span className="portrait-light" aria-hidden="true" />
             </figure>
-            {spotlightProject ? <a className="studio-preview" href="#lab" key={spotlightProject.id} onClick={() => { setProjectLens('all'); setExpandedProject(spotlightProject.id); }}>
-              <span className="studio-media"><video ref={heroVideoRef} muted loop playsInline preload="metadata" poster={spotlightProject.preview.poster} aria-label={spotlightProject.preview.alt}><source src={spotlightProject.preview.mp4} type="video/mp4" /><source src={spotlightProject.preview.webm} type="video/webm" /></video><img src={spotlightProject.preview.poster} alt={spotlightProject.title + ' project preview'} /></span>
-              <span><small>{spotlightProject.type}</small><strong>{spotlightProject.title}</strong><span>Explore this project <Arrow /></span></span>
-            </a> : <div className="studio-preview studio-preview-empty"><span><small>Project previews</small><strong>Choose a project</strong><span>Select a preview below.</span></span></div>}
-            <div className="spotlight-picker" aria-label="Preview a project">
-              {spotlights.map((project, index) => <button key={project.id} type="button" aria-pressed={spotlight === index} onClick={() => setSpotlight(index)}>{project.title}</button>)}
+            <div className="studio-carousel" role="region" aria-roledescription="carousel" aria-label="Featured project previews"
+              data-rotating={!motionPaused && !carouselInteracting && carouselInView && carouselDocumentVisible}
+              onPointerEnter={() => setCarouselInteracting(true)} onPointerLeave={(event) => { if (!event.currentTarget.contains(document.activeElement)) { setCarouselInteracting(false); setCarouselCycle((cycle) => cycle + 1); } }}
+              onFocusCapture={() => setCarouselInteracting(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) { setCarouselInteracting(false); setCarouselCycle((cycle) => cycle + 1); } }}>
+              <a className="studio-preview" href={`#project-${spotlightProject.id}`} key={spotlightProject.id} onClick={() => { setProjectLens('all'); setExpandedProject(spotlightProject.id); }}>
+                <span className="studio-media"><video ref={heroVideoRef} muted loop playsInline preload="metadata" poster={spotlightProject.preview.poster} aria-label={spotlightProject.preview.alt}><source src={spotlightProject.preview.mp4} type="video/mp4" /><source src={spotlightProject.preview.webm} type="video/webm" /></video><img src={spotlightProject.preview.poster} alt={spotlightProject.title + ' project preview'} /></span>
+                <span><small>Project {String(spotlight + 1).padStart(2, '0')} / {String(featuredProjects.length).padStart(2, '0')} · {spotlightProject.type}</small><strong>{spotlightProject.title}</strong><span>Explore this project <Arrow /></span></span>
+              </a>
+              <div className="carousel-progress" aria-hidden="true"><span key={`${spotlight}-${carouselCycle}-${carouselInView}-${carouselDocumentVisible}-${motionPaused}`} /></div>
+              <div className="carousel-controls">
+                <span className="carousel-caption">Featured projects</span>
+                <div className="carousel-arrows">
+                  <button type="button" aria-label="Previous project preview" onClick={() => chooseSpotlight(spotlight - 1)}>←</button>
+                  <button type="button" aria-label="Next project preview" onClick={() => chooseSpotlight(spotlight + 1)}>→</button>
+                </div>
+              </div>
+              <div className="spotlight-picker" aria-label="Choose a project preview">
+                {featuredProjects.map((project, index) => <button key={project.id} type="button" aria-pressed={spotlight === index} onClick={() => chooseSpotlight(index)}>{project.title}</button>)}
+              </div>
             </div>
           </div>
 
           <aside className="impact-rail reveal reveal-3" aria-label="Selected impact">
             {impact.map((item, index) => (
-              <a className="impact-stat" key={item.label} href="#work" onClick={() => setActiveCase(item.caseId)}>
+              <a className="impact-stat" key={item.label} href="#work" onClick={(event) => chooseCase(item.caseId, event)}>
                 <strong>{item.value}</strong>
                 <span>{item.label}</span>
                 <small>See the engineering behind it <Arrow /></small>
@@ -742,15 +817,17 @@ function App() {
 
           <div className="case-grid">
             <div className="case-tabs" role="tablist" aria-label="Case studies">
-              {caseStudies.map((item) => (
+              {caseStudies.map((item, index) => (
                 <button
                   key={item.id}
                   id={`tab-${item.id}`}
                   role="tab"
                   aria-selected={activeCase === item.id}
+                  aria-expanded={activeCase === item.id}
                   aria-controls={`panel-${item.id}`}
+                  style={{ '--mobile-case-order': index * 2 }}
                   className={activeCase === item.id ? 'case-tab is-active' : 'case-tab'}
-                  onClick={() => setActiveCase(item.id)}
+                  onClick={(event) => chooseCase(item.id, event, true)}
                 >
                   <span>{item.id}</span>
                   <strong>{item.title}<small className="case-tab-result">{item.outcome}</small></strong>
@@ -760,15 +837,18 @@ function App() {
             </div>
 
             {!activeCase && <div className="case-panel case-placeholder"><p className="kicker">Case studies</p><h3>Choose a case study.</h3><p className="case-summary">Select an outcome to see the problem, approach, and result.</p></div>}
-            {caseStudies.map((item) => (
+            {caseStudies.map((item, index) => (
               <article
                 key={item.id}
                 id={`panel-${item.id}`}
                 role="tabpanel"
                 aria-labelledby={`tab-${item.id}`}
+                style={{ '--mobile-case-order': index * 2 + 1 }}
                 className={activeCase === item.id ? 'case-panel is-active' : 'case-panel'}
-                hidden={activeCase !== item.id}
+                aria-hidden={activeCase !== item.id}
+                inert={activeCase !== item.id ? '' : undefined}
               >
+                <div className="case-panel-content">
                 <div className="case-panel-top">
                   <p className="kicker">SYS—{item.id} · {item.label}</p>
                   <span className="case-number">/{item.id}</span>
@@ -785,6 +865,7 @@ function App() {
                 <ul className="tag-list" aria-label="Technologies and strengths">
                   {item.stack.map((tech) => <li key={tech}><TechnologyLabel name={tech} /></li>)}
                 </ul>
+                </div>
               </article>
             ))}
           </div>
@@ -826,6 +907,7 @@ function App() {
                 <details
                   ref={(node) => { projectCardRefs.current[project.id] = node; }}
                   className="trace-card"
+                  id={`project-${project.id}`}
                   key={project.id}
                   open={expandedProject === project.id}
                 >
@@ -948,18 +1030,42 @@ function App() {
 
         <section className="about-section section" id="about" aria-labelledby="about-title">
           <div className="about-portrait">
-            <img src="/images/profile-pic-new.png" alt="Haramrit Singh Khurana smiling outdoors" loading="lazy" />
+            <img src="/images/about-portrait-2026.jpg" alt="Haramrit smiling by the water in a white cap and red sunglasses" loading="lazy" />
             <div className="portrait-label"><span className="status-dot"></span> Haramrit Khurana</div>
           </div>
           <div className="about-copy">
+            {/* Adapted Material Symbols by Google; see public/images/tech/material-symbols-LICENSE.txt. */}
+            <div className="about-motifs" aria-hidden="true">
+              <span className="about-motif about-motif-pickleball">
+                <svg viewBox="0 -960 960 960" fill="currentColor">
+                  <path d="M283-381q19 19 42 28t48 9q25 0 48-9t42-28l36-36q19-19 28-42t9-48q0-25-9-47.5T499-596L347-748q-12-12-28.5-12T290-748L132-589q-12 12-12 28t12 28l151 152ZM743-80 508-315q-29 26-64.5 38T372-265q-40 0-77.5-15T227-325L75-476q-17-17-26-39.5T40-561q0-23 9-45.5T75-646l159-159q17-17 39.5-26t45.5-9q23 0 45.5 9t39.5 26l151 152q30 30 45 67.5t15 77.5q0 36-12.5 71.5T564-372l236 236-57 56Zm37-520q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 58-41 99t-99 41Zm0-80q25 0 42.5-17.5T840-740q0-25-17.5-42.5T780-800q-25 0-42.5 17.5T720-740q0 25 17.5 42.5T780-680Z" />
+                </svg>
+              </span>
+              <span className="about-motif about-motif-location">
+                <svg viewBox="0 -960 960 960" fill="currentColor">
+                  <path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z" />
+                </svg>
+              </span>
+              <span className="about-motif about-motif-terminal">
+                <svg viewBox="0 -960 960 960" fill="currentColor">
+                  <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H160v400Zm140-40-56-56 103-104-104-104 57-56 160 160-160 160Zm180 0v-80h240v80H480Z" />
+                </svg>
+              </span>
+              <span className="about-motif about-motif-gaming">
+                <svg viewBox="0 -960 960 960" fill="currentColor">
+                  <path d="M182-200q-51 0-79-35.5T82-322l42-300q9-60 53.5-99T282-760h396q60 0 104.5 39t53.5 99l42 300q7 51-21 86.5T778-200q-21 0-39-7.5T706-230l-90-90H344l-90 90q-15 15-33 22.5t-39 7.5Zm16-86 114-114h336l114 114q2 2 16 6 11 0 17.5-6.5T800-304l-44-308q-4-29-26-48.5T678-680H282q-30 0-52 19.5T204-612l-44 308q-2 11 4.5 17.5T182-280q2 0 16-6Zm482-154q17 0 28.5-11.5T720-480q0-17-11.5-28.5T680-520q-17 0-28.5 11.5T640-480q0 17 11.5 28.5T680-440Zm-80-120q17 0 28.5-11.5T640-600q0-17-11.5-28.5T600-640q-17 0-28.5 11.5T560-600q0 17 11.5 28.5T600-560ZM310-440h60v-70h70v-60h-70v-70h-60v70h-70v60h70v70Z" />
+                </svg>
+              </span>
+            </div>
             <p className="kicker">The engineer</p>
-            <h2 id="about-title">A bit about me.</h2>
+            <h2 id="about-title">Human behind the systems</h2>
             <p className="about-lead">
-              I’m a Senior Software Engineer (AVP) at Citi, based in Grapevine, Texas. I build and operate features for an internal MongoDB DBaaS platform used by application teams across the company globally.
+              I’m at my best when I’m solving messy engineering problems, figuring out why something behaves the way it does, and turning that understanding into something simpler and more reliable.
             </p>
             <p>
-              My work spans Java and Spring Boot services, Angular applications, database performance, enterprise workflow automation, and LLM-assisted diagnostics. Outside work, I build AI Interview Prep Mentor, F1rstAid, and LogScribe MCP.
+              Outside work, I’m usually building side projects, playing pickleball, gaming, traveling, or finding some new thing to learn more deeply than I probably need to.
             </p>
+            <p>I like technology, but I care even more about understanding how things work and building things that are genuinely useful.</p>
             <div className="background-facts">
               <p><strong>Certification</strong><span>AWS Solutions Architect – Associate · 2020–2023</span></p>
             </div>
