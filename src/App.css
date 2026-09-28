@@ -2365,6 +2365,34 @@ button:focus-visible {
   .outcome-chart-row { gap: 10px; grid-template-columns: 44px minmax(0, 1fr) 68px; }
 }
 
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+.toil-loop { margin: 28px 0; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.toil-loop figcaption { margin-bottom: 18px; color: var(--muted); font: 11px 'SFMono-Regular', Consolas, monospace; }
+.toil-loop-card {
+  display: grid;
+  gap: 6px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff05;
+  animation: toil-loop-enter 550ms cubic-bezier(.22, 1, .36, 1) both;
+}
+.toil-loop-tag { font: 10px 'SFMono-Regular', Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.toil-loop-card[data-phase="after"] .toil-loop-tag { color: var(--signal); }
+.toil-loop-stat { font-size: clamp(26px, 3.6vw, 38px); font-weight: 500; letter-spacing: -0.02em; color: var(--text); transition: color 300ms ease; }
+.toil-loop-card[data-phase="after"] .toil-loop-stat { color: var(--signal); }
+.toil-loop-label { font-size: 13px; color: var(--muted); }
+.toil-loop-detail { margin-top: 6px; font-size: 12px; line-height: 1.65; color: var(--muted); }
+.toil-loop-dots { display: flex; gap: 6px; margin-top: 14px; }
+.toil-loop-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: background 300ms ease, transform 300ms ease; }
+.toil-loop-dots span.is-active { background: var(--signal); transform: scale(1.3); }
+@keyframes toil-loop-enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.motion-paused .toil-loop-card { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .toil-loop-card { animation: none; }
+}
+
 .filter-buttons { position: relative; isolation: isolate; }
 .filter-indicator { position: absolute; pointer-events: none; z-index: -1; left: var(--indicator-left, 0px); top: var(--indicator-top, 0px); width: var(--indicator-width, 0px); height: var(--indicator-height, 42px); border: 1px solid var(--signal); background: var(--signal-dark); opacity: 0; transition: left 500ms cubic-bezier(.22, 1, .36, 1), top 500ms ease, width 500ms cubic-bezier(.22, 1, .36, 1), height 500ms ease, opacity 250ms ease; }
 .filter-indicator.is-visible { opacity: 1; }

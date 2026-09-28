@@ -339,8 +339,24 @@ function HeroNetwork() {
 
 const outcomeCharts = {
   '02': { title: 'Peak JVM heap', before: '≈1.4 GB', after: '470 MB', ratio: 470 / 1400 },
-  '05': { title: 'Angular build time', before: '4m 48s', after: '1m 34s', ratio: 94 / 288 },
 };
+
+const manualTestingPhases = [
+  {
+    key: 'before',
+    tag: 'Before Playwright',
+    stat: '~200 min',
+    label: 'manual testing per release',
+    detail: '10 core operations × ~20 min each, plus whatever new-feature testing that release needed.',
+  },
+  {
+    key: 'after',
+    tag: 'After Playwright',
+    stat: '0 min',
+    label: 'on core operations',
+    detail: 'Core operations run automatically overnight. Manual testing is now limited to new, feature-specific work.',
+  },
+];
 
 function OutcomeChart({ caseId }) {
   const chart = outcomeCharts[caseId];
@@ -350,6 +366,38 @@ function OutcomeChart({ caseId }) {
     <div className="outcome-chart-row"><span>Before</span><div className="outcome-chart-track"><span className="outcome-bar before" /></div><strong>{chart.before}</strong></div>
     <div className="outcome-chart-row"><span>After</span><div className="outcome-chart-track"><span className="outcome-bar after" style={{ width: `${chart.ratio * 100}%` }} /></div><strong>{chart.after}</strong></div>
   </figure>;
+}
+
+function ManualTestingLoop({ motionPaused }) {
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    if (motionPaused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = window.setInterval(() => setPhase((current) => (current + 1) % manualTestingPhases.length), 3400);
+    return () => window.clearInterval(timer);
+  }, [motionPaused]);
+
+  const current = manualTestingPhases[phase];
+  return (
+    <figure className="toil-loop">
+      <figcaption>Manual QA toil per release</figcaption>
+      <div className="toil-loop-card" data-phase={current.key} key={current.key}>
+        <span className="toil-loop-tag">{current.tag}</span>
+        <strong className="toil-loop-stat">{current.stat}</strong>
+        <span className="toil-loop-label">{current.label}</span>
+        <p className="toil-loop-detail">{current.detail}</p>
+      </div>
+      <div className="toil-loop-dots" aria-hidden="true">
+        {manualTestingPhases.map((item, index) => (
+          <span key={item.key} className={index === phase ? 'is-active' : ''} />
+        ))}
+      </div>
+      <span className="sr-only">
+        Before Playwright: about 200 minutes of manual testing per release, from 10 core operations at roughly 20 minutes each, plus any new-feature testing.
+        After Playwright: core operations run automatically overnight, so manual testing is limited to new, feature-specific work.
+      </span>
+    </figure>
+  );
 }
 
 function DiagnosticFlow() {
@@ -869,6 +917,7 @@ function App() {
                   <strong>{item.outcome}</strong>
                 </div>
                 {item.id === '01' && <DiagnosticFlow />}
+                {item.id === '05' && <ManualTestingLoop motionPaused={motionPaused} />}
                 <OutcomeChart caseId={item.id} />
                 <p className="case-detail">{item.detail}</p>
                 <ul className="tag-list" aria-label="Technologies and strengths">
