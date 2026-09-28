@@ -1,0 +1,10 @@
+Sound effects used for the "about" section motif icons:
+
+- pickleball-dink.mp3  ("Wood hard hit")
+- keyboard-key.mp3     ("Keyboard key presses")
+- flight-takeoff.mp3   ("Low airplane flying over", trimmed to ~1.9s)
+- arcade-coin.mp3      ("Arcade game jump coin")
+
+Source: Mixkit (https://mixkit.co/free-sound-effects/), used under the
+Mixkit Sound Effects Free License (https://mixkit.co/license/free-sound-effects/) —
+free for commercial and personal use, no attribution required.
